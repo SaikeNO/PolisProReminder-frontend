@@ -1,1 +1,4 @@
-<p *ngIf="user$ | async as user">Dzień dobry {{ user.firstName }}!</p>
+<header class="container mat-primary">
+  <p>PolisPro Reminder</p>
+  <p *ngIf="user$ | async as user">Dzień dobry {{ user.firstName }}!</p>
+</header>

@@ -1,0 +1,21 @@
+<div class="login-page">
+  <h1>Zaloguj się</h1>
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <mat-label>Login</mat-label>
+      <input matInput formControlName="name" />
+      @if (loginForm.controls.name.hasError('required')) {
+      <mat-error>Login jest wymagany</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Hasło</mat-label>
+      <input matInput formControlName="password" />
+      @if (loginForm.controls.password.hasError('required')) {
+      <mat-error>Hasło jest wymagane</mat-error>
+      }
+    </mat-form-field>
+    <button mat-raised-button color="primary">Zaloguj się</button>
+  </form>
+</div>

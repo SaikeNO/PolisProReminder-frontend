@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../data-access/auth.service';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../data-access/user.service';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  public authService = inject(AuthService);
-  public user$ = this.authService.user$;
+  public userSerivce = inject(UserService);
+  public user$ = this.userSerivce.user$;
 }

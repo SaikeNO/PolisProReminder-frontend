@@ -11,7 +11,7 @@
 
     <mat-form-field class="full-width">
       <mat-label>Hasło</mat-label>
-      <input matInput formControlName="password" />
+      <input matInput type="password" formControlName="password" />
       @if (loginForm.controls.password.hasError('required')) {
       <mat-error>Hasło jest wymagane</mat-error>
       }

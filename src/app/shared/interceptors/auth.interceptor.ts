@@ -10,11 +10,13 @@ import { Subject, Observable, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../data-access/auth.service';
 import { StorageService } from '../data-access/storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class AuthInterceptor implements HttpInterceptor {
   private authService = inject(AuthService);
   private storageService = inject(StorageService);
   private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   refreshTokenInProgress = false;
 
@@ -71,6 +73,7 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<any> {
     // Business error
+    this.snackBar.open(error.error, undefined, { duration: 2000 });
 
     if (error.error === 'Token expired') {
       this.logout();

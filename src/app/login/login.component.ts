@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../shared/data-access/auth.service';
 import { Credentials } from '../shared/interfaces/credentials';
 import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +38,13 @@ export class LoginComponent {
 
     this._authService
       .login(this.loginForm.value as Credentials)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.loginForm.controls.name.setErrors({ inncorrect: true });
+          this.loginForm.controls.password.setErrors({ inncorrect: true });
+          return throwError(() => err);
+        })
+      )
       .subscribe(() => this._router.navigate(['/']));
   }
 }

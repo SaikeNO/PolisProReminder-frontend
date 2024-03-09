@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Credentials } from '../interfaces/credentials';
-import { BehaviorSubject, tap } from 'rxjs';
-import { User } from '../interfaces/user';
+import { tap } from 'rxjs';
 import { loginResponse } from '../interfaces/loginResponse';
 import { environment } from '../../../environments/environment';
-import { refreshTokenResponse } from '../interfaces/refreshTokenResponse';
 import { StorageService } from './storage.service';
 import { UserService } from './user.service';
+import { Token } from '../interfaces/Token';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -31,9 +30,9 @@ export class AuthService {
     return !!this.storageService.getAccessToken();
   }
 
-  refreshToken() {
+  refreshToken(token: string) {
     return this.http
-      .post<refreshTokenResponse>(`${environment.API_URL}/refreshtoken`, null)
+      .post<Token>(`${environment.API_URL}/account/refresh-token`, { token })
       .pipe(
         tap((response) => {
           this.storageService.saveAccessToken(response.token);

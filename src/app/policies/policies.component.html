@@ -1,0 +1,3 @@
+<div *ngIf="policies$ | async as policies">
+  <p *ngFor="let policy of policies">{{ policy.title }}</p>
+</div>

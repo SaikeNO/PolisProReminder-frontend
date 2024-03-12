@@ -6,7 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import { Policy } from '../shared/interfaces/policy';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-policies',
   standalone: true,
@@ -15,7 +16,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatChipsModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './policies.component.html',
   styleUrl: './policies.component.scss',
@@ -24,6 +26,8 @@ export class PoliciesComponent {
   private policyService = inject(PoliciesSerivce);
   public policies$ = new Observable<Policy[]>();
   public searchQuery$ = new BehaviorSubject<string>('');
+
+  //https://material.angular.io/components/table/examples#table-http
 
   public displayedColumns: string[] = [
     'id',

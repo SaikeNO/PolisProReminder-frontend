@@ -1,0 +1,10 @@
+<mat-list>
+  @for (item of menuItems; track item) {
+  <mat-list-item>
+    <div matListItemTitle>
+      <a mat-button [routerLink]="item.url">{{ item.name }}</a>
+    </div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  }
+</mat-list>

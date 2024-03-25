@@ -1,7 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { StorageService } from './shared/data-access/storage.service';
-import { UserService } from './shared/data-access/user.service';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +8,4 @@ import { UserService } from './shared/data-access/user.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-  private storageService = inject(StorageService);
-  private userService = inject(UserService);
-  private router = inject(Router);
-
-  ngOnInit() {
-    const user = this.storageService.getUser();
-
-    if (user) {
-      this.userService.setUser(user);
-    } else {
-      this.router.navigate(['/login']);
-    }
-  }
-}
+export class AppComponent {}

@@ -7,7 +7,12 @@ import { environment } from '../../../environments/environment';
 export class PoliciesSerivce {
   private http = inject(HttpClient);
 
-  getPolicies() {
-    return this.http.get<Policy[]>(`${environment.API_URL}/policy`);
+  getPolicies(startIndex: number = 1, pageSize: number = 10) {
+    return this.http.get<Policy[]>(`${environment.API_URL}/policy`, {
+      params: {
+        startIndex,
+        pageSize,
+      },
+    });
   }
 }

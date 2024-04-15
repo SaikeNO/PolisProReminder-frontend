@@ -9,6 +9,10 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { reducers } from './reducers';
+import { PoliciesEffects } from './policies/data-access/state/policies.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +25,7 @@ export const appConfig: ApplicationConfig = {
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideStore(reducers),
+    provideEffects(PoliciesEffects),
   ],
 };

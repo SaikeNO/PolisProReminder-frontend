@@ -1,22 +1,39 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { isAuthenticatedGuard } from './shared/guards/auth.guard';
-import { AppLayoutComponent } from './shared/ui/app-layout/app-layout.component';
-import { PoliciesComponent } from './policies/policies.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: AppLayoutComponent,
+    loadComponent: () =>
+      import('./shared/ui/app-layout/app-layout.component').then((mod) => mod.AppLayoutComponent),
     canActivateChild: [isAuthenticatedGuard],
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'policies', loadComponent: () => PoliciesComponent },
+      {
+        path: '',
+        loadComponent: () => import('./home/home.component').then((mod) => mod.HomeComponent),
+      },
+      {
+        path: 'policies',
+        loadComponent: () =>
+          import('./policies/policies.component').then((mod) => mod.PoliciesComponent),
+      },
+      {
+        path: 'company',
+        loadComponent: () =>
+          import('./insurance-company/insurance-company.component').then(
+            (mod) => mod.InsuranceCompanyComponent,
+          ),
+      },
     ],
   },
 
-  { path: 'login', component: LoginComponent },
-  { path: '**', component: PageNotFoundComponent },
+  {
+    path: 'login',
+    loadComponent: () => import('./login/login.component').then((mod) => mod.LoginComponent),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./page-not-found/page-not-found.component').then((mod) => mod.PageNotFoundComponent),
+  },
 ];

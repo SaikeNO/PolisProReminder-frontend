@@ -9,6 +9,7 @@ import { provideEffects } from '@ngrx/effects';
 import { reducers } from './shared/reducers';
 import { PoliciesEffects } from './policies/data-access/state/policies.effects';
 import { httpInterceptorProviders } from './shared/interceptors';
+import { CompaniesEffects } from './insurance-company/data-access/state/companies.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
     provideStore(reducers),
-    provideEffects(PoliciesEffects),
+    provideEffects(PoliciesEffects, CompaniesEffects),
   ],
 };

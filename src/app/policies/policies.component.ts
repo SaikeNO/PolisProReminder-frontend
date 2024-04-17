@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { PoliciesDataSource } from './data-access/policies-datasource';
+
 @Component({
   selector: 'app-policies',
   standalone: true,
@@ -27,8 +28,9 @@ import { PoliciesDataSource } from './data-access/policies-datasource';
   styleUrl: './policies.component.scss',
 })
 export class PoliciesComponent {
-  public searchQuery$ = new BehaviorSubject<string>('');
+  private dataSource = new PoliciesDataSource();
 
+  public searchQuery$ = new BehaviorSubject<string>('');
   public displayedColumns: string[] = [
     'id',
     'title',
@@ -59,7 +61,6 @@ export class PoliciesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<Policy>;
-  dataSource = new PoliciesDataSource();
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

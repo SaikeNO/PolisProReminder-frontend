@@ -1,7 +1,7 @@
 import { Policy } from '../../../shared/interfaces/policy';
 
-export interface GetPolicies {
-  startIndex: number;
+export interface GetPaginatedPolicies {
+  pageIndex: number;
   pageSize: number;
 }
 

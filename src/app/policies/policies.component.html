@@ -1,12 +1,7 @@
 <div class="top-container">
   <mat-form-field>
     <mat-label>Wyszukaj</mat-label>
-    <input
-      matInput
-      (keyup)="applyFilter($event)"
-      placeholder="np. Tytuł"
-      #input
-    />
+    <input matInput (keyup)="applyFilter($event)" placeholder="np. Tytuł" #input />
   </mat-form-field>
 
   <a mat-raised-button color="primary">
@@ -44,16 +39,12 @@
   </ng-container>
 
   <ng-container matColumnDef="startDate">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-      Początek ubezpieczenia
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Początek ubezpieczenia</th>
     <td mat-cell *matCellDef="let policy">{{ policy.startDate | date }}</td>
   </ng-container>
 
   <ng-container matColumnDef="endDate">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-      Koniec ubezpieczenia
-    </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Koniec ubezpieczenia</th>
     <td mat-cell *matCellDef="let policy">{{ policy.endDate | date }}</td>
   </ng-container>
 

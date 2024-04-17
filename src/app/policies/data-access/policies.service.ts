@@ -8,12 +8,15 @@ export class PoliciesService {
   private http = inject(HttpClient);
   private url = environment.API_URL;
 
-  getPolicies(startIndex: number = 1, pageSize: number = 10) {
-    return this.http.get<Policy[]>(`${this.url}/policy`, {
-      params: {
-        startIndex,
-        pageSize,
-      },
+  getPolicies() {
+    return this.http.get<Policy[]>(`${this.url}/policy`);
+  }
+
+  getPaginatedPolicies(pageIndex: number = 1, pageSize: number = 10) {
+    return this.http.post<Policy[]>(`${this.url}/policy/getPaginated`, {
+      pageIndex,
+      pageSize,
+      sortPolicies: null,
     });
   }
 }

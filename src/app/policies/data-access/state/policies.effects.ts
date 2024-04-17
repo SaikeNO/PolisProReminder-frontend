@@ -13,16 +13,28 @@ export class PoliciesEffects {
   getPolicies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PoliciesActions.getPolicies),
+      mergeMap(() => {
+        return this.policiesService.getPolicies().pipe(
+          map((policies) => PoliciesActions.getPoliciesSuccess({ policies })),
+          catchError((error: HttpErrorResponse) =>
+            of(PoliciesActions.getPoliciesFailure({ error: error.message }))
+          )
+        );
+      })
+    )
+  );
+
+  getPaginatedPolicies$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PoliciesActions.getPaginatedPolicies),
       mergeMap(({ params }) => {
         console.log(params);
-        return this.policiesService
-          .getPolicies(params.startIndex, params.pageSize)
-          .pipe(
-            map((policies) => PoliciesActions.getPoliciesSuccess({ policies })),
-            catchError((error: HttpErrorResponse) =>
-              of(PoliciesActions.getPoliciesFailure({ error: error.message }))
-            )
-          );
+        return this.policiesService.getPaginatedPolicies(params.pageIndex, params.pageSize).pipe(
+          map((policies) => PoliciesActions.getPaginatedPoliciesSuccess({ policies })),
+          catchError((error: HttpErrorResponse) =>
+            of(PoliciesActions.getPaginatedPoliciesFailure({ error: error.message }))
+          )
+        );
       })
     )
   );

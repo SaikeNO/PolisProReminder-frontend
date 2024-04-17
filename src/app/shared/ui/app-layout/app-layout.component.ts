@@ -10,6 +10,7 @@ import { Observable, map, shareReplay } from 'rxjs';
 import { StorageService } from '../../data-access/storage.service';
 import { UserService } from '../../data-access/user.service';
 import { MatIconButton } from '@angular/material/button';
+import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
 
 @Component({
   selector: 'app-app-layout',
@@ -25,6 +26,7 @@ import { MatIconButton } from '@angular/material/button';
     MatListModule,
     NgIf,
     MatIconButton,
+    LoadingBarComponent,
   ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
@@ -35,12 +37,10 @@ export class AppLayoutComponent implements OnInit {
   private userService = inject(UserService);
   private router = inject(Router);
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map((result) => result.matches),
+    shareReplay()
+  );
 
   ngOnInit() {
     const user = this.storageService.getUser();

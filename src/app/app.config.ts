@@ -6,7 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { reducers } from './reducers';
+import { reducers } from './shared/reducers';
 import { PoliciesEffects } from './policies/data-access/state/policies.effects';
 import { httpInterceptorProviders } from './shared/interceptors';
 

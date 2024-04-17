@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { AppState } from '../../../reducers';
+import { AppState } from '../../../shared/reducers';
 
 export const selectFeature = (state: AppState) => state.policies;
 

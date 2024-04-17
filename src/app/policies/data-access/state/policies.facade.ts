@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as PoliciesActions from './policies.actions';
 import * as PoliciesSelectors from './policies.selectors';
-import { AppState } from '../../../reducers';
+import { AppState } from '../../../shared/reducers';
 
 @Injectable({ providedIn: 'root' })
 export class PoliciesFacade {

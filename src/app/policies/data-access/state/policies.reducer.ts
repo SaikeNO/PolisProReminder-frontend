@@ -20,5 +20,5 @@ export const policiesReducer = createReducer(
     ...state,
     isLoading: false,
     error: action.error,
-  }))
+  })),
 );

@@ -13,13 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-  ],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -43,7 +37,7 @@ export class LoginComponent {
           this.loginForm.controls.name.setErrors({ inncorrect: true });
           this.loginForm.controls.password.setErrors({ inncorrect: true });
           return throwError(() => err);
-        })
+        }),
       )
       .subscribe(() => this._router.navigate(['/']));
   }

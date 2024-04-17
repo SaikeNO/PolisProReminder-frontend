@@ -11,7 +11,7 @@ export class LoadingInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     return next.handle(request).pipe(
       tap(() => this.loadingBarService.setIsLoading(true)),
-      finalize(() => this.loadingBarService.setIsLoading(false))
+      finalize(() => this.loadingBarService.setIsLoading(false)),
     );
   }
 }

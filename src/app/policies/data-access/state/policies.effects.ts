@@ -17,11 +17,11 @@ export class PoliciesEffects {
         return this.policiesService.getPolicies().pipe(
           map((policies) => PoliciesActions.getPoliciesSuccess({ policies })),
           catchError((error: HttpErrorResponse) =>
-            of(PoliciesActions.getPoliciesFailure({ error: error.message }))
-          )
+            of(PoliciesActions.getPoliciesFailure({ error: error.message })),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   getPaginatedPolicies$ = createEffect(() =>
@@ -32,10 +32,10 @@ export class PoliciesEffects {
         return this.policiesService.getPaginatedPolicies(params.pageIndex, params.pageSize).pipe(
           map((policies) => PoliciesActions.getPaginatedPoliciesSuccess({ policies })),
           catchError((error: HttpErrorResponse) =>
-            of(PoliciesActions.getPaginatedPoliciesFailure({ error: error.message }))
-          )
+            of(PoliciesActions.getPaginatedPoliciesFailure({ error: error.message })),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 }

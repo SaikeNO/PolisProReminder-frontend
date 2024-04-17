@@ -15,15 +15,13 @@ export class AuthService {
   private userService = inject(UserService);
 
   login(credentials: Credentials) {
-    return this.http
-      .post<loginResponse>(`${environment.API_URL}/account/login`, credentials)
-      .pipe(
-        tap((response) => {
-          this.storageService.saveAccessToken(response.token);
-          this.storageService.saveUser(response.user);
-          this.userService.setUser(response.user);
-        })
-      );
+    return this.http.post<loginResponse>(`${environment.API_URL}/account/login`, credentials).pipe(
+      tap((response) => {
+        this.storageService.saveAccessToken(response.token);
+        this.storageService.saveUser(response.user);
+        this.userService.setUser(response.user);
+      }),
+    );
   }
 
   isAuthenticated(): boolean {
@@ -31,13 +29,11 @@ export class AuthService {
   }
 
   refreshToken(token: string) {
-    return this.http
-      .post<Token>(`${environment.API_URL}/account/refresh-token`, { token })
-      .pipe(
-        tap((response) => {
-          this.storageService.saveAccessToken(response.token);
-        })
-      );
+    return this.http.post<Token>(`${environment.API_URL}/account/refresh-token`, { token }).pipe(
+      tap((response) => {
+        this.storageService.saveAccessToken(response.token);
+      }),
+    );
   }
 
   logout() {

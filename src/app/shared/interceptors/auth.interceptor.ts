@@ -1,9 +1,4 @@
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpInterceptor,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Observable, throwError } from 'rxjs';
@@ -57,7 +52,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.refreshTokenInProgress = false;
           this.logout();
           return throwError(() => err);
-        })
+        }),
       );
     }
   }
@@ -70,7 +65,7 @@ export class AuthInterceptor implements HttpInterceptor {
   handleResponseError(
     error: HttpErrorResponse,
     request: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<any> {
     // Business error
     this.snackBar.open(error.error, undefined, { duration: 2000 });
@@ -97,7 +92,7 @@ export class AuthInterceptor implements HttpInterceptor {
             this.logout();
           }
           return throwError(() => e);
-        })
+        }),
       );
     }
 
@@ -129,7 +124,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         return this.handleResponseError(error, request, next);
-      })
+      }),
     );
   }
 }

@@ -21,4 +21,28 @@ export const companiesReducer = createReducer(
     isLoading: false,
     error: action.error,
   })),
+
+  on(CompaniesActions.createCompany, (state) => ({ ...state, isLoading: true })),
+  on(CompaniesActions.createCompanySuccess, (state) => ({ ...state, isLoading: false })),
+  on(CompaniesActions.createCompanyFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  on(CompaniesActions.deleteCompany, (state) => ({ ...state, isLoading: true })),
+  on(CompaniesActions.deleteCompanySuccess, (state) => ({ ...state, isLoading: false })),
+  on(CompaniesActions.deleteCompanyFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  on(CompaniesActions.editCompany, (state) => ({ ...state, isLoading: true })),
+  on(CompaniesActions.editCompanySuccess, (state) => ({ ...state, isLoading: false })),
+  on(CompaniesActions.editCompanyFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
 );

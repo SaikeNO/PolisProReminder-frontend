@@ -8,8 +8,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
 import { CompaniesFacade } from './data-access/state/companies.facade';
 import { InsuranceCompanyDialogComponent } from './components/insurance-company-dialog/insurance-company-dialog.component';
-import { CreateInsuranceCompany, InsuranceCompany } from '../shared/interfaces/insuranceCompany';
-import { filter, switchMap, tap } from 'rxjs';
+import { InsuranceCompany } from '../shared/interfaces/insuranceCompany';
+import { InsuranceCompanyConfirmComponent } from './components/insurance-company-confirm/insurance-company-confirm.component';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-insurance-company',
@@ -28,7 +29,6 @@ import { filter, switchMap, tap } from 'rxjs';
 export class InsuranceCompanyComponent implements OnInit {
   private companiesFacade = inject(CompaniesFacade);
   private dialog = inject(MatDialog);
-  private company: CreateInsuranceCompany = { name: '' };
 
   public companies$ = this.companiesFacade.companies$;
 
@@ -36,16 +36,22 @@ export class InsuranceCompanyComponent implements OnInit {
     this.companiesFacade.getCompanies();
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(InsuranceCompanyDialogComponent, {
-      data: {
-        company: { ...this.company },
-      },
+  openDialog(company?: InsuranceCompany): void {
+    this.dialog.open(InsuranceCompanyDialogComponent, { data: { company } });
+  }
+
+  deleteCompany(company: InsuranceCompany): void {
+    const dialog = this.dialog.open(InsuranceCompanyConfirmComponent, {
+      data: { company },
+      width: '400px',
     });
 
-    dialogRef.afterClosed().pipe(
-      filter((response: CreateInsuranceCompany) => !!response.name),
-      tap((createCompany) => this.companiesFacade.createCompany(createCompany)),
-    );
+    dialog
+      .afterClosed()
+      .pipe(
+        filter((res: boolean) => res),
+        take(1),
+      )
+      .subscribe(() => this.companiesFacade.deleteCompany(company.id));
   }
 }

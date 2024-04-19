@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>
+  Czy jesteś pewien, że chcesz usunąć <b> {{ data.company.name }} </b>
+</h2>
+<mat-dialog-content> Spowoduje to usunięcie powiązania pomiędzy polisami </mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Nie</button>
+  <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Tak</button>
+</mat-dialog-actions>

@@ -2,22 +2,21 @@
   @if (isEditing) {
     Edytuj Towarzystwo Ubezpieczeniowe
   } @else {
-    Dodaj nowe Towarzystwo Ubezpieczeniowe
+    Dodaj Towarzystwo Ubezpieczeniowe
   }
 </h2>
 
 <mat-dialog-content>
-  @if (!isEditing) {
-    <p>Wpisz nazwe Towarzystwa Ubezpieczeniowego</p>
-  }
-  <mat-form-field class="form-field">
-    <mat-label>Nazwa</mat-label>
-    <!-- <input matInput [(ngModel)]="company.name" name="companyName" /> -->
-  </mat-form-field>
+  <form [formGroup]="form">
+    <mat-form-field class="form-field">
+      <mat-label>Nazwa</mat-label>
+      <input matInput formControlName="name" cdkFocusInitial />
+    </mat-form-field>
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="company" cdkFocusInitial [disabled]="!company.name">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="form" [disabled]="isSubmitDisabled()">
     @if (isEditing) {
       Zapisz
     } @else {

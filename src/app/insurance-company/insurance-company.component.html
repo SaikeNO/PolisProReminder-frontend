@@ -1,7 +1,7 @@
 <div class="top-container">
   <h1>Towarzystwa ubezpieczeniowe</h1>
 
-  <a mat-raised-button color="primary">
+  <a mat-raised-button color="primary" (click)="openDialog()">
     <mat-icon>add</mat-icon>
     Dodaj
   </a>
@@ -11,10 +11,10 @@
   @for (company of companies$ | async; track company.id) {
     <mat-list-item>
       <div class="flex">
-        <button mat-icon-button color="warn" matTooltip="Usuń">
+        <button mat-icon-button color="warn" matTooltip="Usuń" (click)="deleteCompany(company)">
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-icon-button matTooltip="Edytuj">
+        <button mat-icon-button matTooltip="Edytuj" (click)="openDialog(company)">
           <mat-icon>edit</mat-icon>
         </button>
         <span class="">{{ company.name }}</span>

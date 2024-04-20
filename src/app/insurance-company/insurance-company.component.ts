@@ -9,8 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CompaniesFacade } from './data-access/state/companies.facade';
 import { InsuranceCompanyDialogComponent } from './components/insurance-company-dialog/insurance-company-dialog.component';
 import { InsuranceCompany } from '../shared/interfaces/insuranceCompany';
-import { InsuranceCompanyConfirmComponent } from './components/insurance-company-confirm/insurance-company-confirm.component';
 import { filter, take } from 'rxjs';
+import { ConfirmDialogComponent } from '../shared/ui/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-insurance-company',
@@ -41,8 +41,8 @@ export class InsuranceCompanyComponent implements OnInit {
   }
 
   deleteCompany(company: InsuranceCompany): void {
-    const dialog = this.dialog.open(InsuranceCompanyConfirmComponent, {
-      data: { company },
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: { name: company.name },
       width: '500px',
     });
 

@@ -1,0 +1,31 @@
+<div class="top-container">
+  <h1>Typy ubezpieczeń</h1>
+
+  <a mat-raised-button color="primary" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+    Dodaj
+  </a>
+</div>
+
+<mat-list>
+  @for (insuranceType of insruranceTypes$ | async; track insuranceType.id) {
+    <mat-list-item>
+      <div matListItemIcon>
+        <button
+          mat-icon-button
+          color="warn"
+          matTooltip="Usuń"
+          (click)="deleteInsuranceType(insuranceType)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Edytuj" (click)="openDialog(insuranceType)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <span matListItemTitle>{{ insuranceType.name }}</span>
+      <span matListItemLine>Podstawowy</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  }
+</mat-list>

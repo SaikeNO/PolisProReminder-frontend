@@ -24,6 +24,13 @@ export const routes: Routes = [
             (mod) => mod.InsuranceCompanyComponent,
           ),
       },
+      {
+        path: 'types',
+        loadComponent: () =>
+          import('./insurance-types/insurance-types.component').then(
+            (mod) => mod.InsuranceTypesComponent,
+          ),
+      },
     ],
   },
 

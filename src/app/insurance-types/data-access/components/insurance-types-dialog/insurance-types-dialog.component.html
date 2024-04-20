@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>
+  @if (isEditing) {
+    Edytuj Typ Ubezpieczenia
+  } @else {
+    Dodaj Typ Ubezpieczenia
+  }
+</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field class="form-field">
+      <mat-label>Nazwa</mat-label>
+      <input matInput formControlName="name" cdkFocusInitial />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Anuluj</button>
+  <button mat-button [mat-dialog-close]="form" [disabled]="isSubmitDisabled()">
+    @if (isEditing) {
+      Zapisz
+    } @else {
+      Dodaj
+    }
+  </button>
+</mat-dialog-actions>

@@ -10,6 +10,7 @@ import { reducers } from './shared/reducers';
 import { PoliciesEffects } from './policies/data-access/state/policies.effects';
 import { httpInterceptorProviders } from './shared/interceptors';
 import { CompaniesEffects } from './insurance-company/data-access/state/companies.effects';
+import { InsuranceTypesEffects } from './insurance-types/data-access/state/insurance-types.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
     provideStore(reducers),
+    provideEffects(PoliciesEffects, CompaniesEffects, InsuranceTypesEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
-  ],
+],
 };

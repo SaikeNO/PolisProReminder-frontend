@@ -33,7 +33,8 @@ export class InsuranceCompanyDialogComponent implements OnInit {
   public isEditing: boolean = false;
   public companyId: number | null = null;
   public form = this.fb.nonNullable.group({
-    name: ['', [Validators.minLength(3), Validators.required]],
+    name: ['', [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
+    shortName: [''],
   });
   public initialCompany: InsuranceCompany | null = null;
 
@@ -43,6 +44,7 @@ export class InsuranceCompanyDialogComponent implements OnInit {
   ) {
     this.initialCompany = data.company;
     this.form.controls.name.setValue(data.company ? data.company.name : '');
+    this.form.controls.shortName.setValue(data.company ? data.company.shortName : '');
     this.isEditing = !!data.company;
     this.companyId = data.company ? data.company.id : null;
   }
@@ -52,7 +54,7 @@ export class InsuranceCompanyDialogComponent implements OnInit {
       .afterClosed()
       .pipe(
         filter((response: FormGroup) => response && response.valid),
-        map((response) => ({ name: response.controls['name'].value }) as CreateInsuranceCompany),
+        map((response) => this.mapToCreateInsuranceCompany(response)),
         take(1),
       )
       .subscribe((company) => {
@@ -65,6 +67,19 @@ export class InsuranceCompanyDialogComponent implements OnInit {
   }
 
   isSubmitDisabled() {
-    return this.form.invalid || this.initialCompany?.name === this.form.controls.name.value;
+    return (
+      this.form.invalid ||
+      !(
+        this.initialCompany?.name !== this.form.controls.name.value ||
+        this.initialCompany?.shortName !== this.form.controls.shortName.value
+      )
+    );
+  }
+
+  private mapToCreateInsuranceCompany(obj: FormGroup): CreateInsuranceCompany {
+    return {
+      name: obj.controls['name'].value,
+      shortName: obj.controls['shortName'].value,
+    };
   }
 }

@@ -43,7 +43,7 @@ export class InsuranceCompanyComponent implements OnInit {
   deleteCompany(company: InsuranceCompany): void {
     const dialog = this.dialog.open(InsuranceCompanyConfirmComponent, {
       data: { company },
-      width: '400px',
+      width: '500px',
     });
 
     dialog

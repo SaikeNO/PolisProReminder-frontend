@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -10,6 +10,7 @@ import { reducers } from './shared/reducers';
 import { PoliciesEffects } from './policies/data-access/state/policies.effects';
 import { httpInterceptorProviders } from './shared/interceptors';
 import { CompaniesEffects } from './insurance-company/data-access/state/companies.effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
     provideStore(reducers),
-    provideEffects(PoliciesEffects, CompaniesEffects),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
   ],
 };

@@ -9,3 +9,11 @@ export interface Insurer {
   pesel: string;
   policies?: Policy[];
 }
+
+export interface CreateInsurer {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  pesel: string;
+}

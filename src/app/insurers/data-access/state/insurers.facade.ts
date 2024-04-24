@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as InsurersActions from './insurers.actions';
 import * as InsurersSelectors from './insurers.selectors';
 import { AppState } from '../../../shared/reducers';
+import { CreateInsurer } from '../../../shared/interfaces/insurer';
 
 @Injectable({ providedIn: 'root' })
 export class InsurersFacade {
@@ -20,4 +21,14 @@ export class InsurersFacade {
   getPaginatedInsurers(pageIndex: number, pageSize: number): void {
     this.store.dispatch(InsurersActions.getPaginatedInsurers({ params: { pageSize, pageIndex } }));
   }
+
+  createInsurer(createInsurer: CreateInsurer): void {
+    this.store.dispatch(InsurersActions.createInsurer({ createInsurer }));
+  }
+
+  editInsurer(createInsurer: CreateInsurer, id: number): void {
+    this.store.dispatch(InsurersActions.editInsurer({ createInsurer, id }));
+  }
+
+  deleteInsurer(id: number): void {}
 }

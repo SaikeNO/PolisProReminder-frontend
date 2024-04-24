@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Insurer } from '../../shared/interfaces/insurer';
+import { CreateInsurer, Insurer } from '../../shared/interfaces/insurer';
 
 @Injectable({ providedIn: 'root' })
 export class InsurersService {
@@ -17,5 +17,13 @@ export class InsurersService {
       pageIndex,
       pageSize,
     });
+  }
+
+  createInsurer(insurer: CreateInsurer) {
+    return this.http.post<void>(`${this.url}/Insurer`, insurer);
+  }
+
+  editInsurer(insurer: CreateInsurer, id: number) {
+    return this.http.put<void>(`${this.url}/Insurer/${id}`, insurer);
   }
 }

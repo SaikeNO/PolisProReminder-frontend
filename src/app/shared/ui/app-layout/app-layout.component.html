@@ -16,6 +16,19 @@
       <a mat-list-item routerLink="/types">Typy</a>
     </mat-nav-list>
   </mat-sidenav>
+
+  <mat-sidenav
+    fixedInViewport
+    disableClose
+    role="dialog"
+    mode="over"
+    [opened]="isPortalOpened$ | async"
+    position="end"
+  >
+    <button mat-icon-button (click)="onPortalClose()"><mat-icon>close</mat-icon></button>
+    <ng-template [cdkPortalOutlet]="selectedPortal$ | async"></ng-template>
+  </mat-sidenav>
+
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button

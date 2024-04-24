@@ -11,6 +11,8 @@ import { StorageService } from '../../data-access/storage.service';
 import { UserService } from '../../data-access/user.service';
 import { MatIconButton } from '@angular/material/button';
 import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
+import { PortalModule } from '@angular/cdk/portal';
+import { PortalService } from '../../data-access/portal.service';
 
 @Component({
   selector: 'app-app-layout',
@@ -27,6 +29,7 @@ import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
     NgIf,
     MatIconButton,
     LoadingBarComponent,
+    PortalModule,
   ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
@@ -35,7 +38,11 @@ export class AppLayoutComponent implements OnInit {
   private breakpointObserver = inject(BreakpointObserver);
   private storageService = inject(StorageService);
   private userService = inject(UserService);
+  private portalService = inject(PortalService);
   private router = inject(Router);
+
+  selectedPortal$ = this.portalService.selectedPortal$;
+  isPortalOpened$ = this.portalService.isOpened$;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
@@ -50,5 +57,9 @@ export class AppLayoutComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  public onPortalClose(): void {
+    this.portalService.closePortal();
   }
 }

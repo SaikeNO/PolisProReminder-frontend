@@ -8,6 +8,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
   standalone: true,
   imports: [MatProgressBarModule, NgIf, AsyncPipe],
   templateUrl: './loading-bar.component.html',
+  styleUrl: './loading-bar.component.scss',
 })
 export class LoadingBarComponent {
   private loadingService = inject(LoadingBarService);

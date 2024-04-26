@@ -32,4 +32,16 @@ export const insurersReducer = createReducer(
     isLoading: false,
     error: action.error,
   })),
+
+  on(InsurersActions.editInsurer, (state) => ({ ...state, isLoading: true, error: null })),
+  on(InsurersActions.editInsurerSuccess, (state) => ({
+    ...state,
+    isLoading: false,
+  })),
+  on(InsurersActions.editInsurerFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
 );

@@ -1,3 +1,8 @@
 .sidenav-container {
   min-height: 100vh;
 }
+
+.sidenav-portal {
+  padding: 20px;
+  background-color: var(--mat-sidenav-content-background-color);
+}

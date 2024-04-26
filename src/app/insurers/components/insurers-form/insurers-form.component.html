@@ -1,13 +1,16 @@
 <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
-  <mat-card class="shipping-card">
+  <mat-card class="form-card">
     <mat-card-header>
-      <mat-card-title>{{ isEditing ? "Edytuj klienta" : "Dodaj nowego klienta" }}</mat-card-title>
+      <mat-card-title class="card-title">
+        {{ insurer ? "Edytuj klienta" : "Dodaj nowego klienta" }}
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Imię" formControlName="firstName" />
+            <mat-label>Imię</mat-label>
+            <input matInput formControlName="firstName" />
             @if (form.controls.firstName.hasError("required")) {
               <mat-error> Imię jest wymagane </mat-error>
             }
@@ -15,14 +18,16 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Nazwisko" formControlName="lastName" />
+            <mat-label>Nazwisko</mat-label>
+            <input matInput formControlName="lastName" />
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="PESEL" formControlName="pesel" />
+            <mat-label>PESEL</mat-label>
+            <input matInput formControlName="pesel" />
             @if (form.controls.pesel.hasError("required")) {
               <mat-error> PESEL jest wymagany </mat-error>
             }
@@ -32,23 +37,22 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Telefon" formControlName="phoneNumber" />
+            <mat-label>Telefon</mat-label>
+            <input matInput formControlName="phoneNumber" />
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Email" type="email" formControlName="email" />
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" />
           </mat-form-field>
         </div>
       </div>
-      @if (error$ | async; as error) {
-        <span>{{ error }}</span>
-      }
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit">Zapisz</button>
     </mat-card-actions>
   </mat-card>
 </form>

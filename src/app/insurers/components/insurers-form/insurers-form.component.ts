@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { peselRegex, phoneRegex } from '../../../shared/constants/regex';
 import { InsurersFacade } from '../../data-access/state/insurers.facade';
 import { CreateInsurer, Insurer } from '../../../shared/interfaces/insurer';
+import { replaceEmptyStringWithNull } from '../../../shared/helpers/replaceEmptyStringWithNull';
 
 export const CONTAINER_DATA = new InjectionToken<{}>('CONTAINER_DATA');
 
@@ -30,9 +31,7 @@ export const CONTAINER_DATA = new InjectionToken<{}>('CONTAINER_DATA');
 })
 export class InsurersFormComponent implements OnInit {
   private insurersFacade = inject(InsurersFacade);
-  private initialInsurer: Insurer | undefined = undefined;
 
-  public isEditing: boolean = false;
   public error$ = this.insurersFacade.error$;
   public form = this.fb.group({
     firstName: ['', [Validators.required, Validators.maxLength(20)]],
@@ -49,9 +48,7 @@ export class InsurersFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.insurer) return;
-    this.initialInsurer = this.insurer;
 
-    this.isEditing = true;
     this.form.setValue({
       firstName: this.insurer.firstName,
       lastName: this.insurer.lastName,
@@ -64,15 +61,9 @@ export class InsurersFormComponent implements OnInit {
   public onSubmit() {
     if (this.form.invalid) return;
 
-    const insurer: CreateInsurer = {
-      firstName: this.form.value.firstName!,
-      lastName: this.form.value.lastName!,
-      pesel: this.form.value.pesel!,
-      phoneNumber: this.form.value.phoneNumber!,
-      email: this.form.value.email!,
-    };
+    const insurer = replaceEmptyStringWithNull(this.form.value) as CreateInsurer;
 
-    if (this.isEditing && this.insurer) {
+    if (this.insurer) {
       this.insurersFacade.editInsurer(insurer, this.insurer.id);
     } else {
       this.insurersFacade.createInsurer(insurer);

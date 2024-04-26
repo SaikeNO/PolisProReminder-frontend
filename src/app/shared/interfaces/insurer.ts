@@ -12,8 +12,8 @@ export interface Insurer {
 
 export interface CreateInsurer {
   firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  email: string;
+  lastName?: string;
   pesel: string;
+  phoneNumber?: string;
+  email?: string;
 }

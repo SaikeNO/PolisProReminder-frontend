@@ -2,9 +2,8 @@
   width: 100%;
 }
 
-.shipping-card {
-  min-width: 120px;
-  margin: 20px auto;
+.form-card {
+  margin: 15px;
 }
 
 .mat-radio-button {
@@ -24,4 +23,8 @@
 
 .col:last-child {
   margin-right: 0;
+}
+
+.card-title {
+  padding-bottom: 15px;
 }

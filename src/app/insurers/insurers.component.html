@@ -11,19 +11,28 @@
 </div>
 
 <table mat-table class="mat-elevation-z8" matSort aria-label="Insurers">
+  <ng-container matColumnDef="details">
+    <th class="icon" mat-header-cell *matHeaderCellDef></th>
+    <td class="icon" mat-cell *matCellDef="let insurer">
+      <button mat-icon-button matTooltip="Szczegóły" (click)="openDetails(insurer)">
+        <mat-icon class="mat-18">open_in_new</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef>Edytuj</th>
-    <td mat-cell *matCellDef="let insurer">
-      <button mat-icon-button (click)="openForm(insurer)">
+    <th class="icon" mat-header-cell *matHeaderCellDef></th>
+    <td class="icon" mat-cell *matCellDef="let insurer">
+      <button mat-icon-button matTooltip="Edytuj" (click)="openForm(insurer)">
         <mat-icon class="mat-18">edit</mat-icon>
       </button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef>Usuń</th>
-    <td mat-cell *matCellDef="let insurer">
-      <button mat-icon-button color="warn" (click)="onDeleteInsurer(insurer)">
+    <th class="icon" mat-header-cell *matHeaderCellDef></th>
+    <td class="icon" mat-cell *matCellDef="let insurer">
+      <button mat-icon-button color="warn" matTooltip="Usuń" (click)="onDeleteInsurer(insurer)">
         <mat-icon class="mat-18">delete</mat-icon>
       </button>
     </td>
@@ -39,6 +48,11 @@
     <td mat-cell *matCellDef="let insurer">{{ insurer.lastName }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="pesel">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>PESEL</th>
+    <td mat-cell *matCellDef="let insurer">{{ insurer.pesel }}</td>
+  </ng-container>
+
   <ng-container matColumnDef="phoneNumber">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefon</th>
     <td mat-cell *matCellDef="let insurer">{{ insurer.phoneNumber }}</td>
@@ -47,11 +61,6 @@
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
     <td mat-cell *matCellDef="let insurer">{{ insurer.email }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="pesel">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>PESEL</th>
-    <td mat-cell *matCellDef="let insurer">{{ insurer.pesel }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

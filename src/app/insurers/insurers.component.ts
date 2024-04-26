@@ -19,6 +19,11 @@ import { ConfirmDialogComponent } from '../shared/ui/confirm-dialog/confirm-dial
 import { filter, take } from 'rxjs';
 import { InsurersFacade } from './data-access/state/insurers.facade';
 import { InfoDialogComponent } from '../shared/ui/info-dialog/info-dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {
+  INSURER_DETAILS,
+  InsurersDetailsComponent,
+} from './components/insurers-details/insurers-details.component';
 
 @Component({
   selector: 'app-insurers',
@@ -33,6 +38,7 @@ import { InfoDialogComponent } from '../shared/ui/info-dialog/info-dialog.compon
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTooltipModule,
   ],
 })
 export class InsurersComponent implements AfterViewInit {
@@ -47,13 +53,14 @@ export class InsurersComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<Insurer>;
 
   public displayedColumns: string[] = [
+    'details',
     'edit',
     'delete',
     'firstName',
     'lastName',
+    'pesel',
     'phoneNumber',
     'email',
-    'pesel',
   ];
 
   ngAfterViewInit(): void {
@@ -81,7 +88,26 @@ export class InsurersComponent implements AfterViewInit {
     this.portalService.setIsOpen(true);
   }
 
-  onDeleteInsurer(insurer: Insurer): void {
+  public openDetails(insurer: Insurer): void {
+    this.portalService.setSelectedPortal(
+      new ComponentPortal(
+        InsurersDetailsComponent,
+        null,
+        Injector.create({
+          parent: this.injector,
+          providers: [
+            {
+              provide: INSURER_DETAILS,
+              useValue: insurer,
+            },
+          ],
+        }),
+      ),
+    );
+    this.portalService.setIsOpen(true);
+  }
+
+  public onDeleteInsurer(insurer: Insurer): void {
     if (insurer.policies?.length) {
       this.dialog.open(InfoDialogComponent, {
         data: {

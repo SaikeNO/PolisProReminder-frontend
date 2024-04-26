@@ -44,4 +44,14 @@ export const insurersReducer = createReducer(
     error: action.error,
   })),
 
+  on(InsurersActions.deleteInsurer, (state) => ({ ...state, isLoading: true, error: null })),
+  on(InsurersActions.deleteInsurerSuccess, (state) => ({
+    ...state,
+    isLoading: false,
+  })),
+  on(InsurersActions.deleteInsurerFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
 );

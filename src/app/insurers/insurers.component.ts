@@ -18,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../shared/ui/confirm-dialog/confirm-dialog.component';
 import { filter, take } from 'rxjs';
 import { InsurersFacade } from './data-access/state/insurers.facade';
+import { InfoDialogComponent } from '../shared/ui/info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-insurers',
@@ -81,17 +82,26 @@ export class InsurersComponent implements AfterViewInit {
   }
 
   onDeleteInsurer(insurer: Insurer): void {
-    const dialog = this.dialog.open(ConfirmDialogComponent, {
-      data: { name: `${insurer.firstName} ${insurer.lastName}` },
-      width: '500px',
-    });
+    if (insurer.policies?.length) {
+      this.dialog.open(InfoDialogComponent, {
+        data: {
+          message: `Nie można usunąć ${insurer.firstName} ${insurer.lastName}`,
+          subMessage: 'Klient posiada polisy',
+        },
+      });
+    } else {
+      const dialog = this.dialog.open(ConfirmDialogComponent, {
+        data: { name: `${insurer.firstName} ${insurer.lastName}`, withMessage: false },
+        width: '500px',
+      });
 
-    dialog
-      .afterClosed()
-      .pipe(
-        filter((res: boolean) => res),
-        take(1),
-      )
-      .subscribe(() => this.insurersFacade.deleteInsurer(insurer.id));
+      dialog
+        .afterClosed()
+        .pipe(
+          filter((res: boolean) => res),
+          take(1),
+        )
+        .subscribe(() => this.insurersFacade.deleteInsurer(insurer.id));
+    }
   }
 }

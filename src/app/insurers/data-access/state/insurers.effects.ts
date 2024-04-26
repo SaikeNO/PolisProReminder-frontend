@@ -20,6 +20,7 @@ export class InsurersEffects {
         InsurersActions.getInsurers,
         InsurersActions.createInsurerSuccess,
         InsurersActions.editInsurerSuccess,
+        InsurersActions.deleteInsurerSuccess,
       ),
       mergeMap(() => {
         return this.insurersService.getInsurers().pipe(
@@ -64,7 +65,7 @@ export class InsurersEffects {
     ),
   );
 
-  editInsuranceType$ = createEffect(() =>
+  editInsurer$ = createEffect(() =>
     this.actions$.pipe(
       ofType(InsurersActions.editInsurer),
       mergeMap(({ createInsurer, id }) => {
@@ -82,6 +83,24 @@ export class InsurersEffects {
     ),
   );
 
+  deleteInsurer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.deleteInsurer),
+      mergeMap(({ id }) => {
+        return this.insurersService.deleteInsurer(id).pipe(
+          map(() =>
+            InsurersActions.deleteInsurerSuccess({
+              result: { message: MESSAGES.DELETE_SUCCESS, type: ActionResultsTypes.SUCCESS },
+            }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(InsurersActions.deleteInsurerFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
   allActions$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -90,7 +109,7 @@ export class InsurersEffects {
           // InsurersActions.createInsurerFailure,
           InsurersActions.editInsurerSuccess,
           // InsurersActions.editInsurerFailure,
-          //InsurersActions.deleteInsurerSuccess,
+          InsurersActions.deleteInsurerSuccess,
           // InsurersActions.deleteInsurerFailure,
         ),
         map(({ result: { message, type } }) => {

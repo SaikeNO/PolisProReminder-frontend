@@ -26,4 +26,8 @@ export class InsurersService {
   editInsurer(insurer: CreateInsurer, id: number) {
     return this.http.put<void>(`${this.url}/Insurer/${id}`, insurer);
   }
+
+  deleteInsurer(id: number) {
+    return this.http.delete<void>(`${this.url}/Insurer/${id}`);
+  }
 }

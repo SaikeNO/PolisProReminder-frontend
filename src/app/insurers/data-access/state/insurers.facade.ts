@@ -30,5 +30,7 @@ export class InsurersFacade {
     this.store.dispatch(InsurersActions.editInsurer({ createInsurer, id }));
   }
 
-  deleteInsurer(id: number): void {}
+  deleteInsurer(id: number): void {
+    this.store.dispatch(InsurersActions.deleteInsurer({ id }));
+  }
 }

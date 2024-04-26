@@ -59,3 +59,18 @@ export const editInsurerFailure = createAction(
   '[Insurer Page] Edit Insurer Failure',
   props<{ error: string }>(),
 );
+
+export const deleteInsurer = createAction(
+  '[Insurer Page] Delete Insurer ',
+  props<{ id: number }>(),
+);
+
+export const deleteInsurerSuccess = createAction(
+  '[Insurer Page] Delete Insurer Success',
+  props<{ result: ActionResults }>(),
+);
+
+export const deleteInsurerFailure = createAction(
+  '[Insurer Page] Delete Insurer Failure',
+  props<{ error: string }>(),
+);

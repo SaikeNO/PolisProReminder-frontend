@@ -1,30 +1,19 @@
 import { createAction, props } from '@ngrx/store';
-import { GetPaginatedPolicies } from './policies.models';
 import { Policy } from '../../../shared/interfaces/policy';
+import { GetQuery } from '../../../shared/interfaces/getQuery';
+import { PageResult } from '../../../shared/interfaces/pageResult';
 
-export const getPolicies = createAction('[Policies Page] Get All Policies');
+export const getPolicies = createAction(
+  '[Policies Page] Get Policies',
+  props<{ query: GetQuery }>(),
+);
 
 export const getPoliciesSuccess = createAction(
-  '[Policies Page] Get All Policies Success',
-  props<{ policies: Policy[] }>(),
+  '[Policies Page] Get Policies Success',
+  props<{ pageResult: PageResult<Policy> }>(),
 );
 
 export const getPoliciesFailure = createAction(
-  '[Policies Page] Get All Policies Failure',
-  props<{ error: string }>(),
-);
-
-export const getPaginatedPolicies = createAction(
-  '[Policies Page] Get Paginated Policies',
-  props<{ params: GetPaginatedPolicies }>(),
-);
-
-export const getPaginatedPoliciesSuccess = createAction(
-  '[Policies Page] Get Paginated Policies Success',
-  props<{ policies: Policy[] }>(),
-);
-
-export const getPaginatedPoliciesFailure = createAction(
-  '[Policies Page] Get Paginated Policies Failure',
+  '[Policies Page] Get Policies Failure',
   props<{ error: string }>(),
 );

@@ -24,6 +24,7 @@ import { PoliciesDataSource } from './data-access/policies-datasource';
     MatPaginatorModule,
     MatSortModule,
   ],
+  providers: [{ provide: MatPaginatorIntl, useValue: getPaginatorIntl() }],
   templateUrl: './policies.component.html',
   styleUrl: './policies.component.scss',
 })

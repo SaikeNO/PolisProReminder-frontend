@@ -1,4 +1,4 @@
-export type SortDirection = 'asc' | 'desc' | '';
+export type SortDirection = 'asc' | 'desc' | 'none';
 
 export interface GetQuery {
   searchPhrase?: string;

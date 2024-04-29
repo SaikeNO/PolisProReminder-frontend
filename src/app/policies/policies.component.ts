@@ -20,6 +20,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { PoliciesFacade } from './data-access/state/policies.facade';
 import { getPaginatorIntl } from '../shared/utils/paginator-intl';
 import { GetQuery } from '../shared/interfaces/getQuery';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-policies',
@@ -33,6 +34,7 @@ import { GetQuery } from '../shared/interfaces/getQuery';
     MatIconModule,
     MatPaginatorModule,
     MatSortModule,
+    MatTooltipModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: getPaginatorIntl() }],
   templateUrl: './policies.component.html',
@@ -47,6 +49,9 @@ export class PoliciesComponent {
 
   public searchQuery$ = new BehaviorSubject<string>('');
   public displayedColumns: string[] = [
+    'details',
+    'edit',
+    'delete',
     'title',
     'policyNumber',
     'insurer',
@@ -81,18 +86,22 @@ export class PoliciesComponent {
     this.loadPolicies();
   }
 
-  applyFilter(event: Event) {
+  public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.searchQuery$.next(filterValue);
   }
+
+  public openDetails(policy: Policy) {}
+  public openForm(policy: Policy) {}
+  public onDeletePolicy(policy: Policy) {}
 
   private loadPolicies() {
     const query: GetQuery = {
       searchPhrase: this.searchQuery$.getValue(),
       pageIndex: this.paginator.pageIndex,
       pageSize: this.paginator.pageSize,
-      sortBy: this.sort.active ?? '',
-      sortDirection: this.sort.direction,
+      sortBy: this.sort.active ? this.sort.active.toLowerCase() : '',
+      sortDirection: this.sort.direction ? this.sort.direction : 'none',
     };
 
     this.policiesFacade.getPolicies(query);

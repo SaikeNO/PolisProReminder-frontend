@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { InsurersPoliciesComponent } from '../insurers-policies/insurers-policies.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { ErrorInfoComponent } from '../../../shared/ui/error-info/error-info.component';
 
 export const INSURER_DETAILS = new InjectionToken<{}>('CONTAINER_DATA');
 
@@ -17,6 +18,7 @@ export const INSURER_DETAILS = new InjectionToken<{}>('CONTAINER_DATA');
     InsurersPoliciesComponent,
     MatIconModule,
     MatButtonModule,
+    ErrorInfoComponent,
   ],
   templateUrl: './insurers-details.component.html',
   styleUrl: './insurers-details.component.scss',

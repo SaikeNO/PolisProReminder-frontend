@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, Injector, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,7 +10,6 @@ import {
   distinctUntilChanged,
   merge,
   takeUntil,
-  tap,
 } from 'rxjs';
 import { Policy } from '../shared/interfaces/policy';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,6 +20,12 @@ import { PoliciesFacade } from './data-access/state/policies.facade';
 import { getPaginatorIntl } from '../shared/utils/paginator-intl';
 import { GetQuery } from '../shared/interfaces/getQuery';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PortalService } from '../shared/data-access/portal.service';
+import { ComponentPortal } from '@angular/cdk/portal';
+import {
+  POLICY_DETAILS,
+  PoliciesDetailsComponent,
+} from './components/policies-details/policies-details.component';
 
 @Component({
   selector: 'app-policies',
@@ -42,6 +47,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class PoliciesComponent {
   private policiesFacade = inject(PoliciesFacade);
+  private portalService = inject(PortalService);
+  private injector = inject(Injector);
   private onDestroy$ = new Subject<void>();
 
   public policies$ = this.policiesFacade.policies$;
@@ -68,16 +75,11 @@ export class PoliciesComponent {
 
   ngAfterViewInit(): void {
     this.searchQuery$
-      .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        tap(() => {
-          this.paginator.pageIndex = 0;
-          this.loadPolicies();
-        }),
-        takeUntil(this.onDestroy$),
-      )
-      .subscribe();
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.onDestroy$))
+      .subscribe(() => {
+        this.paginator.pageIndex = 0;
+        this.loadPolicies();
+      });
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(takeUntil(this.onDestroy$))
@@ -91,7 +93,25 @@ export class PoliciesComponent {
     this.searchQuery$.next(filterValue);
   }
 
-  public openDetails(policy: Policy) {}
+  public openDetails(policy: Policy) {
+    this.portalService.setSelectedPortal(
+      new ComponentPortal(
+        PoliciesDetailsComponent,
+        null,
+        Injector.create({
+          parent: this.injector,
+          providers: [
+            {
+              provide: POLICY_DETAILS,
+              useValue: policy,
+            },
+          ],
+        }),
+      ),
+    );
+    this.portalService.setIsOpen(true);
+  }
+
   public openForm(policy: Policy) {}
   public onDeletePolicy(policy: Policy) {}
 

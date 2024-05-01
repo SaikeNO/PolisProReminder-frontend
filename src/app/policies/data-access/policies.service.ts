@@ -17,4 +17,8 @@ export class PoliciesService {
   getInsurerPolicies(insurerId: number) {
     return this.http.get<Policy[]>(`${this.url}/Policy/Insurer/${insurerId}`);
   }
+
+  deletePolicy(policyId: number) {
+    return this.http.delete<void>(`${this.url}/Policy/${policyId}`);
+  }
 }

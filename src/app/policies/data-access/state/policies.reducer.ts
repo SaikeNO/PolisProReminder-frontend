@@ -6,6 +6,13 @@ export const initialState: PoliciesState = {
   isLoading: false,
   error: null,
   policies: [],
+  query: {
+    searchPhrase: '',
+    pageIndex: 0,
+    pageSize: 10,
+    sortBy: '',
+    sortDirection: 'none',
+  },
   itemsFrom: 0,
   itemsTo: 0,
   totalItemsCount: 0,
@@ -14,7 +21,7 @@ export const initialState: PoliciesState = {
 
 export const policiesReducer = createReducer(
   initialState,
-  on(PoliciesActions.getPolicies, (state) => ({ ...state, isLoading: true })),
+  on(PoliciesActions.getPolicies, (state, { query }) => ({ ...state, query, isLoading: true })),
   on(
     PoliciesActions.getPoliciesSuccess,
     (state, { pageResult: { items, itemsFrom, itemsTo, totalItemsCount, totalPages } }) => ({
@@ -29,6 +36,17 @@ export const policiesReducer = createReducer(
     }),
   ),
   on(PoliciesActions.getPoliciesFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  on(PoliciesActions.deletePolicy, (state) => ({ ...state, isLoading: true, error: null })),
+  on(PoliciesActions.deletePolicySuccess, (state) => ({
+    ...state,
+    isLoading: false,
+  })),
+  on(PoliciesActions.deletePolicyFailure, (state, action) => ({
     ...state,
     isLoading: false,
     error: action.error,

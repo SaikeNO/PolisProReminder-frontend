@@ -11,6 +11,7 @@ export class PoliciesFacade {
 
   isLoading$ = this.store.pipe(select(PoliciesSelectors.isLoading));
   error$ = this.store.pipe(select(PoliciesSelectors.getError));
+  query$ = this.store.pipe(select(PoliciesSelectors.getQuery));
   policies$ = this.store.pipe(select(PoliciesSelectors.getPolicies));
   totalItemsCount$ = this.store.pipe(select(PoliciesSelectors.getTotalItemsCount));
   totalPages$ = this.store.pipe(select(PoliciesSelectors.getTotalPages));
@@ -19,5 +20,9 @@ export class PoliciesFacade {
 
   getPolicies(query: GetQuery): void {
     this.store.dispatch(PoliciesActions.getPolicies({ query }));
+  }
+
+  deletePolicy(policyId: number): void {
+    this.store.dispatch(PoliciesActions.deletePolicy({ policyId }));
   }
 }

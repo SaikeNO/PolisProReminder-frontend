@@ -3,29 +3,34 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import {
   BehaviorSubject,
   Subject,
   debounceTime,
   distinctUntilChanged,
+  filter,
   merge,
+  take,
   takeUntil,
 } from 'rxjs';
+
 import { Policy } from '../shared/interfaces/policy';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { PoliciesFacade } from './data-access/state/policies.facade';
 import { getPaginatorIntl } from '../shared/utils/paginator-intl';
 import { GetQuery } from '../shared/interfaces/getQuery';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { PortalService } from '../shared/data-access/portal.service';
-import { ComponentPortal } from '@angular/cdk/portal';
 import {
   POLICY_DETAILS,
   PoliciesDetailsComponent,
 } from './components/policies-details/policies-details.component';
+import { ConfirmDialogComponent } from '../shared/ui/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-policies',
@@ -49,6 +54,7 @@ export class PoliciesComponent {
   private policiesFacade = inject(PoliciesFacade);
   private portalService = inject(PortalService);
   private injector = inject(Injector);
+  private dialog = inject(MatDialog);
   private onDestroy$ = new Subject<void>();
 
   public policies$ = this.policiesFacade.policies$;
@@ -113,7 +119,21 @@ export class PoliciesComponent {
   }
 
   public openForm(policy: Policy) {}
-  public onDeletePolicy(policy: Policy) {}
+
+  public onDeletePolicy(policy: Policy) {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      data: { name: `${policy.title}`, withMessage: false },
+      width: '500px',
+    });
+
+    dialog
+      .afterClosed()
+      .pipe(
+        filter((res: boolean) => res),
+        take(1),
+      )
+      .subscribe(() => this.policiesFacade.deletePolicy(policy.id));
+  }
 
   private loadPolicies() {
     const query: GetQuery = {

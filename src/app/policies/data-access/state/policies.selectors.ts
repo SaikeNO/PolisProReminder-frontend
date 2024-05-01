@@ -7,6 +7,8 @@ export const isLoading = createSelector(selectFeature, (state) => state.isLoadin
 
 export const getError = createSelector(selectFeature, (state) => state.error);
 
+export const getQuery = createSelector(selectFeature, (state) => state.query);
+
 export const getPolicies = createSelector(selectFeature, (state) => state.policies);
 
 export const getTotalPages = createSelector(selectFeature, (state) => state.totalPages);

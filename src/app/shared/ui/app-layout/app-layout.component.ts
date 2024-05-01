@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
@@ -30,6 +30,7 @@ import { PortalService } from '../../data-access/portal.service';
     MatIconButton,
     LoadingBarComponent,
     PortalModule,
+    RouterLinkActive,
   ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',

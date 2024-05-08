@@ -39,14 +39,16 @@
     mode="over"
     [opened]="isPortalOpened$ | async"
     position="end"
-    class="sidenav-portal"
   >
     <div class="sidenav-portal-button">
       <button mat-icon-button (click)="onPortalClose()">
         <mat-icon>close</mat-icon>
       </button>
     </div>
-    <ng-template [cdkPortalOutlet]="selectedPortal$ | async"></ng-template>
+
+    <div class="sidenav-portal">
+      <ng-template [cdkPortalOutlet]="selectedPortal$ | async"></ng-template>
+    </div>
   </mat-sidenav>
 
   <mat-sidenav-content>

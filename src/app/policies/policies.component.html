@@ -4,7 +4,7 @@
     <input matInput (keyup)="applyFilter($event)" #input />
   </mat-form-field>
 
-  <button mat-raised-button color="primary" matTooltip="Dodaj">
+  <button mat-raised-button color="primary" matTooltip="Dodaj" (click)="openForm()">
     <mat-icon>add</mat-icon>
     Dodaj
   </button>

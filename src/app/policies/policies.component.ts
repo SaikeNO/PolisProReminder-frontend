@@ -31,6 +31,10 @@ import {
   PoliciesDetailsComponent,
 } from './components/policies-details/policies-details.component';
 import { ConfirmDialogComponent } from '../shared/ui/confirm-dialog/confirm-dialog.component';
+import {
+  POLICY_FORM,
+  PoliciesFormComponent,
+} from './components/policies-form/policies-form.component';
 
 @Component({
   selector: 'app-policies',
@@ -118,7 +122,24 @@ export class PoliciesComponent {
     this.portalService.setIsOpen(true);
   }
 
-  public openForm(policy: Policy) {}
+  public openForm(policy?: Policy) {
+    this.portalService.setSelectedPortal(
+      new ComponentPortal(
+        PoliciesFormComponent,
+        null,
+        Injector.create({
+          parent: this.injector,
+          providers: [
+            {
+              provide: POLICY_FORM,
+              useValue: policy,
+            },
+          ],
+        }),
+      ),
+    );
+    this.portalService.setIsOpen(true);
+  }
 
   public onDeletePolicy(policy: Policy) {
     const dialog = this.dialog.open(ConfirmDialogComponent, {

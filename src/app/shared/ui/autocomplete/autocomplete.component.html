@@ -1,0 +1,25 @@
+<mat-form-field>
+  @if (label) {
+    <mat-label>{{ label }}</mat-label>
+  }
+  <input type="text" matInput [formControl]="control" [matAutocomplete]="auto" />
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    @for (option of filteredOptions | async; track option.id) {
+      <mat-option [value]="option.value">{{ option.value }}</mat-option>
+    }
+  </mat-autocomplete>
+  @if (control.value) {
+    <button
+      type="button"
+      matSuffix
+      mat-icon-button
+      aria-label="Wyszyść"
+      (click)="control.patchValue('', { emitEvent: true })"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+  @if (errorMessage && control.hasError("required")) {
+    <mat-error> {{ errorMessage }} </mat-error>
+  }
+</mat-form-field>

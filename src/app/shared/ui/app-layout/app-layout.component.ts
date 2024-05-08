@@ -1,12 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule, MatNavList } from '@angular/material/list';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, map, shareReplay } from 'rxjs';
+import { Observable, filter, map, shareReplay, take } from 'rxjs';
 import { StorageService } from '../../data-access/storage.service';
 import { UserService } from '../../data-access/user.service';
 import { MatIconButton } from '@angular/material/button';
@@ -41,6 +41,7 @@ export class AppLayoutComponent implements OnInit {
   private userService = inject(UserService);
   private portalService = inject(PortalService);
   private router = inject(Router);
+  @ViewChild('drawer') drawer!: MatSidenav;
 
   selectedPortal$ = this.portalService.selectedPortal$;
   isPortalOpened$ = this.portalService.isOpened$;
@@ -58,6 +59,17 @@ export class AppLayoutComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  public closeDrawer() {
+    this.isHandset$
+      .pipe(
+        filter((isHandset) => isHandset),
+        take(1),
+      )
+      .subscribe(() => {
+        this.drawer.close();
+      });
   }
 
   public onPortalClose(): void {

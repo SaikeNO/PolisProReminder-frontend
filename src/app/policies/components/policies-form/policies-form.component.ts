@@ -62,12 +62,12 @@ export class PoliciesFormComponent implements OnInit {
   public form = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(60)]],
     policyNumber: ['', [Validators.required, Validators.maxLength(60)]],
-    insuranceCompany: ['', [Validators.required]],
+    insuranceCompanyId: ['', [Validators.required]],
     startDate: [''],
     endDate: [''],
     paymentDate: [''],
     isPaid: [''],
-    insurer: ['', Validators.required],
+    insurerId: ['', Validators.required],
     insuranceTypes: [''],
   });
 

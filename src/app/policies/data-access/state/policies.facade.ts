@@ -4,6 +4,7 @@ import * as PoliciesActions from './policies.actions';
 import * as PoliciesSelectors from './policies.selectors';
 import { AppState } from '../../../shared/reducers';
 import { GetQuery } from '../../../shared/interfaces/getQuery';
+import { CreatePolicy } from '../../../shared/interfaces/policy';
 
 @Injectable({ providedIn: 'root' })
 export class PoliciesFacade {
@@ -20,6 +21,14 @@ export class PoliciesFacade {
 
   getPolicies(query: GetQuery): void {
     this.store.dispatch(PoliciesActions.getPolicies({ query }));
+  }
+
+  createPolicy(createPolicy: CreatePolicy): void {
+    this.store.dispatch(PoliciesActions.createPolicy({ createPolicy }));
+  }
+
+  editPolicy(createPolicy: CreatePolicy, id: number): void {
+    this.store.dispatch(PoliciesActions.editPolicy({ createPolicy, id }));
   }
 
   deletePolicy(policyId: number): void {

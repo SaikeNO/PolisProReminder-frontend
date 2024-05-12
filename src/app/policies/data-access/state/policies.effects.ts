@@ -38,6 +38,56 @@ export class PoliciesEffects {
     ),
   );
 
+  createPolicy$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PoliciesActions.createPolicy),
+      mergeMap(({ createPolicy }) => {
+        return this.policiesService.createPolicy(createPolicy).pipe(
+          map(() =>
+            PoliciesActions.createPolicySuccess({
+              result: { message: MESSAGES.CREATE_SUCCESS, type: ActionResultsTypes.SUCCESS },
+            }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(PoliciesActions.createPolicyFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
+  createPolicySuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PoliciesActions.createPolicySuccess),
+      map(() => PoliciesActions.reloadPolicies()),
+    ),
+  );
+
+  editPolicy$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PoliciesActions.editPolicy),
+      mergeMap(({ createPolicy, id }) => {
+        return this.policiesService.editPolicy(createPolicy, id).pipe(
+          map(() =>
+            PoliciesActions.editPolicySuccess({
+              result: { message: MESSAGES.EDIT_SUCCESS, type: ActionResultsTypes.SUCCESS },
+            }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(PoliciesActions.editPolicyFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
+  editPolicySuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PoliciesActions.editPolicySuccess),
+      map(() => PoliciesActions.reloadPolicies()),
+    ),
+  );
+
   deletePolicy$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PoliciesActions.deletePolicy),
@@ -67,9 +117,9 @@ export class PoliciesEffects {
     () =>
       this.actions$.pipe(
         ofType(
-          //PoliciesActions.createInsurerSuccess,
-          // PoliciesActions.createInsurerFailure,
-          //PoliciesActions.editInsurerSuccess,
+          PoliciesActions.createPolicySuccess,
+          // PoliciesActions.createPolicyFailure,
+          PoliciesActions.editPolicySuccess,
           // PoliciesActions.editInsurerFailure,
           PoliciesActions.deletePolicySuccess,
           // PoliciesActions.deleteInsurerFailure,

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Policy } from '../../shared/interfaces/policy';
+import { CreatePolicy, Policy } from '../../shared/interfaces/policy';
 import { environment } from '../../../environments/environment';
 import { PageResult } from '../../shared/interfaces/pageResult';
 import { GetQuery } from '../../shared/interfaces/getQuery';
@@ -16,6 +16,14 @@ export class PoliciesService {
 
   getInsurerPolicies(insurerId: number) {
     return this.http.get<Policy[]>(`${this.url}/Policy/Insurer/${insurerId}`);
+  }
+
+  createPolicy(policy: CreatePolicy) {
+    return this.http.post<void>(`${this.url}/Policy`, policy);
+  }
+
+  editPolicy(policy: CreatePolicy, id: number) {
+    return this.http.put<void>(`${this.url}/Policy/${id}`, policy);
   }
 
   deletePolicy(policyId: number) {

@@ -69,7 +69,7 @@ export class InsurersPoliciesDataSource extends DataSource<Policy> {
         case 'policyNumber':
           return compare(a.policyNumber, b.policyNumber, isAsc);
         case 'insuranceCompany':
-          return compare(a.insuranceCompany, b.insuranceCompany, isAsc);
+          return compare(a.insuranceCompany.shortName, b.insuranceCompany.shortName, isAsc);
         case 'startDate':
           return compare(a.startDate.toString(), b.startDate.toString(), isAsc);
         case 'endDate':

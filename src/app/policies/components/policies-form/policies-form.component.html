@@ -48,6 +48,9 @@
             <input matInput formControlName="endDate" [matDatepicker]="endDate" />
             <mat-datepicker-toggle matIconSuffix [for]="endDate"></mat-datepicker-toggle>
             <mat-datepicker #endDate></mat-datepicker>
+            @if (form.controls.endDate.hasError("greaterThan")) {
+              <mat-error> Koniec nie może być przed początkiem </mat-error>
+            }
           </mat-form-field>
         </div>
         <div class="col">
@@ -56,6 +59,9 @@
             <input matInput formControlName="paymentDate" [matDatepicker]="paymentDate" />
             <mat-datepicker-toggle matIconSuffix [for]="paymentDate"></mat-datepicker-toggle>
             <mat-datepicker #paymentDate></mat-datepicker>
+            @if (form.controls.paymentDate.hasError("greaterThan")) {
+              <mat-error> Termin nie może być przed początkiem </mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
@@ -72,9 +78,9 @@
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Typy Ubezpieczenia</mat-label>
-            <mat-select formControlName="insuranceTypes" multiple>
+            <mat-select formControlName="insuranceTypeIds" multiple>
               @for (type of insuranceTypes$ | async; track type.id) {
-                <mat-option [value]="type.name">{{ type.name }}</mat-option>
+                <mat-option [value]="type.id">{{ type.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>

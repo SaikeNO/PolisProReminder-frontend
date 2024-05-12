@@ -1,5 +1,5 @@
 import { Component, Inject, InjectionToken, OnInit, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
 import { map } from 'rxjs';
 
@@ -11,17 +11,31 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 import { CompaniesFacade } from '../../../insurance-company/data-access/state/companies.facade';
 import { AutocompleteComponent } from '../../../shared/ui/autocomplete/autocomplete.component';
-import { Policy } from '../../../shared/interfaces/policy';
+import { CreatePolicy, Policy } from '../../../shared/interfaces/policy';
 import { Option } from '../../../shared/ui/autocomplete/autocomplete.model';
 import { InsurersFacade } from '../../../insurers/data-access/state/insurers.facade';
 import { InsuranceTypesFacade } from '../../../insurance-types/data-access/state/insurance-types.facade';
-import { MatSelectModule } from '@angular/material/select';
 import { replaceEmptyStringWithNull } from '../../../shared/helpers/replaceEmptyStringWithNull';
+import { PoliciesFacade } from '../../data-access/state/policies.facade';
+import { greaterThan } from '../../../shared/validators/date.validator';
 
 export const POLICY_FORM = new InjectionToken<{}>('POLICY_FORM');
+
+export interface PolicyForm {
+  title: FormControl<string | null>;
+  policyNumber: FormControl<string | null>;
+  insuranceCompanyId: FormControl<number | null>;
+  startDate: FormControl<Date | null>;
+  endDate: FormControl<Date | null>;
+  paymentDate: FormControl<Date | null>;
+  isPaid: FormControl<boolean>;
+  insurerId: FormControl<number | null>;
+  insuranceTypeIds: FormControl<number[]>;
+}
 
 @Component({
   selector: 'app-policies-form',
@@ -45,9 +59,10 @@ export const POLICY_FORM = new InjectionToken<{}>('POLICY_FORM');
 })
 export class PoliciesFormComponent implements OnInit {
   private fb = inject(FormBuilder);
+  private policiesFacade = inject(PoliciesFacade);
+  private insuranceTypesFacade = inject(InsuranceTypesFacade);
   private insuranceCompaniesFacade = inject(CompaniesFacade);
   private insurersFacade = inject(InsurersFacade);
-  private insuranceTypesFacade = inject(InsuranceTypesFacade);
 
   public insuranceCompanies$ = this.insuranceCompaniesFacade.companies$.pipe(
     map((companies) => companies.map((c) => ({ id: c.id, value: c.shortName }) as Option)),
@@ -59,16 +74,16 @@ export class PoliciesFormComponent implements OnInit {
 
   public insuranceTypes$ = this.insuranceTypesFacade.insuranceTypes$;
 
-  public form = this.fb.group({
-    title: ['', [Validators.required, Validators.maxLength(60)]],
-    policyNumber: ['', [Validators.required, Validators.maxLength(60)]],
-    insuranceCompanyId: ['', [Validators.required]],
-    startDate: [''],
-    endDate: [''],
-    paymentDate: [''],
-    isPaid: [''],
-    insurerId: ['', Validators.required],
-    insuranceTypes: [''],
+  public form = this.fb.group<PolicyForm>({
+    title: this.fb.control('', [Validators.required, Validators.maxLength(60)]),
+    policyNumber: this.fb.control('', [Validators.required, Validators.maxLength(60)]),
+    insuranceCompanyId: this.fb.control(null, [Validators.required]),
+    startDate: this.fb.control(null),
+    endDate: this.fb.control(null),
+    paymentDate: this.fb.control(null),
+    isPaid: this.fb.nonNullable.control(false),
+    insurerId: this.fb.control(null, Validators.required),
+    insuranceTypeIds: this.fb.nonNullable.control([]),
   });
 
   constructor(@Inject(POLICY_FORM) public policy: Policy | undefined) {}
@@ -77,10 +92,41 @@ export class PoliciesFormComponent implements OnInit {
     this.insuranceTypesFacade.getInsuranceTypes();
     this.insuranceCompaniesFacade.getCompanies();
     this.insurersFacade.getInsurers();
+    this.updateValidators();
+
+    if (!this.policy) return;
+    this.form.patchValue({
+      title: this.policy.title,
+      policyNumber: this.policy.policyNumber,
+      endDate: this.policy.endDate,
+      startDate: this.policy.startDate,
+      insuranceCompanyId: this.policy.insuranceCompany?.id,
+      insurerId: this.policy.insurer?.id,
+      isPaid: this.policy.isPaid,
+      paymentDate: this.policy.paymentDate,
+      insuranceTypeIds: this.policy.insuranceTypes.map((t) => t.id),
+    });
   }
 
   public onSubmit() {
-    console.log(this.form.value);
-    console.log(replaceEmptyStringWithNull(this.form.value));
+    const policy = replaceEmptyStringWithNull(this.form.value) as CreatePolicy;
+    if (this.form.invalid) return;
+
+    if (this.policy) {
+      this.policiesFacade.editPolicy(policy, this.policy.id);
+    } else {
+      this.policiesFacade.createPolicy(policy);
+    }
+  }
+
+  private updateValidators() {
+    const startDateControl = this.form.controls.startDate;
+    const endDateControl = this.form.controls.endDate;
+    const paymentDateControl = this.form.controls.paymentDate;
+    endDateControl.setValidators([Validators.required, greaterThan(startDateControl)]);
+    paymentDateControl.setValidators([Validators.required, greaterThan(startDateControl)]);
+
+    endDateControl.updateValueAndValidity();
+    paymentDateControl.updateValueAndValidity();
   }
 }

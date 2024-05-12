@@ -1,6 +1,12 @@
+import moment from 'moment';
+
 export const replaceEmptyStringWithNull = (obj: any): any => {
   if (obj == null) {
     return obj;
+  }
+
+  if (obj instanceof Date) {
+    return moment(obj).format();
   }
 
   if (Array.isArray(obj)) {

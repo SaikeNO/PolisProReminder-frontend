@@ -27,7 +27,7 @@ export const reloadPoliciesSuccess = createAction(
 );
 
 export const relaodPoliciesFailure = createAction(
-  '[Policies Page] Get Policies Failure',
+  '[Policies Page] Reload Policies Failure',
   props<{ error: string }>(),
 );
 

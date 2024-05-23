@@ -6,4 +6,5 @@ export interface GetQuery {
   pageSize: number;
   sortBy: string;
   sortDirection: SortDirection;
+  typeId?: number;
 }

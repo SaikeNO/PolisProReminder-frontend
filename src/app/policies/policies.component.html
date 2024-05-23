@@ -3,11 +3,19 @@
     <mat-label>Wyszukaj</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input />
   </mat-form-field>
-
-  <button mat-raised-button color="primary" matTooltip="Dodaj" (click)="openForm()">
-    <mat-icon>add</mat-icon>
-    Dodaj
-  </button>
+  <div>
+    <mat-chip-listbox>
+      @for (type of insuranceTypes$ | async; track type) {
+        <mat-chip-option (click)="selectInsuranceTypeId(type.id)">{{ type.name }}</mat-chip-option>
+      }
+    </mat-chip-listbox>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" matTooltip="Dodaj" (click)="openForm()">
+      <mat-icon>add</mat-icon>
+      Dodaj
+    </button>
+  </div>
 </div>
 
 <div class="table-responsive mat-elevation-z8">

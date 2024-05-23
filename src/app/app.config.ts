@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { DATE_PIPE_DEFAULT_OPTIONS, registerLocaleData } from '@angular/common';
 import localePL from '@angular/common/locales/pl';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -23,8 +23,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimationsAsync(),
-    importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
     provideStore(reducers),
     provideEffects(PoliciesEffects, InsurersEffects, CompaniesEffects, InsuranceTypesEffects),

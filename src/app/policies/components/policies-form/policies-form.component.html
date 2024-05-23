@@ -24,12 +24,16 @@
           </mat-form-field>
         </div>
         <div class="col">
-          <app-autocomplete
-            [control]="form.controls.insuranceCompanyId"
-            [options]="insuranceCompanies$ | async"
-            label="Towarzystwo ubezpieczeniowe"
-            errorMessage="Towarzystwo ubezpieczeniowe jest wymagane"
-          />
+          @if (insuranceCompanies$ | async; as companies) {
+            @if (companies.length) {
+              <app-autocomplete
+                [control]="form.controls.insuranceCompanyId"
+                [options]="companies"
+                label="Towarzystwo ubezpieczeniowe"
+                errorMessage="Towarzystwo ubezpieczeniowe jest wymagane"
+              />
+            }
+          }
         </div>
       </div>
 
@@ -68,12 +72,16 @@
 
       <div class="row">
         <div class="col">
-          <app-autocomplete
-            [control]="form.controls.insurerId"
-            [options]="insurers$ | async"
-            label="Ubezpieczający"
-            errorMessage="Ubezpieczający jest wymagany"
-          />
+          @if (insurers$ | async; as insurers) {
+            @if (insurers.length) {
+              <app-autocomplete
+                [control]="form.controls.insurerId"
+                [options]="insurers"
+                label="Ubezpieczający"
+                errorMessage="Ubezpieczający jest wymagany"
+              />
+            }
+          }
         </div>
         <div class="col">
           <mat-form-field class="full-width">

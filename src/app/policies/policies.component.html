@@ -11,7 +11,7 @@
 </div>
 
 <div class="table-responsive mat-elevation-z8">
-  <table mat-table matSort [dataSource]="visiblePolicies" aria-label="Polisy">
+  <table mat-table matSort [dataSource]="(policies$ | async)!" aria-label="Polisy">
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox
@@ -93,6 +93,11 @@
     <ng-container matColumnDef="paymentDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Termin zapłaty</th>
       <td mat-cell *matCellDef="let policy">{{ policy.paymentDate | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="insuranceTypes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ ubezpieczenia</th>
+      <td mat-cell *matCellDef="let policy">{{ displayInsuranceType(policy.insuranceTypes) }}</td>
     </ng-container>
 
     <ng-container matColumnDef="isPaid">

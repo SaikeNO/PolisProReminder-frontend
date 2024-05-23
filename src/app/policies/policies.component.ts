@@ -37,6 +37,7 @@ import {
 } from './components/policies-form/policies-form.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
+import { InsuranceType } from '../shared/interfaces/insuranceType';
 
 @Component({
   selector: 'app-policies',
@@ -82,6 +83,7 @@ export class PoliciesComponent {
     'startDate',
     'endDate',
     'paymentDate',
+    'insuranceTypes',
     'isPaid',
   ];
 
@@ -179,6 +181,10 @@ export class PoliciesComponent {
     }
 
     this.selection.select(...this.visiblePolicies);
+  }
+
+  public displayInsuranceType(types: InsuranceType[]) {
+    return types.map((t) => t.name).join(', ');
   }
 
   private loadPolicies() {

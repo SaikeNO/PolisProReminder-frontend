@@ -35,6 +35,8 @@ import {
   POLICY_FORM,
   PoliciesFormComponent,
 } from './components/policies-form/policies-form.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-policies',
@@ -49,6 +51,7 @@ import {
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
+    MatCheckboxModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: getPaginatorIntl() }],
   templateUrl: './policies.component.html',
@@ -65,7 +68,10 @@ export class PoliciesComponent {
   public totalItemsCount$ = this.policiesFacade.totalItemsCount$;
 
   public searchQuery$ = new BehaviorSubject<string>('');
+  public selection = new SelectionModel<Policy>(true, []);
+  public visiblePolicies: Policy[] = [];
   public displayedColumns: string[] = [
+    'select',
     'details',
     'edit',
     'delete',
@@ -84,6 +90,10 @@ export class PoliciesComponent {
   @ViewChild(MatTable) table!: MatTable<Policy>;
 
   ngAfterViewInit(): void {
+    this.policies$
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((policies) => (this.visiblePolicies = policies));
+
     this.searchQuery$
       .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.onDestroy$))
       .subscribe(() => {
@@ -154,6 +164,21 @@ export class PoliciesComponent {
         take(1),
       )
       .subscribe(() => this.policiesFacade.deletePolicy(policy.id));
+  }
+
+  public isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.visiblePolicies.length;
+    return numSelected === numRows;
+  }
+
+  public toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.visiblePolicies);
   }
 
   private loadPolicies() {

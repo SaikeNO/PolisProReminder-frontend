@@ -1,5 +1,5 @@
 import { Component, Inject, InjectionToken, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
 import { map } from 'rxjs';
 
@@ -22,20 +22,9 @@ import { InsuranceTypesFacade } from '../../../insurance-types/data-access/state
 import { replaceEmptyStringWithNull } from '../../../shared/helpers/replaceEmptyStringWithNull';
 import { PoliciesFacade } from '../../data-access/state/policies.facade';
 import { greaterThan } from '../../../shared/validators/date.validator';
+import { PolicyForm } from './policy-form.models';
 
 export const POLICY_FORM = new InjectionToken<{}>('POLICY_FORM');
-
-export interface PolicyForm {
-  title: FormControl<string | null>;
-  policyNumber: FormControl<string | null>;
-  insuranceCompanyId: FormControl<number | null>;
-  startDate: FormControl<Date | null>;
-  endDate: FormControl<Date | null>;
-  paymentDate: FormControl<Date | null>;
-  isPaid: FormControl<boolean>;
-  insurerId: FormControl<number | null>;
-  insuranceTypeIds: FormControl<number[]>;
-}
 
 @Component({
   selector: 'app-policies-form',
@@ -69,7 +58,9 @@ export class PoliciesFormComponent implements OnInit {
   );
 
   public insurers$ = this.insurersFacade.insurers$.pipe(
-    map((insurers) => insurers.map((i) => ({ id: i.id, value: i.lastName }) as Option)),
+    map((insurers) =>
+      insurers.map((i) => ({ id: i.id, value: `${i.lastName} ${i.firstName}` }) as Option),
+    ),
   );
 
   public insuranceTypes$ = this.insuranceTypesFacade.insuranceTypes$;
@@ -78,7 +69,7 @@ export class PoliciesFormComponent implements OnInit {
     title: this.fb.control('', [Validators.required, Validators.maxLength(60)]),
     policyNumber: this.fb.control('', [Validators.required, Validators.maxLength(60)]),
     insuranceCompanyId: this.fb.control(null, [Validators.required]),
-    startDate: this.fb.control(null),
+    startDate: this.fb.control(null, [Validators.required]),
     endDate: this.fb.control(null),
     paymentDate: this.fb.control(null),
     isPaid: this.fb.nonNullable.control(false),

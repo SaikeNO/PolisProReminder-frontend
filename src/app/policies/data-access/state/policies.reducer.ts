@@ -26,7 +26,6 @@ export const policiesReducer = createReducer(
     PoliciesActions.getPoliciesSuccess,
     (state, { pageResult: { items, itemsFrom, itemsTo, totalItemsCount, totalPages } }) => ({
       ...state,
-      items,
       itemsFrom,
       itemsTo,
       totalItemsCount,

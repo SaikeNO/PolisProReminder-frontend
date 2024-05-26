@@ -56,13 +56,6 @@ export class PoliciesEffects {
     ),
   );
 
-  createPolicySuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(PoliciesActions.createPolicySuccess),
-      map(() => PoliciesActions.reloadPolicies()),
-    ),
-  );
-
   editPolicy$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PoliciesActions.editPolicy),
@@ -78,13 +71,6 @@ export class PoliciesEffects {
           ),
         );
       }),
-    ),
-  );
-
-  editPolicySuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(PoliciesActions.editPolicySuccess),
-      map(() => PoliciesActions.reloadPolicies()),
     ),
   );
 
@@ -106,9 +92,13 @@ export class PoliciesEffects {
     ),
   );
 
-  deletePolicySuccess$ = createEffect(() =>
+  allActionsReloadPolicies$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(PoliciesActions.deletePolicySuccess),
+      ofType(
+        PoliciesActions.createPolicySuccess,
+        PoliciesActions.editPolicySuccess,
+        PoliciesActions.deletePolicySuccess,
+      ),
       map(() => PoliciesActions.reloadPolicies()),
     ),
   );

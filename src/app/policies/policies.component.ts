@@ -24,6 +24,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatChipsModule } from '@angular/material/chips';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { Policy } from '../shared/interfaces/policy';
 import { PoliciesFacade } from './data-access/state/policies.facade';
@@ -40,7 +41,6 @@ import {
   PoliciesFormComponent,
 } from './components/policies-form/policies-form.component';
 
-import { InsuranceType } from '../shared/interfaces/insuranceType';
 import { InsuranceTypesFacade } from '../insurance-types/data-access/state/insurance-types.facade';
 import { InsuranceTypePipe } from '../shared/pipes/insurance-type.pipe';
 
@@ -60,6 +60,7 @@ import { InsuranceTypePipe } from '../shared/pipes/insurance-type.pipe';
     MatCheckboxModule,
     MatChipsModule,
     InsuranceTypePipe,
+    ClipboardModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: getPaginatorIntl() }],
   templateUrl: './policies.component.html',

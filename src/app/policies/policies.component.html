@@ -68,12 +68,24 @@
 
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Tytuł</th>
-      <td mat-cell *matCellDef="let policy">{{ policy.title }}</td>
+      <td mat-cell *matCellDef="let policy">
+        <span class="cell-content" [cdkCopyToClipboard]="policy.title">
+          {{ policy.title }}
+          <mat-icon matTooltip="Kopiuj"> assignment </mat-icon>
+        </span>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="policyNumber">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Numer polisy</th>
-      <td mat-cell *matCellDef="let policy">{{ policy.policyNumber }}</td>
+      <td mat-cell *matCellDef="let policy">
+        <div class="cell">
+          <span class="cell-content" [cdkCopyToClipboard]="policy.policyNumber">
+            {{ policy.policyNumber }}
+            <mat-icon matTooltip="Kopiuj"> assignment </mat-icon>
+          </span>
+        </div>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="insurer">

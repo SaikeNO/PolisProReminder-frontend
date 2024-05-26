@@ -18,7 +18,13 @@
       @if (insurer.policies?.length) {
         <app-insurers-policies [policies]="insurer.policies!"></app-insurers-policies>
       } @else {
-        Klient nie posiada jeszcze żadnej polisy. Do zrobienia przycisk dodaj
+        <div class="content-inner">
+          <h4 class="">Klient nie posiada jeszcze żadnej polisy.</h4>
+          <button mat-raised-button color="primary" (click)="openForm()">
+            <mat-icon>add</mat-icon>
+            Dodaj polisę
+          </button>
+        </div>
       }
     </mat-card-content>
   </mat-card>

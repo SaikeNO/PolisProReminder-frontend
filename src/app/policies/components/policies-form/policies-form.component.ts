@@ -95,7 +95,7 @@ export class PoliciesFormComponent implements OnInit {
       insurerId: this.policy.insurer?.id,
       isPaid: this.policy.isPaid,
       paymentDate: this.policy.paymentDate,
-      insuranceTypeIds: this.policy.insuranceTypes.map((t) => t.id),
+      insuranceTypeIds: this.policy.insuranceTypes?.map((t) => t.id),
     });
   }
 
@@ -103,7 +103,7 @@ export class PoliciesFormComponent implements OnInit {
     const policy = replaceEmptyStringWithNull(this.form.value) as CreatePolicy;
     if (this.form.invalid) return;
 
-    if (this.policy) {
+    if (this.policy && this.policy.id) {
       this.policiesFacade.editPolicy(policy, this.policy.id);
     } else {
       this.policiesFacade.createPolicy(policy);

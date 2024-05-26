@@ -4,16 +4,25 @@
     <mat-form-field class="full-width">
       <mat-label>Login</mat-label>
       <input matInput formControlName="name" />
-      @if (loginForm.controls.name.hasError('required')) {
-      <mat-error>Login jest wymagany</mat-error>
+      @if (loginForm.controls.name.hasError("required")) {
+        <mat-error>Login jest wymagany</mat-error>
       }
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Hasło</mat-label>
-      <input matInput type="password" formControlName="password" />
-      @if (loginForm.controls.password.hasError('required')) {
-      <mat-error>Hasło jest wymagane</mat-error>
+      <input matInput [type]="isPasswordHidden ? 'password' : 'text'" formControlName="password" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="isPasswordHidden = !isPasswordHidden"
+        [attr.aria-label]="'Ukryj hasło'"
+        [attr.aria-pressed]="isPasswordHidden"
+      >
+        <mat-icon>{{ isPasswordHidden ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      @if (loginForm.controls.password.hasError("required")) {
+        <mat-error>Hasło jest wymagane</mat-error>
       }
     </mat-form-field>
     <button mat-raised-button color="primary">Zaloguj się</button>

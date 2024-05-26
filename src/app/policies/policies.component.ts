@@ -42,6 +42,7 @@ import {
 
 import { InsuranceType } from '../shared/interfaces/insuranceType';
 import { InsuranceTypesFacade } from '../insurance-types/data-access/state/insurance-types.facade';
+import { InsuranceTypePipe } from '../shared/pipes/insurance-type.pipe';
 
 @Component({
   selector: 'app-policies',
@@ -58,6 +59,7 @@ import { InsuranceTypesFacade } from '../insurance-types/data-access/state/insur
     MatTooltipModule,
     MatCheckboxModule,
     MatChipsModule,
+    InsuranceTypePipe,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: getPaginatorIntl() }],
   templateUrl: './policies.component.html',
@@ -190,10 +192,6 @@ export class PoliciesComponent {
     }
 
     this.selection.select(...this.visiblePolicies);
-  }
-
-  public displayInsuranceType(types: InsuranceType[]) {
-    return types.map((t) => t.name).join(', ');
   }
 
   public selectInsuranceTypeId(id: number) {

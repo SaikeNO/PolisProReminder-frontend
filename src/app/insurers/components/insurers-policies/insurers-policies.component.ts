@@ -6,11 +6,19 @@ import { MatTable, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { InsurersPoliciesDataSource } from './data-access/insurers-policies-datasource';
 import { MatButtonModule } from '@angular/material/button';
+import { InsuranceTypePipe } from '../../../shared/pipes/insurance-type.pipe';
 
 @Component({
   selector: 'app-insurers-policies',
   standalone: true,
-  imports: [DatePipe, MatTableModule, MatPaginatorModule, MatSortModule, MatButtonModule],
+  imports: [
+    DatePipe,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
+    InsuranceTypePipe,
+  ],
   templateUrl: './insurers-policies.component.html',
   styleUrl: './insurers-policies.component.scss',
 })
@@ -28,6 +36,7 @@ export class InsurersPoliciesComponent implements OnInit {
     'startDate',
     'endDate',
     'paymentDate',
+    'insuranceTypes',
     'isPaid',
   ];
 

@@ -2,31 +2,28 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { InsurersService } from '../insurers.service';
 import * as InsurersActions from './insurers.actions';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, withLatestFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackBarService } from '../../../shared/data-access/snack-bar.service';
 import { ActionResultsTypes } from '../../../shared/interfaces/actionResults';
 import { MESSAGES } from '../../../shared/messages/insurer';
+import { InsurersFacade } from './insurers.facade';
 
 @Injectable()
 export class InsurersEffects {
   private actions$ = inject(Actions);
   private insurersService = inject(InsurersService);
   private snackBarService = inject(SnackBarService);
+  private insurersFacade = inject(InsurersFacade);
 
-  getInsurers$ = createEffect(() =>
+  getAllInsurers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(
-        InsurersActions.getInsurers,
-        InsurersActions.createInsurerSuccess,
-        InsurersActions.editInsurerSuccess,
-        InsurersActions.deleteInsurerSuccess,
-      ),
+      ofType(InsurersActions.getAllInsurers),
       mergeMap(() => {
-        return this.insurersService.getInsurers().pipe(
-          map((insurers) => InsurersActions.getInsurersSuccess({ insurers })),
+        return this.insurersService.getAllInsurers().pipe(
+          map((insurers) => InsurersActions.getAllInsurersSuccess({ insurers })),
           catchError((error: HttpErrorResponse) =>
-            of(InsurersActions.getInsurersFailure({ error: error.error })),
+            of(InsurersActions.getAllInsurersFailure({ error: error.error })),
           ),
         );
       }),
@@ -36,14 +33,22 @@ export class InsurersEffects {
   getPaginatedInsurers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(InsurersActions.getPaginatedInsurers),
-      mergeMap(({ params }) => {
-        return this.insurersService.getPaginatedInsurers(params.pageIndex, params.pageSize).pipe(
-          map((insurers) => InsurersActions.getPaginatedInsurersSuccess({ insurers })),
+      mergeMap(({ query }) => {
+        return this.insurersService.getPaginatedInsurers(query).pipe(
+          map((pageResult) => InsurersActions.getPaginatedInsurersSuccess({ pageResult })),
           catchError((error: HttpErrorResponse) =>
             of(InsurersActions.getPaginatedInsurersFailure({ error: error.error })),
           ),
         );
       }),
+    ),
+  );
+
+  reloadPaginatedPolicies$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.reloadPaginatedInsurers),
+      withLatestFrom(this.insurersFacade.query$),
+      map(([_, query]) => InsurersActions.getPaginatedInsurers({ query })),
     ),
   );
 
@@ -98,6 +103,17 @@ export class InsurersEffects {
           ),
         );
       }),
+    ),
+  );
+
+  allActionsReloadPaginatedInsurers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        InsurersActions.createInsurerSuccess,
+        InsurersActions.editInsurerSuccess,
+        InsurersActions.deleteInsurerSuccess,
+      ),
+      map(() => InsurersActions.reloadPaginatedInsurers()),
     ),
   );
 

@@ -4,19 +4,53 @@ import * as InsurersActions from './insurers.actions';
 
 export const initialState: InsurersState = {
   isLoading: false,
-  insurers: [],
   error: null,
+  insurers: [],
+  query: {
+    searchPhrase: '',
+    pageIndex: 0,
+    pageSize: 10,
+    sortBy: '',
+    sortDirection: 'none',
+  },
+  itemsFrom: 0,
+  itemsTo: 0,
+  totalItemsCount: 0,
+  totalPages: 0,
 };
 
 export const insurersReducer = createReducer(
   initialState,
-  on(InsurersActions.getInsurers, (state) => ({ ...state, isLoading: true, error: null })),
-  on(InsurersActions.getInsurersSuccess, (state, action) => ({
+  on(InsurersActions.getAllInsurers, (state) => ({ ...state, isLoading: true, error: null })),
+  on(InsurersActions.getAllInsurersSuccess, (state, action) => ({
     ...state,
     isLoading: false,
     insurers: action.insurers,
   })),
-  on(InsurersActions.getInsurersFailure, (state, action) => ({
+  on(InsurersActions.getAllInsurersFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  on(InsurersActions.getPaginatedInsurers, (state, { query }) => ({
+    ...state,
+    query,
+    isLoading: true,
+  })),
+  on(
+    InsurersActions.getPaginatedInsurersSuccess,
+    (state, { pageResult: { items, itemsFrom, itemsTo, totalItemsCount, totalPages } }) => ({
+      ...state,
+      itemsFrom,
+      itemsTo,
+      totalItemsCount,
+      totalPages,
+      isLoading: false,
+      insurers: items,
+    }),
+  ),
+  on(InsurersActions.getPaginatedInsurersFailure, (state, action) => ({
     ...state,
     isLoading: false,
     error: action.error,

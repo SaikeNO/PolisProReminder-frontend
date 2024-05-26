@@ -1,7 +1,7 @@
 <div class="top-container">
   <mat-form-field>
     <mat-label>Wyszukaj</mat-label>
-    <input matInput #input />
+    <input matInput (keyup)="applyFilter($event)" #input />
   </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="openForm()">
@@ -11,7 +11,26 @@
 </div>
 
 <div class="table-responsive mat-elevation-z8">
-  <table mat-table matSort aria-label="Klienci">
+  <table mat-table matSort [dataSource]="(insurers$ | async)!" aria-label="Klienci">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? toggleAllRows() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="details">
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let insurer">
@@ -55,7 +74,7 @@
     </ng-container>
 
     <ng-container matColumnDef="phoneNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefon</th>
+      <th mat-header-cell *matHeaderCellDef>Telefon</th>
       <td mat-cell *matCellDef="let insurer">{{ insurer.phoneNumber }}</td>
     </ng-container>
 
@@ -66,14 +85,19 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Brak wyników dla: "{{ input.value }}"</td>
+    </tr>
   </table>
 </div>
 
 <mat-paginator
   #paginator
+  [length]="totalItemsCount$ | async"
   [pageIndex]="0"
   [pageSize]="10"
-  [pageSizeOptions]="[5, 10, 20]"
-  aria-label="Select page"
+  [pageSizeOptions]="[5, 10, 15, 30]"
+  aria-label="Wybierz stronę"
 >
 </mat-paginator>

@@ -1,12 +1,14 @@
+import { GetQuery } from '../../../shared/interfaces/getQuery';
 import { Insurer } from '../../../shared/interfaces/insurer';
-
-export interface GetPaginatedInsurers {
-  pageIndex: number;
-  pageSize: number;
-}
 
 export interface InsurersState {
   isLoading: boolean;
-  insurers: Insurer[];
   error: string | null;
+  query: GetQuery;
+
+  insurers: Insurer[];
+  totalPages: number;
+  totalItemsCount: number;
+  itemsFrom: number;
+  itemsTo: number;
 }

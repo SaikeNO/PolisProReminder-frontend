@@ -82,7 +82,7 @@ export class PoliciesFormComponent implements OnInit {
   ngOnInit(): void {
     this.insuranceTypesFacade.getInsuranceTypes();
     this.insuranceCompaniesFacade.getCompanies();
-    this.insurersFacade.getInsurers();
+    this.insurersFacade.getAllInsurers();
     this.updateValidators();
 
     if (!this.policy) return;

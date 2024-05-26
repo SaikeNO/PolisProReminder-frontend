@@ -1,32 +1,45 @@
 import { createAction, props } from '@ngrx/store';
-import { GetPaginatedInsurers } from './insurers.models';
 import { CreateInsurer, Insurer } from '../../../shared/interfaces/insurer';
 import { ActionResults } from '../../../shared/interfaces/actionResults';
+import { GetQuery } from '../../../shared/interfaces/getQuery';
+import { PageResult } from '../../../shared/interfaces/pageResult';
 
-export const getInsurers = createAction('[Insurers Page] Get All Insurers');
+export const getAllInsurers = createAction('[Insurers Page] Get All Insurers');
 
-export const getInsurersSuccess = createAction(
+export const getAllInsurersSuccess = createAction(
   '[Insurers Page] Get All Insurers Success',
   props<{ insurers: Insurer[] }>(),
 );
 
-export const getInsurersFailure = createAction(
+export const getAllInsurersFailure = createAction(
   '[Insurers Page] Get All Insurers Failure',
   props<{ error: string }>(),
 );
 
 export const getPaginatedInsurers = createAction(
   '[Insurers Page] Get Paginated Insurers',
-  props<{ params: GetPaginatedInsurers }>(),
+  props<{ query: GetQuery }>(),
 );
 
 export const getPaginatedInsurersSuccess = createAction(
   '[Insurers Page] Get Paginated Insurers Success',
-  props<{ insurers: Insurer[] }>(),
+  props<{ pageResult: PageResult<Insurer> }>(),
 );
 
 export const getPaginatedInsurersFailure = createAction(
   '[Insurers Page] Get Paginated Insurers Failure',
+  props<{ error: string }>(),
+);
+
+export const reloadPaginatedInsurers = createAction('[Insurers Page] Reload Paginated Insurers');
+
+export const reloadPaginatedInsurersSuccess = createAction(
+  '[Insurers Page] Reload Paginated Insurers Success',
+  props<{ pageResult: PageResult<Insurer> }>(),
+);
+
+export const relaodPaginatedInsurersFailure = createAction(
+  '[Insurers Page] Reload Paginated Insurers Failure',
   props<{ error: string }>(),
 );
 

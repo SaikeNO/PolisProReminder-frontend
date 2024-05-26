@@ -115,7 +115,7 @@ export class PoliciesComponent {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => this.loadPolicies());
 
-    this.loadPolicies();
+    //this.loadPolicies();
     this.insuranceTypesFacade.getInsuranceTypes();
   }
 

@@ -5,8 +5,16 @@ export const selectFeature = (state: AppState) => state.insurers;
 
 export const isLoading = createSelector(selectFeature, (state) => state.isLoading);
 
-export const getAllInsurers = createSelector(selectFeature, (state) => state.insurers);
-
 export const getError = createSelector(selectFeature, (state) => state.error);
 
-export const getColumns = createSelector(selectFeature, (state) => Object.keys(state.insurers));
+export const getQuery = createSelector(selectFeature, (state) => state.query);
+
+export const getInsurers = createSelector(selectFeature, (state) => state.insurers);
+
+export const getTotalPages = createSelector(selectFeature, (state) => state.totalPages);
+
+export const getItemsFrom = createSelector(selectFeature, (state) => state.itemsFrom);
+
+export const getItemsTo = createSelector(selectFeature, (state) => state.itemsTo);
+
+export const getTotalItemsCount = createSelector(selectFeature, (state) => state.totalItemsCount);

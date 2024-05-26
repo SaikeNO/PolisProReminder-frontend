@@ -13,7 +13,7 @@
 <div class="table-responsive mat-elevation-z8">
   <table mat-table matSort [dataSource]="(insurers$ | async)!" aria-label="Klienci">
     <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
+      <th class="check" mat-header-cell *matHeaderCellDef>
         <mat-checkbox
           (change)="$event ? toggleAllRows() : null"
           [checked]="selection.hasValue() && isAllSelected()"
@@ -21,7 +21,7 @@
         >
         </mat-checkbox>
       </th>
-      <td mat-cell *matCellDef="let row">
+      <td class="check" mat-cell *matCellDef="let row">
         <mat-checkbox
           (click)="$event.stopPropagation()"
           (change)="$event ? selection.toggle(row) : null"

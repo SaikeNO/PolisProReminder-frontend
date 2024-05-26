@@ -9,3 +9,11 @@
   padding: 0;
   width: 0;
 }
+
+.check {
+  width: 0;
+}
+
+tr:nth-child(even) {
+  background-color: #f0f0f0 !important;
+}

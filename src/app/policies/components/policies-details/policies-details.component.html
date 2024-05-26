@@ -10,7 +10,7 @@
     </mat-card-header>
     <mat-card-content class="content">
       <div class="content-inner">
-        <h3>Numer policy: {{ policy.policyNumber }}</h3>
+        <h3>Numer polisy: {{ policy.policyNumber }}</h3>
         <h3>Towarzystwo: {{ policy.insuranceCompany.shortName }}</h3>
         <h3>
           Ubezpieczający:
@@ -23,7 +23,14 @@
         <h3>Początek ubezpieczenia: {{ policy.startDate | date }}</h3>
         <h3>Koniec ubezpieczenia: {{ policy.endDate | date }}</h3>
         <h3>Termin zapłaty: {{ policy.paymentDate | date }}</h3>
-        <h3>Czy opłacono: {{ policy.isPaid }}</h3>
+        <h3>
+          Czy opłacono:
+          @if (policy.isPaid) {
+            <button mat-flat-button color="warn" disabled>TAK</button>
+          } @else {
+            <button mat-flat-button color="warn">NIE</button>
+          }
+        </h3>
         <h3>
           <mat-chip-listbox>
             @for (type of policy.insuranceTypes; track type.id) {

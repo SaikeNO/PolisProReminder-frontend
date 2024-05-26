@@ -3,7 +3,7 @@
     <mat-label>Wyszukaj</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input />
   </mat-form-field>
-  <div>
+  <div class="chips">
     <mat-chip-listbox>
       @for (type of insuranceTypes$ | async; track type) {
         <mat-chip-option (click)="selectInsuranceTypeId(type.id)">{{ type.name }}</mat-chip-option>

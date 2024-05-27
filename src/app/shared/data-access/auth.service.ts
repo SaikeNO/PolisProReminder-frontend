@@ -22,6 +22,10 @@ export class AuthService {
     );
   }
 
+  resetPassword(resetPassword: ResetPassword) {
+    return this.http.post<void>(`${environment.API_URL}/account/reset-password`, resetPassword);
+  }
+
   isAuthenticated(): boolean {
     return !!this.storageService.getAccessToken();
   }

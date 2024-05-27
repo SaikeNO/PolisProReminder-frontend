@@ -13,6 +13,7 @@ import { MatIconButton } from '@angular/material/button';
 import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
 import { PortalModule } from '@angular/cdk/portal';
 import { PortalService } from '../../data-access/portal.service';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-app-layout',
@@ -31,6 +32,7 @@ import { PortalService } from '../../data-access/portal.service';
     LoadingBarComponent,
     PortalModule,
     RouterLinkActive,
+    MenuComponent
   ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',

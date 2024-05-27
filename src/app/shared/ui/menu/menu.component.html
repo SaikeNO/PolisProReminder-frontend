@@ -1,0 +1,12 @@
+<div class="menu">
+  <span class="hello">Witaj {{ (user$ | async)?.firstName }}!</span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Boczne menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openDialog()">
+      <mat-icon>lock_open</mat-icon>
+      <span>Zmień hasło</span>
+    </button>
+  </mat-menu>
+</div>

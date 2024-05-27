@@ -1,15 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../shared/data-access/auth.service';
-import { Credentials } from '../shared/interfaces/credentials';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { PasswordInputComponent } from '../shared/ui/password-input/password-input.component';
+import { LoginModel } from './login.models';
+import { Credentials } from '../shared/interfaces/auth';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     ReactiveFormsModule,
     MatIconModule,
+    PasswordInputComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -30,9 +33,7 @@ export class LoginComponent {
   private _authService = inject(AuthService);
   private _router = inject(Router);
 
-  public isPasswordHidden = true;
-
-  loginForm = this._formBuilder.group({
+  loginForm: FormGroup<LoginModel> = this._formBuilder.group({
     name: ['', Validators.required],
     password: ['', Validators.required],
   });

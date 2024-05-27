@@ -9,22 +9,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field class="full-width">
-      <mat-label>Hasło</mat-label>
-      <input matInput [type]="isPasswordHidden ? 'password' : 'text'" formControlName="password" />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="isPasswordHidden = !isPasswordHidden"
-        [attr.aria-label]="'Ukryj hasło'"
-        [attr.aria-pressed]="isPasswordHidden"
-      >
-        <mat-icon>{{ isPasswordHidden ? "visibility_off" : "visibility" }}</mat-icon>
-      </button>
-      @if (loginForm.controls.password.hasError("required")) {
-        <mat-error>Hasło jest wymagane</mat-error>
-      }
-    </mat-form-field>
+    <app-password-input [control]="loginForm.controls.password"></app-password-input>
     <button mat-raised-button color="primary">Zaloguj się</button>
   </form>
 </div>

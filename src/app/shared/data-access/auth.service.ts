@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Credentials } from '../interfaces/credentials';
 import { tap } from 'rxjs';
-import { loginResponse } from '../interfaces/loginResponse';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { UserService } from './user.service';
-import { Token } from '../interfaces/Token';
+import { Credentials, LoginResponse, ResetPassword, Token } from '../interfaces/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,7 +13,7 @@ export class AuthService {
   private userService = inject(UserService);
 
   login(credentials: Credentials) {
-    return this.http.post<loginResponse>(`${environment.API_URL}/account/login`, credentials).pipe(
+    return this.http.post<LoginResponse>(`${environment.API_URL}/account/login`, credentials).pipe(
       tap((response) => {
         this.storageService.saveAccessToken(response.token);
         this.storageService.saveUser(response.user);

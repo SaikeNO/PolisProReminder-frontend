@@ -1,0 +1,98 @@
+<mat-card-header>
+  <mat-card-title>
+    <span>Najbliższe polisy</span>
+    <button
+      mat-icon-button
+      class="more-button"
+      [matMenuTriggerFor]="menu"
+      aria-label="Przełącz menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+      <button mat-menu-item>Ilość wyświetlanych</button>
+    </mat-menu>
+  </mat-card-title>
+</mat-card-header>
+<mat-card-content>
+  <div class="table-responsive">
+    <table mat-table matSort [dataSource]="(policies$ | async)!" aria-label="Polisy">
+      <ng-container matColumnDef="details">
+        <th class="icon" mat-header-cell *matHeaderCellDef></th>
+        <td class="icon" mat-cell *matCellDef="let policy">
+          <button mat-icon-button matTooltip="Szczegóły" (click)="openDetails(policy)">
+            <mat-icon class="mat-18">open_in_new</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tytuł</th>
+        <td mat-cell *matCellDef="let policy">
+          <span class="cell-content" [cdkCopyToClipboard]="policy.title">
+            {{ policy.title }}
+            <mat-icon matTooltip="Kopiuj"> assignment </mat-icon>
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="policyNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Numer polisy</th>
+        <td mat-cell *matCellDef="let policy">
+          <div class="cell">
+            <span class="cell-content" [cdkCopyToClipboard]="policy.policyNumber">
+              {{ policy.policyNumber }}
+              <mat-icon matTooltip="Kopiuj"> assignment </mat-icon>
+            </span>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="insurer">
+        <th mat-header-cell *matHeaderCellDef>Ubezpieczający</th>
+        <td mat-cell *matCellDef="let policy">
+          {{ policy.insurer.lastName }} {{ policy.insurer.firstName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="insuranceCompany">
+        <th mat-header-cell *matHeaderCellDef>Towarzystwo</th>
+        <td mat-cell *matCellDef="let policy">{{ policy.insuranceCompany?.shortName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Początek ubezpieczenia</th>
+        <td mat-cell *matCellDef="let policy">{{ policy.startDate | date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Koniec ubezpieczenia</th>
+        <td mat-cell *matCellDef="let policy">{{ policy.endDate | date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="paymentDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Termin zapłaty</th>
+        <td mat-cell *matCellDef="let policy">{{ policy.paymentDate | date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="insuranceTypes">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Typ ubezpieczenia</th>
+        <td mat-cell *matCellDef="let policy">{{ policy.insuranceTypes | insuranceType }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="isPaid">
+        <th mat-header-cell *matHeaderCellDef>Czy opłacono</th>
+        <td mat-cell *matCellDef="let policy">
+          @if (policy.isPaid) {
+            <button mat-flat-button color="warn" disabled>TAK</button>
+          } @else {
+            <button mat-flat-button color="warn">NIE</button>
+          }
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</mat-card-content>

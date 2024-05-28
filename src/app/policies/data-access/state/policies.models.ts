@@ -6,6 +6,7 @@ export interface PoliciesState {
   query: GetQuery;
 
   policies: Policy[];
+  latestPolicies: Policy[];
   totalPages: number;
   totalItemsCount: number;
   itemsFrom: number;

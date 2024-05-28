@@ -6,6 +6,7 @@ export const initialState: PoliciesState = {
   isLoading: false,
   error: null,
   policies: [],
+  latestPolicies: [],
   query: {
     searchPhrase: '',
     pageIndex: 0,
@@ -35,6 +36,18 @@ export const policiesReducer = createReducer(
     }),
   ),
   on(PoliciesActions.getPoliciesFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  on(PoliciesActions.getLatestPolicies, (state) => ({ ...state, isLoading: true })),
+  on(PoliciesActions.getLatestPoliciesSuccess, (state, { policies }) => ({
+    ...state,
+    isLoading: false,
+    latestPolicies: policies,
+  })),
+  on(PoliciesActions.getLatestPoliciesFailure, (state, action) => ({
     ...state,
     isLoading: false,
     error: action.error,

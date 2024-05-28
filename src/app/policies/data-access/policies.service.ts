@@ -14,6 +14,10 @@ export class PoliciesService {
     return this.http.get<PageResult<Policy>>(`${this.url}/policy`, { params: { ...query } });
   }
 
+  getLatestPolicies(count: number) {
+    return this.http.get<Policy[]>(`${this.url}/Policy/Latest`, { params: { count } });
+  }
+
   getInsurerPolicies(insurerId: number) {
     return this.http.get<Policy[]>(`${this.url}/Policy/Insurer/${insurerId}`);
   }

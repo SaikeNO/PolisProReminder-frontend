@@ -19,6 +19,21 @@ export const getPoliciesFailure = createAction(
   props<{ error: string }>(),
 );
 
+export const getLatestPolicies = createAction(
+  '[Policies Page] Get Latest Policies',
+  props<{ count: number }>(),
+);
+
+export const getLatestPoliciesSuccess = createAction(
+  '[Policies Page] Get Latest Policies Success',
+  props<{ policies: Policy[] }>(),
+);
+
+export const getLatestPoliciesFailure = createAction(
+  '[Policies Page] Get Latest Policies Failure',
+  props<{ error: string }>(),
+);
+
 export const reloadPolicies = createAction('[Policies Page] Reload Policies');
 
 export const reloadPoliciesSuccess = createAction(

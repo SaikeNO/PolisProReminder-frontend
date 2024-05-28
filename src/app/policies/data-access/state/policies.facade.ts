@@ -14,6 +14,7 @@ export class PoliciesFacade {
   error$ = this.store.pipe(select(PoliciesSelectors.getError));
   query$ = this.store.pipe(select(PoliciesSelectors.getQuery));
   policies$ = this.store.pipe(select(PoliciesSelectors.getPolicies));
+  latestPolicies$ = this.store.pipe(select(PoliciesSelectors.getLatestPolicies));
   totalItemsCount$ = this.store.pipe(select(PoliciesSelectors.getTotalItemsCount));
   totalPages$ = this.store.pipe(select(PoliciesSelectors.getTotalPages));
   itemsFrom$ = this.store.pipe(select(PoliciesSelectors.getItemsFrom));
@@ -21,6 +22,10 @@ export class PoliciesFacade {
 
   getPolicies(query: GetQuery): void {
     this.store.dispatch(PoliciesActions.getPolicies({ query }));
+  }
+
+  getLatestPolicies(count: number): void {
+    this.store.dispatch(PoliciesActions.getLatestPolicies({ count }));
   }
 
   createPolicy(createPolicy: CreatePolicy): void {

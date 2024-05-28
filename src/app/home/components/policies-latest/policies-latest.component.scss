@@ -1,0 +1,42 @@
+:host {
+  height: 100%;
+  display: block;
+}
+
+.cell-content {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  mat-icon {
+    cursor: pointer;
+    width: 17px;
+    height: 17px;
+    font-size: 17px;
+    opacity: 0;
+    transition: 0.2s;
+  }
+  &:hover {
+    mat-icon {
+      opacity: 0.38;
+    }
+  }
+}
+
+.table-responsive {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.select-cell {
+  padding: 0;
+}
+
+tr:nth-child(even) {
+  background-color: #f0f0f0 !important;
+}

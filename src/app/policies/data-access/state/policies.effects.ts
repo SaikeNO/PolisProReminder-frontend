@@ -30,6 +30,20 @@ export class PoliciesEffects {
     ),
   );
 
+  getLatestPolicies$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PoliciesActions.getLatestPolicies),
+      mergeMap(({ count }) => {
+        return this.policiesService.getLatestPolicies(count).pipe(
+          map((policies) => PoliciesActions.getLatestPoliciesSuccess({ policies })),
+          catchError((error: HttpErrorResponse) =>
+            of(PoliciesActions.getLatestPoliciesFailure({ error: error.message })),
+          ),
+        );
+      }),
+    ),
+  );
+
   reloadPolicies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PoliciesActions.reloadPolicies),

@@ -11,6 +11,8 @@ export const getQuery = createSelector(selectFeature, (state) => state.query);
 
 export const getPolicies = createSelector(selectFeature, (state) => state.policies);
 
+export const getLatestPolicies = createSelector(selectFeature, (state) => state.latestPolicies);
+
 export const getTotalPages = createSelector(selectFeature, (state) => state.totalPages);
 
 export const getItemsFrom = createSelector(selectFeature, (state) => state.itemsFrom);

@@ -3,6 +3,7 @@ import { User } from '../interfaces/auth';
 
 const USER_KEY = 'auth_user';
 const ACCESS_TOKEN_KEY = 'access_token';
+const REFRESH_TOKEN_KEY = 'refresh_token';
 
 @Injectable({ providedIn: 'root' })
 export class StorageService {
@@ -29,7 +30,16 @@ export class StorageService {
     window.localStorage.setItem(ACCESS_TOKEN_KEY, token);
   }
 
+  public saveRefreshToken(token: string) {
+    window.localStorage.removeItem(REFRESH_TOKEN_KEY);
+    window.localStorage.setItem(REFRESH_TOKEN_KEY, token);
+  }
+
   public getAccessToken(): string | null {
     return window.localStorage.getItem(ACCESS_TOKEN_KEY);
+  }
+
+  public getRefreshToken(): string | null {
+    return window.localStorage.getItem(REFRESH_TOKEN_KEY);
   }
 }

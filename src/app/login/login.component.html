@@ -3,8 +3,8 @@
   <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="full-width">
       <mat-label>Login</mat-label>
-      <input matInput formControlName="name" />
-      @if (loginForm.controls.name.hasError("required")) {
+      <input matInput formControlName="email" />
+      @if (loginForm.controls.email.hasError("required")) {
         <mat-error>Login jest wymagany</mat-error>
       }
     </mat-form-field>

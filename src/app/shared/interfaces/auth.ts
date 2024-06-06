@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface Credentials {
-  name: string;
+  email: string;
   password: string;
 }
 
@@ -18,10 +18,8 @@ export interface ResetPassword {
 }
 
 export interface LoginResponse {
-  token: string;
-  user: User;
-}
-
-export interface Token {
-  token: string;
+  tokenType: string;
+  accessToken: string;
+  expiresIn: number;
+  refreshToken: string;
 }

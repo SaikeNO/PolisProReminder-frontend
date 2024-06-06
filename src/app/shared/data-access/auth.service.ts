@@ -13,29 +13,32 @@ export class AuthService {
   private userService = inject(UserService);
 
   login(credentials: Credentials) {
-    return this.http.post<LoginResponse>(`${environment.API_URL}/account/login`, credentials).pipe(
+    return this.http.post<LoginResponse>(`${environment.API_URL}/identity/login`, credentials).pipe(
       tap((response) => {
-        this.storageService.saveAccessToken(response.token);
-        this.storageService.saveUser(response.user);
-        this.userService.setUser(response.user);
+        this.storageService.saveAccessToken(response.accessToken);
+        this.storageService.saveRefreshToken(response.refreshToken);
+        //this.storageService.saveUser(response.user);
+        //this.userService.setUser(response.user);
       }),
     );
   }
 
   resetPassword(resetPassword: ResetPassword) {
-    return this.http.post<void>(`${environment.API_URL}/account/reset-password`, resetPassword);
+    return this.http.post<void>(`${environment.API_URL}/identity/resetPassword`, resetPassword);
   }
 
   isAuthenticated(): boolean {
     return !!this.storageService.getAccessToken();
   }
 
-  refreshToken(token: string) {
-    return this.http.post<Token>(`${environment.API_URL}/account/refresh-token`, { token }).pipe(
-      tap((response) => {
-        this.storageService.saveAccessToken(response.token);
-      }),
-    );
+  refreshToken(refreshToken: string) {
+    return this.http
+      .post<LoginResponse>(`${environment.API_URL}/identity/refresh`, { refreshToken })
+      .pipe(
+        tap((response) => {
+          this.storageService.saveAccessToken(response.accessToken);
+        }),
+      );
   }
 
   logout() {

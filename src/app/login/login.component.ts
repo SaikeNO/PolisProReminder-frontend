@@ -34,7 +34,7 @@ export class LoginComponent {
   private _router = inject(Router);
 
   loginForm: FormGroup<LoginModel> = this._formBuilder.group({
-    name: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
   });
 
@@ -45,7 +45,7 @@ export class LoginComponent {
       .login(this.loginForm.value as Credentials)
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          this.loginForm.controls.name.setErrors({ inncorrect: true });
+          this.loginForm.controls.email.setErrors({ inncorrect: true });
           this.loginForm.controls.password.setErrors({ inncorrect: true });
           return throwError(() => err);
         }),

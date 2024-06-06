@@ -32,7 +32,7 @@ import { MenuComponent } from '../menu/menu.component';
     LoadingBarComponent,
     PortalModule,
     RouterLinkActive,
-    MenuComponent
+    MenuComponent,
   ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
@@ -59,7 +59,7 @@ export class AppLayoutComponent implements OnInit {
     if (user) {
       this.userService.setUser(user);
     } else {
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
     }
   }
 

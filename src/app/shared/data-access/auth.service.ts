@@ -4,7 +4,7 @@ import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { UserService } from './user.service';
-import { Credentials, LoginResponse, ResetPassword, Token } from '../interfaces/auth';
+import { Credentials, LoginResponse, ResetPassword } from '../interfaces/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

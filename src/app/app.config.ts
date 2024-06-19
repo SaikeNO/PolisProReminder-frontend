@@ -15,6 +15,7 @@ import { httpInterceptorProviders } from './shared/interceptors';
 import { CompaniesEffects } from './insurance-company/data-access/state/companies.effects';
 import { InsuranceTypesEffects } from './insurance-types/data-access/state/insurance-types.effects';
 import { InsurersEffects } from './insurers/data-access/state/insurers.effects';
+import { VehiclesEffects } from './vehicles/data-access/state/vehicles.effects';
 
 registerLocaleData(localePL, 'pl');
 
@@ -27,7 +28,13 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
     provideStore(reducers),
-    provideEffects(PoliciesEffects, InsurersEffects, CompaniesEffects, InsuranceTypesEffects),
+    provideEffects(
+      PoliciesEffects,
+      InsurersEffects,
+      CompaniesEffects,
+      InsuranceTypesEffects,
+      VehiclesEffects,
+    ),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     { provide: LOCALE_ID, useValue: 'pl' },
     { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'YYYY/MM/dd' } },

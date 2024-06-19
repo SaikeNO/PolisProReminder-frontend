@@ -7,12 +7,15 @@ import { InsuranceTypesState } from '../../insurance-types/data-access/state/ins
 import { insuranceTypesReducer } from '../../insurance-types/data-access/state/insurance-types.reducer';
 import { InsurersState } from '../../insurers/data-access/state/insurers.models';
 import { insurersReducer } from '../../insurers/data-access/state/insurers.reducer';
+import { VehiclesState } from '../../vehicles/data-access/state/vehicles.models';
+import { vehiclesReducer } from '../../vehicles/data-access/state/vehicles.reducer';
 
 export interface AppState {
   policies: PoliciesState;
   insuranceTypes: InsuranceTypesState;
   companies: CompaniesState;
   insurers: InsurersState;
+  vehicles: VehiclesState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -20,4 +23,5 @@ export const reducers: ActionReducerMap<AppState> = {
   insurers: insurersReducer,
   companies: companiesReducer,
   insuranceTypes: insuranceTypesReducer,
+  vehicles: vehiclesReducer,
 };

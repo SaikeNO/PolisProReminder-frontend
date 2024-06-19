@@ -23,6 +23,11 @@ export const routes: Routes = [
           import('./insurers/insurers.component').then((mod) => mod.InsurersComponent),
       },
       {
+        path: 'vehicles',
+        loadComponent: () =>
+          import('./vehicles/vehicles.component').then((mod) => mod.VehiclesComponent),
+      },
+      {
         path: 'company',
         loadComponent: () =>
           import('./insurance-company/insurance-company.component').then(

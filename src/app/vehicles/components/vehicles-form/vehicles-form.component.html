@@ -1,0 +1,25 @@
+<form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title class="card-title">
+        {{ vehicle ? "Edytuj pojazd" : "Dodaj nowy pojazd" }}
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Nazwa pojazdu</mat-label>
+            <input matInput formControlName="name" />
+            @if (form.controls.name.hasError("required")) {
+              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Zapisz</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

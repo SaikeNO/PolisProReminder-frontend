@@ -1,3 +1,6 @@
+import { Insurer } from './insurer';
+import { VehicleBrand } from './vehicleBrand';
+
 export interface Vehicle {
   id: string;
   name: string;
@@ -9,7 +12,8 @@ export interface Vehicle {
   km: number;
   capacity: number;
   mileage: number;
-  vehicleBrand: string;
+  vehicleBrand: VehicleBrand;
+  insurer: Insurer;
 }
 
 export interface CreateVehicle {

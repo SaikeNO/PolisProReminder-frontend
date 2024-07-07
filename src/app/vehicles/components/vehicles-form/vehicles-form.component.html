@@ -16,6 +16,98 @@
             }
           </mat-form-field>
         </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Numer rejestracyjny</mat-label>
+            <input matInput formControlName="registrationNumber" />
+            @if (form.controls.registrationNumber.hasError("required")) {
+              <mat-error> Numer rejestracyjny jest wymagany </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          @if (insurers$ | async; as insurers) {
+            @if (insurers.length) {
+              <app-autocomplete
+                [control]="form.controls.insurerId"
+                [options]="insurers"
+                label="Właściciel"
+                errorMessage="Właściciel jest wymagany"
+              />
+            }
+          }
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Data pierwszej rejestracji</mat-label>
+            <input matInput formControlName="firstRegistrationDate" />
+            @if (form.controls.firstRegistrationDate.hasError("required")) {
+              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Data produkcji</mat-label>
+            <input matInput formControlName="productionYear" />
+            @if (form.controls.productionYear.hasError("required")) {
+              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>VIN</mat-label>
+            <input matInput formControlName="vin" />
+            @if (form.controls.vin.hasError("required")) {
+              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Przebieg</mat-label>
+            <input matInput formControlName="mileage" />
+            @if (form.controls.mileage.hasError("required")) {
+              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>KW</mat-label>
+            <input matInput formControlName="kw" />
+            @if (form.controls.kw.hasError("required")) {
+              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>KM</mat-label>
+            <input matInput formControlName="km" />
+            @if (form.controls.km.hasError("required")) {
+              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Pojemność</mat-label>
+            <input matInput formControlName="capacity" />
+            @if (form.controls.capacity.hasError("required")) {
+              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
+            }
+          </mat-form-field>
+        </div>
       </div>
     </mat-card-content>
     <mat-card-actions>

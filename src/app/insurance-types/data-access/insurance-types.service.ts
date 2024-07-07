@@ -16,11 +16,11 @@ export class InsuranceTypesService {
     return this.http.post<void>(`${this.url}/InsuranceType`, type);
   }
 
-  editInsuranceType(type: CreateInsuranceType, id: number) {
+  editInsuranceType(type: CreateInsuranceType, id: string) {
     return this.http.put<void>(`${this.url}/InsuranceType/${id}`, type);
   }
 
-  deleteInsuranceType(id: number) {
+  deleteInsuranceType(id: string) {
     return this.http.delete<void>(`${this.url}/InsuranceType/${id}`);
   }
 }

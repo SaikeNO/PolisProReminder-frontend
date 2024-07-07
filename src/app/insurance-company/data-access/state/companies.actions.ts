@@ -34,7 +34,7 @@ export const createCompanyFailure = createAction(
 
 export const editCompany = createAction(
   '[Insurance Company Page] Edit Company ',
-  props<{ company: CreateInsuranceCompany; id: number }>(),
+  props<{ company: CreateInsuranceCompany; id: string }>(),
 );
 
 export const editCompanySuccess = createAction(
@@ -49,7 +49,7 @@ export const editCompanyFailure = createAction(
 
 export const deleteCompany = createAction(
   '[Insurance Company Page] Delete Company ',
-  props<{ id: number }>(),
+  props<{ id: string }>(),
 );
 
 export const deleteCompanySuccess = createAction(

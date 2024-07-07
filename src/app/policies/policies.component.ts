@@ -80,7 +80,7 @@ export class PoliciesComponent {
 
   public searchQuery$ = new BehaviorSubject<string>('');
   public selection = new SelectionModel<Policy>(true, []);
-  public selectedInsuranceTypeId: number | null = null;
+  public selectedInsuranceTypeId: string | null = null;
   public visiblePolicies: Policy[] = [];
   public displayedColumns: string[] = [
     'select',
@@ -195,7 +195,7 @@ export class PoliciesComponent {
     this.selection.select(...this.visiblePolicies);
   }
 
-  public selectInsuranceTypeId(id: number) {
+  public selectInsuranceTypeId(id: string) {
     if (this.selectedInsuranceTypeId === id) {
       this.selectedInsuranceTypeId = null;
     } else {

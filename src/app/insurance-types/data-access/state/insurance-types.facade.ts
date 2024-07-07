@@ -25,11 +25,11 @@ export class InsuranceTypesFacade {
     this.dispatch(InsuranceTypesActions.createInsuranceType({ insuranceType }));
   }
 
-  editInsuranceType(insuranceType: CreateInsuranceType, id: number): void {
+  editInsuranceType(insuranceType: CreateInsuranceType, id: string): void {
     this.dispatch(InsuranceTypesActions.editInsuranceType({ insuranceType, id }));
   }
 
-  deleteInsuranceType(id: number): void {
+  deleteInsuranceType(id: string): void {
     this.dispatch(InsuranceTypesActions.deleteInsuranceType({ id }));
   }
 }

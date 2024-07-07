@@ -31,7 +31,7 @@ export const createInsuranceTypeFailure = createAction(
 
 export const editInsuranceType = createAction(
   '[Insurance Types Page] Edit Insurance Type ',
-  props<{ insuranceType: CreateInsuranceType; id: number }>(),
+  props<{ insuranceType: CreateInsuranceType; id: string }>(),
 );
 
 export const editInsuranceTypeSuccess = createAction(
@@ -46,7 +46,7 @@ export const editInsuranceTypeFailure = createAction(
 
 export const deleteInsuranceType = createAction(
   '[Insurance Types Page] Delete Insurance Type ',
-  props<{ id: number }>(),
+  props<{ id: string }>(),
 );
 
 export const deleteInsuranceTypeSuccess = createAction(

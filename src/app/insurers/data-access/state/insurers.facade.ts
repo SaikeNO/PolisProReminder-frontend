@@ -31,11 +31,11 @@ export class InsurersFacade {
     this.store.dispatch(InsurersActions.createInsurer({ createInsurer }));
   }
 
-  editInsurer(createInsurer: CreateInsurer, id: number): void {
+  editInsurer(createInsurer: CreateInsurer, id: string): void {
     this.store.dispatch(InsurersActions.editInsurer({ createInsurer, id }));
   }
 
-  deleteInsurer(id: number): void {
+  deleteInsurer(id: string): void {
     this.store.dispatch(InsurersActions.deleteInsurer({ id }));
   }
 }

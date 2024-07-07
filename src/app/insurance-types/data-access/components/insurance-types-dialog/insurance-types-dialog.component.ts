@@ -29,7 +29,7 @@ export class InsuranceTypesDialogComponent implements OnInit {
   private fb = inject(FormBuilder);
 
   public isEditing: boolean = false;
-  public insuranceTypeId: number | null = null;
+  public insuranceTypeId: string | null = null;
   public form = this.fb.nonNullable.group({
     name: ['', [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
   });

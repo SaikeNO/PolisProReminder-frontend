@@ -24,11 +24,11 @@ export class InsurersService {
     return this.http.post<void>(`${this.url}/Insurer`, insurer);
   }
 
-  editInsurer(insurer: CreateInsurer, id: number) {
+  editInsurer(insurer: CreateInsurer, id: string) {
     return this.http.put<void>(`${this.url}/Insurer/${id}`, insurer);
   }
 
-  deleteInsurer(id: number) {
+  deleteInsurer(id: string) {
     return this.http.delete<void>(`${this.url}/Insurer/${id}`);
   }
 }

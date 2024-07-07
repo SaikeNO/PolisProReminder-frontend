@@ -31,7 +31,7 @@ export class InsuranceCompanyDialogComponent implements OnInit {
   private fb = inject(FormBuilder);
 
   public isEditing: boolean = false;
-  public companyId: number | null = null;
+  public companyId: string | null = null;
   public form = this.fb.nonNullable.group({
     name: ['', [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
     shortName: [''],

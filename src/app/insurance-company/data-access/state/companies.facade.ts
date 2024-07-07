@@ -25,11 +25,11 @@ export class CompaniesFacade {
     this.dispatch(CompaniesActions.createCompany({ company }));
   }
 
-  editCompany(company: CreateInsuranceCompany, id: number): void {
+  editCompany(company: CreateInsuranceCompany, id: string): void {
     this.dispatch(CompaniesActions.editCompany({ company, id }));
   }
 
-  deleteCompany(id: number): void {
+  deleteCompany(id: string): void {
     this.dispatch(CompaniesActions.deleteCompany({ id }));
   }
 }

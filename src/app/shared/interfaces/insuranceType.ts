@@ -1,5 +1,5 @@
 export interface InsuranceType {
-  id: number;
+  id: string;
   name: string;
 }
 

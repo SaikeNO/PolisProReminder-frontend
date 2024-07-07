@@ -16,11 +16,11 @@ export class InsuranceCompanyService {
     return this.http.post<void>(`${this.url}/InsuranceCompany`, company);
   }
 
-  editCompany(company: CreateInsuranceCompany, id: number) {
+  editCompany(company: CreateInsuranceCompany, id: string) {
     return this.http.put<void>(`${this.url}/InsuranceCompany/${id}`, company);
   }
 
-  deleteCompany(id: number) {
+  deleteCompany(id: string) {
     return this.http.delete<void>(`${this.url}/InsuranceCompany/${id}`);
   }
 }

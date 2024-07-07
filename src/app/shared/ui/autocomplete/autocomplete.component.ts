@@ -44,7 +44,7 @@ export class AutocompleteComponent {
     );
   }
 
-  public displayFn(id: number): string {
+  public displayFn(id: string): string {
     let index = this.options.findIndex((option) => option.id === id);
     return this.options[index]?.value;
   }

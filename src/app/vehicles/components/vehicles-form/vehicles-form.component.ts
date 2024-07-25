@@ -13,6 +13,9 @@ import { map } from 'rxjs';
 import { InsurersFacade } from '../../../insurers/data-access/state/insurers.facade';
 import { Option } from '../../../shared/ui/autocomplete/autocomplete.model';
 import { AutocompleteComponent } from '../../../shared/ui/autocomplete/autocomplete.component';
+import { VehicleBrandsFacade } from '../../../vehicle-brands/data-access/state/vehicle-brands.facade';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINER_FORM');
 
@@ -29,6 +32,8 @@ export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINE
     AsyncPipe,
     NgFor,
     AutocompleteComponent,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   templateUrl: './vehicles-form.component.html',
   styleUrl: './vehicles-form.component.scss',
@@ -36,18 +41,19 @@ export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINE
 export class VehiclesFormComponent {
   private vehiclesFacade = inject(VehiclesFacade);
   private insurersFacade = inject(InsurersFacade);
+  private vehicleBrandsFacade = inject(VehicleBrandsFacade);
 
   public error$ = this.vehiclesFacade.error$;
   public form = this.fb.group({
     name: ['', Validators.required],
     registrationNumber: ['', Validators.required],
-    firstRegistrationDate: [''],
-    productionYear: [''],
+    firstRegistrationDate: this.fb.control<Date | null>(null),
+    productionYear: this.fb.control<Date | null>(null),
     vin: [''],
-    kw: [0],
-    km: [0],
-    capacity: [0],
-    mileage: [0],
+    kw: this.fb.control<number | null>(null),
+    km: this.fb.control<number | null>(null),
+    capacity: this.fb.control<number | null>(null),
+    mileage: this.fb.control<number | null>(null),
     insurerId: ['', Validators.required],
     vehicleBrandId: ['', Validators.required],
   });
@@ -58,6 +64,10 @@ export class VehiclesFormComponent {
     ),
   );
 
+  public vehicleBrands$ = this.vehicleBrandsFacade.vehicles$.pipe(
+    map((brands) => brands.map((b) => ({ id: b.id, value: b.name }) as Option)),
+  );
+
   constructor(
     private fb: FormBuilder,
     @Inject(VEHICLES_CONTAINER_FORM) public vehicle: Vehicle | undefined,
@@ -65,6 +75,7 @@ export class VehiclesFormComponent {
 
   ngOnInit(): void {
     this.insurersFacade.getAllInsurers();
+    this.vehicleBrandsFacade.getVehicleBrands();
 
     if (!this.vehicle) return;
 
@@ -88,10 +99,23 @@ export class VehiclesFormComponent {
 
     const vehicle = replaceEmptyStringWithNull(this.form.value) as CreateVehicle;
 
+    this.replaceZerosWithNull();
+
     if (this.vehicle) {
       this.vehiclesFacade.editVehicle(vehicle, this.vehicle.id);
     } else {
       this.vehiclesFacade.createVehicle(vehicle);
     }
+  }
+
+  private replaceZerosWithNull() {
+    const formValue = this.form.value;
+
+    console.log(formValue);
+
+    formValue.capacity = formValue.capacity === 0 ? null : formValue.capacity;
+    formValue.kw = formValue.kw === 0 ? null : formValue.kw;
+    formValue.km = formValue.km === 0 ? null : formValue.km;
+    formValue.mileage = formValue.mileage === 0 ? null : formValue.mileage;
   }
 }

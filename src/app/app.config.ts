@@ -16,6 +16,7 @@ import { CompaniesEffects } from './insurance-company/data-access/state/companie
 import { InsuranceTypesEffects } from './insurance-types/data-access/state/insurance-types.effects';
 import { InsurersEffects } from './insurers/data-access/state/insurers.effects';
 import { VehiclesEffects } from './vehicles/data-access/state/vehicles.effects';
+import { VehicleBrandsEffects } from './vehicle-brands/data-access/state/vehicle-brands.effects';
 
 registerLocaleData(localePL, 'pl');
 
@@ -34,6 +35,7 @@ export const appConfig: ApplicationConfig = {
       CompaniesEffects,
       InsuranceTypesEffects,
       VehiclesEffects,
+      VehicleBrandsEffects,
     ),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     { provide: LOCALE_ID, useValue: 'pl' },

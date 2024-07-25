@@ -79,6 +79,7 @@ export class VehiclesComponent implements AfterViewInit, OnDestroy {
     'name',
     'vehicleBrand',
     'registrationNumber',
+    'insurer',
     'firstRegistrationDate',
     'productionYear',
     'vin',
@@ -103,8 +104,6 @@ export class VehiclesComponent implements AfterViewInit, OnDestroy {
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(() => this.loadVehicles());
-
-    //this.loadVehicles();
   }
 
   ngOnDestroy(): void {

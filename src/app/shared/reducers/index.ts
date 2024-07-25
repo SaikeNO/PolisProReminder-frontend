@@ -9,6 +9,8 @@ import { InsurersState } from '../../insurers/data-access/state/insurers.models'
 import { insurersReducer } from '../../insurers/data-access/state/insurers.reducer';
 import { VehiclesState } from '../../vehicles/data-access/state/vehicles.models';
 import { vehiclesReducer } from '../../vehicles/data-access/state/vehicles.reducer';
+import { VehicleBrandsState } from '../../vehicle-brands/data-access/state/vehicle-brands.models';
+import { vehicleBrandsReducer } from '../../vehicle-brands/data-access/state/vehicle-brands.reducer';
 
 export interface AppState {
   policies: PoliciesState;
@@ -16,6 +18,7 @@ export interface AppState {
   companies: CompaniesState;
   insurers: InsurersState;
   vehicles: VehiclesState;
+  vehicleBrands: VehicleBrandsState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -24,4 +27,5 @@ export const reducers: ActionReducerMap<AppState> = {
   companies: companiesReducer,
   insuranceTypes: insuranceTypesReducer,
   vehicles: vehiclesReducer,
+  vehicleBrands: vehicleBrandsReducer,
 };

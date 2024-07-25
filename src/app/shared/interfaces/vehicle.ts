@@ -5,8 +5,8 @@ export interface Vehicle {
   id: string;
   name: string;
   registrationNumber: string;
-  firstRegistrationDate: string;
-  productionYear: string;
+  firstRegistrationDate: Date;
+  productionYear: Date;
   vin: string;
   kw: number;
   km: number;
@@ -19,12 +19,13 @@ export interface Vehicle {
 export interface CreateVehicle {
   name: string;
   registrationNumber: string;
-  firstRegistrationDate: string;
-  productionYear: string;
+  firstRegistrationDate: Date;
+  productionYear: Date;
   vin: string;
   kw: number;
   km: number;
   capacity: number;
   mileage: number;
   vehicleBrandId: number;
+  insurerId: number;
 }

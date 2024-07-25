@@ -28,6 +28,18 @@
       </div>
       <div class="row">
         <div class="col">
+          @if (vehicleBrands$ | async; as vehicleBrands) {
+            @if (vehicleBrands.length) {
+              <app-autocomplete
+                [control]="form.controls.vehicleBrandId"
+                [options]="vehicleBrands"
+                label="Marka"
+                errorMessage="Marka pojazdu jest wymagana"
+              />
+            }
+          }
+        </div>
+        <div class="col">
           @if (insurers$ | async; as insurers) {
             @if (insurers.length) {
               <app-autocomplete
@@ -44,19 +56,24 @@
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Data pierwszej rejestracji</mat-label>
-            <input matInput formControlName="firstRegistrationDate" />
-            @if (form.controls.firstRegistrationDate.hasError("required")) {
-              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
-            }
+            <input
+              matInput
+              formControlName="firstRegistrationDate"
+              [matDatepicker]="firstRegistrationDate"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="firstRegistrationDate"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #firstRegistrationDate></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Data produkcji</mat-label>
-            <input matInput formControlName="productionYear" />
-            @if (form.controls.productionYear.hasError("required")) {
-              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
-            }
+            <input matInput formControlName="productionYear" [matDatepicker]="productionYear" />
+            <mat-datepicker-toggle matIconSuffix [for]="productionYear"></mat-datepicker-toggle>
+            <mat-datepicker #productionYear></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
@@ -65,18 +82,12 @@
           <mat-form-field class="full-width">
             <mat-label>VIN</mat-label>
             <input matInput formControlName="vin" />
-            @if (form.controls.vin.hasError("required")) {
-              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
-            }
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Przebieg</mat-label>
             <input matInput formControlName="mileage" />
-            @if (form.controls.mileage.hasError("required")) {
-              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
-            }
           </mat-form-field>
         </div>
       </div>
@@ -85,27 +96,18 @@
           <mat-form-field class="full-width">
             <mat-label>KW</mat-label>
             <input matInput formControlName="kw" />
-            @if (form.controls.kw.hasError("required")) {
-              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
-            }
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>KM</mat-label>
-            <input matInput formControlName="km" />
-            @if (form.controls.km.hasError("required")) {
-              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
-            }
+            <input matInput type="number" formControlName="km" />
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Pojemność</mat-label>
             <input matInput formControlName="capacity" />
-            @if (form.controls.capacity.hasError("required")) {
-              <mat-error> Nazwa pojazdu jest wymagane </mat-error>
-            }
           </mat-form-field>
         </div>
       </div>

@@ -97,7 +97,9 @@
 
     <ng-container matColumnDef="insuranceCompany">
       <th mat-header-cell *matHeaderCellDef>Towarzystwo</th>
-      <td mat-cell *matCellDef="let policy">{{ policy.insuranceCompany?.shortName }}</td>
+      <td mat-cell *matCellDef="let policy">
+        {{ policy.insuranceCompany?.shortName || policy.insuranceCompany.name }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="startDate">

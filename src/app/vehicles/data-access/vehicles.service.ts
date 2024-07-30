@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { GetQuery } from '../../shared/interfaces/getQuery';
 import { PageResult } from '../../shared/interfaces/pageResult';
 import { CreateVehicle, Vehicle } from '../../shared/interfaces/vehicle';
+import { Attachment } from '../../shared/interfaces/attachment';
 
 @Injectable({ providedIn: 'root' })
 export class VehiclesService {
@@ -26,5 +27,9 @@ export class VehiclesService {
 
   deleteVehicle(id: string) {
     return this.http.delete<void>(`${this.url}/Vehicle/${id}`);
+  }
+
+  getAttachments(vehicleId: string) {
+    return this.http.get<Attachment[]>(`${this.url}/Vehicle/${vehicleId}/attachments`);
   }
 }

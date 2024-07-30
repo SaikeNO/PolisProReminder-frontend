@@ -1,0 +1,20 @@
+<mat-list>
+  @for (attachment of attachments$ | async; track attachment.id) {
+    <mat-list-item>
+      <div matListItemIcon>
+        <button mat-icon-button color="warn" matTooltip="Usuń">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Edytuj"
+          (click)="onDownload(attachment.id, attachment.fileName)"
+        >
+          <mat-icon>download</mat-icon>
+        </button>
+      </div>
+      <span matListItemTitle> {{ attachment.fileName }}</span>
+      <span matListItemLine>{{ attachment.createdTime | date }}</span>
+    </mat-list-item>
+  }
+</mat-list>

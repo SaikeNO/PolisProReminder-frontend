@@ -1,11 +1,11 @@
 <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
-  <mat-card class="form-card">
-    <mat-card-header>
-      <mat-card-title class="card-title">
-        {{ vehicle ? "Edytuj pojazd" : "Dodaj nowy pojazd" }}
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <mat-accordion multi>
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ vehicle ? "Edytuj pojazd" : "Dodaj nowy pojazd" }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
@@ -111,9 +111,30 @@
           </mat-form-field>
         </div>
       </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Zapisz</button>
-    </mat-card-actions>
-  </mat-card>
+    </mat-expansion-panel>
+
+    @if (vehicle) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Pliki </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-attachments-list [parent]="attachmentParentEnum.VEHICLE" [parentId]="vehicle.id" />
+      </mat-expansion-panel>
+    }
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Dołącz pliki </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <app-attachment-input
+          (onAttachmentsChange)="onAttachmentsChange($event)"
+        ></app-attachment-input>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="button-container">
+    <button mat-raised-button color="primary" type="submit">Zapisz</button>
+  </div>
 </form>

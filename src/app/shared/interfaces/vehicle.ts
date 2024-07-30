@@ -28,4 +28,5 @@ export interface CreateVehicle {
   mileage: number;
   vehicleBrandId: number;
   insurerId: number;
+  attachments: File[];
 }

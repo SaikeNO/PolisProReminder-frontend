@@ -18,7 +18,13 @@ export class VehiclesService {
   }
 
   createVehicle(vehicle: CreateVehicle) {
-    return this.http.post<void>(`${this.url}/Vehicle`, vehicle);
+    const formData = new FormData();
+    vehicle.attachments.forEach((attachment) => {
+      formData.append('attachments', attachment);
+    });
+
+    formData.append('jsonString', JSON.stringify(vehicle));
+    return this.http.post<void>(`${this.url}/Vehicle`, formData);
   }
 
   editVehicle(vehicle: CreateVehicle, id: string) {

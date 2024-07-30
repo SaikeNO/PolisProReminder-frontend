@@ -1,11 +1,9 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, Inject, InjectionToken, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
 import { VehiclesFacade } from '../../data-access/state/vehicles.facade';
 import { CreateVehicle, Vehicle } from '../../../shared/interfaces/vehicle';
 import { replaceEmptyStringWithNull } from '../../../shared/helpers/replaceEmptyStringWithNull';
@@ -16,6 +14,10 @@ import { AutocompleteComponent } from '../../../shared/ui/autocomplete/autocompl
 import { VehicleBrandsFacade } from '../../../vehicle-brands/data-access/state/vehicle-brands.facade';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AttachmentsListComponent } from '../../../shared/ui/attachments-list/attachments-list.component';
+import { AttachmentParent } from '../../../shared/ui/attachments-list/data-access/attachments-list.service';
+import { AttachmentInputComponent } from '../../../shared/ui/attachment-input/attachment-input.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINER_FORM');
 
@@ -25,15 +27,15 @@ export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINE
   imports: [
     MatCardModule,
     MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
     ReactiveFormsModule,
     MatButtonModule,
     AsyncPipe,
-    NgFor,
     AutocompleteComponent,
     MatNativeDateModule,
     MatDatepickerModule,
+    AttachmentsListComponent,
+    AttachmentInputComponent,
+    MatExpansionModule,
   ],
   templateUrl: './vehicles-form.component.html',
   styleUrl: './vehicles-form.component.scss',
@@ -42,6 +44,9 @@ export class VehiclesFormComponent {
   private vehiclesFacade = inject(VehiclesFacade);
   private insurersFacade = inject(InsurersFacade);
   private vehicleBrandsFacade = inject(VehicleBrandsFacade);
+
+  public attachmentParentEnum = AttachmentParent;
+  public attachmentsToUpload: File[] = [];
 
   public error$ = this.vehiclesFacade.error$;
   public form = this.fb.group({
@@ -94,28 +99,21 @@ export class VehiclesFormComponent {
     });
   }
 
+  public onAttachmentsChange(attachments: File[]) {
+    this.attachmentsToUpload = attachments;
+  }
+
   public onSubmit() {
     if (this.form.invalid) return;
 
     const vehicle = replaceEmptyStringWithNull(this.form.value) as CreateVehicle;
 
-    this.replaceZerosWithNull();
+    vehicle.attachments = this.attachmentsToUpload;
 
     if (this.vehicle) {
       this.vehiclesFacade.editVehicle(vehicle, this.vehicle.id);
     } else {
       this.vehiclesFacade.createVehicle(vehicle);
     }
-  }
-
-  private replaceZerosWithNull() {
-    const formValue = this.form.value;
-
-    console.log(formValue);
-
-    formValue.capacity = formValue.capacity === 0 ? null : formValue.capacity;
-    formValue.kw = formValue.kw === 0 ? null : formValue.kw;
-    formValue.km = formValue.km === 0 ? null : formValue.km;
-    formValue.mileage = formValue.mileage === 0 ? null : formValue.mileage;
   }
 }

@@ -2,12 +2,19 @@
   @for (attachment of attachments$ | async; track attachment.id) {
     <mat-list-item>
       <div matListItemIcon>
-        <button mat-icon-button color="warn" matTooltip="Usuń">
+        <button
+          mat-icon-button
+          type="button"
+          color="warn"
+          matTooltip="Usuń"
+          (click)="onDelete(attachment.id)"
+        >
           <mat-icon>delete</mat-icon>
         </button>
         <button
           mat-icon-button
-          matTooltip="Edytuj"
+          type="button"
+          matTooltip="Pobierz"
           (click)="onDownload(attachment.id, attachment.fileName)"
         >
           <mat-icon>download</mat-icon>

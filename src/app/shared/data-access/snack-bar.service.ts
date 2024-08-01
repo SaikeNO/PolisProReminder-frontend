@@ -8,10 +8,10 @@ export class SnackBarService {
   private duration = 2000;
 
   public openSucces(message: string): void {
-    this.snackBar.open(message, undefined, { duration: this.duration });
+    this.snackBar.open(message, 'Zamknij', { duration: this.duration });
   }
 
   public openFailure(message: string): void {
-    this.snackBar.open(message, undefined, { duration: this.duration });
+    this.snackBar.open(message, 'Zamknij', { duration: this.duration });
   }
 }

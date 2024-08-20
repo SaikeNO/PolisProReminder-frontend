@@ -11,10 +11,9 @@ export interface Credentials {
   password: string;
 }
 
-export interface ResetPassword {
-  oldPassword: string;
+export interface ChangePassword {
+  currentPassword: string;
   newPassword: string;
-  confirmPassword: string;
 }
 
 export interface LoginResponse {

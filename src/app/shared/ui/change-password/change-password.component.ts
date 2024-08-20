@@ -13,7 +13,6 @@ import {
 import { AuthService } from '../../data-access/auth.service';
 import { PasswordsInterface } from './change-password.models';
 import { MatButtonModule } from '@angular/material/button';
-import { ResetPassword } from '../../interfaces/auth';
 import { Subject, takeUntil } from 'rxjs';
 import { SnackBarService } from '../../data-access/snack-bar.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -41,7 +40,7 @@ export class ChangePasswordComponent implements OnDestroy {
 
   constructor(public dialogRef: MatDialogRef<ChangePasswordComponent>) {
     this.form = this._formBuilder.group({
-      oldPassword: ['', Validators.required],
+      currentPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, this.passwordsMatchValidator()]],
     });
@@ -54,7 +53,10 @@ export class ChangePasswordComponent implements OnDestroy {
   onSubmit(): void {
     if (this.form.invalid) return;
     this._authService
-      .resetPassword(this.form.value as ResetPassword)
+      .changePassword({
+        currentPassword: this.form.value.currentPassword!,
+        newPassword: this.form.value.newPassword!,
+      })
       .pipe(takeUntil(this._onDestroy$))
       .subscribe(() => {
         this.dialogRef.close();

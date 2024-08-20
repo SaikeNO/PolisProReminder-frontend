@@ -4,7 +4,7 @@ import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { UserService } from './user.service';
-import { Credentials, LoginResponse, ResetPassword } from '../interfaces/auth';
+import { Credentials, LoginResponse, ChangePassword } from '../interfaces/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -23,8 +23,8 @@ export class AuthService {
     );
   }
 
-  resetPassword(resetPassword: ResetPassword) {
-    return this.http.post<void>(`${environment.API_URL}/identity/resetPassword`, resetPassword);
+  changePassword(changePassword: ChangePassword) {
+    return this.http.post<void>(`${environment.API_URL}/user/changePassword`, changePassword);
   }
 
   isAuthenticated(): boolean {

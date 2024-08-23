@@ -27,7 +27,8 @@ jobs:
         run: npm run build
 
       - name: Deploy to gh pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          ACCESS_TOKEN: ${{ secrets.GH_TOKEN }}
-          FOLDER: dist/browser
+        run: |
+          npx angular-cli-ghpages --dir=dist/browser
+        env:
+          CI: true
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

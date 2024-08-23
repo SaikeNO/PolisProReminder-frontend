@@ -24,4 +24,7 @@ jobs:
         run: npm run build:prod
 
       - name: Publish
-        run: cp -r ./dist/browser/* /var/www/polis-pro-fe
+        run: /
+          sudo cp -r ./dist/browser/* /var/www/polis-pro-fe
+      - name: Restart the app
+        run: sudo service nginx restart

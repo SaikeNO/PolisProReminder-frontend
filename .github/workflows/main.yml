@@ -25,6 +25,7 @@ jobs:
 
       - name: Publish
         run: /
-          sudo cp -r ./dist/browser/* /var/www/polis-pro-fe
+          sudo cp -r ./dist/browser/* /var/www/fe
+
       - name: Restart the app
         run: sudo service nginx restart

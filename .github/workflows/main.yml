@@ -49,7 +49,7 @@ jobs:
         run: sudo pwd
 
       - name: Publish
-        run: sudo cp -r deploy_dist/browser/* /var/www/fe
+        run: sudo cp -r browser/* /var/www/fe
 
       - name: Restart the app
         run: sudo service nginx restart

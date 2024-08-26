@@ -24,12 +24,10 @@ jobs:
         run: npm run build:prod
 
       - name: PWD
-        run: /
-          sudo pwd
+        run: sudo pwd
 
       - name: Publish
-        run: /
-          sudo cp -r ./dist/browser/* /var/www/fe
+        run: sudo cp -r ./dist/browser/* /var/www/fe
 
       - name: Restart the app
         run: sudo service nginx restart

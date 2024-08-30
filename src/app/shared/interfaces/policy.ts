@@ -3,7 +3,7 @@ import { InsuranceType } from './insuranceType';
 import { Insurer } from './insurer';
 
 export interface Policy {
-  id: number;
+  id: string;
   title: string;
   policyNumber: string;
   insuranceCompany: InsuranceCompany;
@@ -25,4 +25,5 @@ export interface CreatePolicy {
   isPaid: boolean;
   insurerId: number;
   insuranceTypeIds: number[];
+  attachments: File[];
 }

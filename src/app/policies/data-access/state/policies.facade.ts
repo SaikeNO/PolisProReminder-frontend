@@ -32,11 +32,11 @@ export class PoliciesFacade {
     this.store.dispatch(PoliciesActions.createPolicy({ createPolicy }));
   }
 
-  editPolicy(createPolicy: CreatePolicy, id: number): void {
+  editPolicy(createPolicy: CreatePolicy, id: string): void {
     this.store.dispatch(PoliciesActions.editPolicy({ createPolicy, id }));
   }
 
-  deletePolicy(policyId: number): void {
+  deletePolicy(policyId: string): void {
     this.store.dispatch(PoliciesActions.deletePolicy({ policyId }));
   }
 }

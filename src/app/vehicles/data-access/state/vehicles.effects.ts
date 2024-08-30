@@ -8,6 +8,7 @@ import { SnackBarService } from '../../../shared/data-access/snack-bar.service';
 import { ActionResultsTypes } from '../../../shared/interfaces/actionResults';
 import { MESSAGES } from '../../../shared/messages/vehicles';
 import { VehiclesFacade } from './vehicles.facade';
+import { PortalService } from '../../../shared/data-access/portal.service';
 
 @Injectable()
 export class VehiclesEffects {
@@ -15,6 +16,7 @@ export class VehiclesEffects {
   private vehiclesService = inject(VehiclesService);
   private snackBarService = inject(SnackBarService);
   private vehiclesFacade = inject(VehiclesFacade);
+  private portalService = inject(PortalService);
 
   getPaginatedVehicles$ = createEffect(() =>
     this.actions$.pipe(
@@ -92,6 +94,20 @@ export class VehiclesEffects {
     ),
   );
 
+  getAttachments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(VehiclesActions.getAttachments),
+      mergeMap(({ id }) => {
+        return this.vehiclesService.getAttachments(id).pipe(
+          map((attachments) => VehiclesActions.getAttachmentsSuccess({ attachments })),
+          catchError((error: HttpErrorResponse) =>
+            of(VehiclesActions.getAttachmentsFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
   allActionsReloadPaginatedVehicles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
@@ -117,6 +133,7 @@ export class VehiclesEffects {
         map(({ result: { message, type } }) => {
           if (type === ActionResultsTypes.SUCCESS) {
             this.snackBarService.openSucces(message);
+            this.portalService.setIsOpen(false);
           } else if (type === ActionResultsTypes.FAILURE) {
             this.snackBarService.openFailure(message);
           }

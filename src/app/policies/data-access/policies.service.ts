@@ -23,14 +23,26 @@ export class PoliciesService {
   // }
 
   createPolicy(policy: CreatePolicy) {
-    return this.http.post<void>(`${this.url}/Policy`, policy);
+    const formData = new FormData();
+    policy.attachments.forEach((attachment) => {
+      formData.append('attachments', attachment);
+    });
+
+    formData.append('jsonString', JSON.stringify(policy));
+    return this.http.post<void>(`${this.url}/Policy`, formData);
   }
 
-  editPolicy(policy: CreatePolicy, id: number) {
-    return this.http.put<void>(`${this.url}/Policy/${id}`, policy);
+  editPolicy(policy: CreatePolicy, id: string) {
+    const formData = new FormData();
+    policy.attachments.forEach((attachment) => {
+      formData.append('attachments', attachment);
+    });
+
+    formData.append('jsonString', JSON.stringify(policy));
+    return this.http.put<void>(`${this.url}/Policy/${id}`, formData);
   }
 
-  deletePolicy(policyId: number) {
+  deletePolicy(policyId: string) {
     return this.http.delete<void>(`${this.url}/Policy/${policyId}`);
   }
 }

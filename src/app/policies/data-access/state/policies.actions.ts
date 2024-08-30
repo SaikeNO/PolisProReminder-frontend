@@ -63,7 +63,7 @@ export const createPolicyFailure = createAction(
 
 export const editPolicy = createAction(
   '[Policies Page] Edit Policy ',
-  props<{ createPolicy: CreatePolicy; id: number }>(),
+  props<{ createPolicy: CreatePolicy; id: string }>(),
 );
 
 export const editPolicySuccess = createAction(
@@ -78,7 +78,7 @@ export const editPolicyFailure = createAction(
 
 export const deletePolicy = createAction(
   '[Policies Page] Delete Policy ',
-  props<{ policyId: number }>(),
+  props<{ policyId: string }>(),
 );
 
 export const deletePolicySuccess = createAction(

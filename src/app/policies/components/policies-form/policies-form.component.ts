@@ -23,6 +23,10 @@ import { replaceEmptyStringWithNull } from '../../../shared/helpers/replaceEmpty
 import { PoliciesFacade } from '../../data-access/state/policies.facade';
 import { greaterThan } from '../../../shared/validators/date.validator';
 import { PolicyForm } from './policy-form.models';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { AttachmentInputComponent } from '../../../shared/ui/attachment-input/attachment-input.component';
+import { AttachmentsListComponent } from '../../../shared/ui/attachments-list/attachments-list.component';
+import { AttachmentParent } from '../../../shared/ui/attachments-list/data-access/attachments-list.service';
 
 export const POLICY_FORM = new InjectionToken<{}>('POLICY_FORM');
 
@@ -31,7 +35,7 @@ export const POLICY_FORM = new InjectionToken<{}>('POLICY_FORM');
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    MatCardModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -42,6 +46,8 @@ export const POLICY_FORM = new InjectionToken<{}>('POLICY_FORM');
     MatDatepickerModule,
     MatCheckboxModule,
     MatSelectModule,
+    AttachmentInputComponent,
+    AttachmentsListComponent,
   ],
   templateUrl: './policies-form.component.html',
   styleUrl: './policies-form.component.scss',
@@ -52,6 +58,9 @@ export class PoliciesFormComponent implements OnInit {
   private insuranceTypesFacade = inject(InsuranceTypesFacade);
   private insuranceCompaniesFacade = inject(CompaniesFacade);
   private insurersFacade = inject(InsurersFacade);
+
+  public attachmentParentEnum = AttachmentParent;
+  public attachmentsToUpload: File[] = [];
 
   public insuranceCompanies$ = this.insuranceCompaniesFacade.companies$.pipe(
     map((companies) => companies.map((c) => ({ id: c.id, value: c.shortName }) as Option)),
@@ -99,9 +108,15 @@ export class PoliciesFormComponent implements OnInit {
     });
   }
 
+  public onAttachmentsChange(attachments: File[]) {
+    this.attachmentsToUpload = attachments;
+  }
+
   public onSubmit() {
-    const policy = replaceEmptyStringWithNull(this.form.value) as CreatePolicy;
     if (this.form.invalid) return;
+
+    const policy = replaceEmptyStringWithNull(this.form.value) as CreatePolicy;
+    policy.attachments = this.attachmentsToUpload;
 
     if (this.policy && this.policy.id) {
       this.policiesFacade.editPolicy(policy, this.policy.id);

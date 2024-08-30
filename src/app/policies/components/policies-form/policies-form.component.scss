@@ -2,10 +2,6 @@
   width: 100%;
 }
 
-.form-card {
-  margin: 15px;
-}
-
 .mat-radio-button {
   display: block;
   margin: 5px 0;
@@ -26,6 +22,10 @@
   }
 }
 
-.card-title {
-  padding-bottom: 15px;
+.mat-expansion-panel-header-title {
+  font-size: 18px;
+}
+
+.button-container {
+  margin-top: 15px;
 }

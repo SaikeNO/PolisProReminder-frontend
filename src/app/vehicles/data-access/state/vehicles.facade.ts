@@ -14,6 +14,7 @@ export class VehiclesFacade {
   error$ = this.store.pipe(select(VehiclesSelectors.getError));
   query$ = this.store.pipe(select(VehiclesSelectors.getQuery));
   vehicles$ = this.store.pipe(select(VehiclesSelectors.getVehicles));
+  attachments$ = this.store.pipe(select(VehiclesSelectors.getAttachments));
   totalItemsCount$ = this.store.pipe(select(VehiclesSelectors.getTotalItemsCount));
   totalPages$ = this.store.pipe(select(VehiclesSelectors.getTotalPages));
   itemsFrom$ = this.store.pipe(select(VehiclesSelectors.getItemsFrom));

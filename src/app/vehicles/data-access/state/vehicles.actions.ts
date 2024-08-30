@@ -3,6 +3,7 @@ import { CreateVehicle, Vehicle } from '../../../shared/interfaces/vehicle';
 import { ActionResults } from '../../../shared/interfaces/actionResults';
 import { GetQuery } from '../../../shared/interfaces/getQuery';
 import { PageResult } from '../../../shared/interfaces/pageResult';
+import { Attachment } from '../../../shared/interfaces/attachment';
 
 export const getPaginatedVehicles = createAction(
   '[Vehicles Page] Get Paginated Vehicles',
@@ -75,3 +76,20 @@ export const deleteVehicleFailure = createAction(
   '[Vehicle Page] Delete Vehicle Failure',
   props<{ error: string }>(),
 );
+
+export const getAttachments = createAction(
+  '[Vehicle Page] Get Vehicle Attachments ',
+  props<{ id: string }>(),
+);
+
+export const getAttachmentsSuccess = createAction(
+  '[Vehicle Page] Get Vehicle Attachments Success',
+  props<{ attachments: Attachment[] }>(),
+);
+
+export const getAttachmentsFailure = createAction(
+  '[Vehicle Page] Get Vehicle Attachments Failure',
+  props<{ error: string }>(),
+);
+
+export const clearAttachments = createAction('[Vehicle Page] Clear Vehicle Attachments');

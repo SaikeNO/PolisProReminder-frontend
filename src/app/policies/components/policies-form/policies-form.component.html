@@ -1,11 +1,11 @@
 <form [formGroup]="form" novalidate>
-  <mat-card class="form-card">
-    <mat-card-header>
-      <mat-card-title class="card-title">
-        {{ policy?.id ? "Edytuj polisę" : "Dodaj nową polisę" }}
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <mat-accordion multi>
+    <mat-expansion-panel expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ policy?.id ? "Edytuj polisę" : "Dodaj nową polisę" }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <mat-form-field class="full-width">
         <mat-label>Tytuł polisy</mat-label>
         <input matInput formControlName="title" />
@@ -100,9 +100,30 @@
           <mat-checkbox formControlName="isPaid">Czy opłacono</mat-checkbox>
         </div>
       </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onSubmit()">Zapisz</button>
-    </mat-card-actions>
-  </mat-card>
+    </mat-expansion-panel>
+
+    @if (policy) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Pliki </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-attachments-list [parent]="attachmentParentEnum.POLICY" [parentId]="policy.id" />
+      </mat-expansion-panel>
+    }
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Dołącz pliki </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <app-attachment-input
+          (onAttachmentsChange)="onAttachmentsChange($event)"
+        ></app-attachment-input>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="onSubmit()">Zapisz</button>
+  </div>
 </form>

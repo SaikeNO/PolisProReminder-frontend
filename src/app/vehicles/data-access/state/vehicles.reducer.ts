@@ -6,6 +6,7 @@ export const initialState: VehiclesState = {
   isLoading: false,
   error: null,
   vehicles: [],
+  attachments: [],
   query: {
     searchPhrase: '',
     pageIndex: 0,
@@ -75,5 +76,24 @@ export const vehiclesReducer = createReducer(
     ...state,
     isLoading: false,
     error: action.error,
+  })),
+
+  on(VehiclesActions.getAttachments, (state) => ({ ...state, isLoading: true, error: null })),
+  on(VehiclesActions.getAttachmentsSuccess, (state, { attachments }) => ({
+    ...state,
+    attachments,
+    isLoading: false,
+  })),
+  on(VehiclesActions.getAttachmentsFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  on(VehiclesActions.clearAttachments, (state) => ({
+    ...state,
+    isLoading: false,
+    error: null,
+    attachments: [],
   })),
 );

@@ -5,6 +5,8 @@ export const selectFeature = (state: AppState) => state.vehicles;
 
 export const isLoading = createSelector(selectFeature, (state) => state.isLoading);
 
+export const getAttachments = createSelector(selectFeature, (state) => state.attachments);
+
 export const getError = createSelector(selectFeature, (state) => state.error);
 
 export const getQuery = createSelector(selectFeature, (state) => state.query);

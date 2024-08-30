@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --configuration production --base-href http://vps-8313aea7.vps.ovh.net/",
+    "build:prod": "ng build --configuration production --base-href https://vps-8313aea7.vps.ovh.net/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""

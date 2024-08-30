@@ -54,7 +54,7 @@ export class VehiclesFormComponent {
     registrationNumber: ['', Validators.required],
     firstRegistrationDate: this.fb.control<Date | null>(null),
     productionYear: this.fb.control<Date | null>(null),
-    vin: [''],
+    vin: ['', Validators.maxLength(17)],
     kw: this.fb.control<number | null>(null),
     km: this.fb.control<number | null>(null),
     capacity: this.fb.control<number | null>(null),

@@ -31,7 +31,7 @@ export class InsuranceTypesDialogComponent implements OnInit {
   public isEditing: boolean = false;
   public insuranceTypeId: string | null = null;
   public form = this.fb.nonNullable.group({
-    name: ['', [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
+    name: ['', [Validators.minLength(1), Validators.maxLength(30), Validators.required]],
   });
   public initialInsuranceType: InsuranceType | null = null;
 

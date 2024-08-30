@@ -17,6 +17,7 @@ import { InsuranceTypesEffects } from './insurance-types/data-access/state/insur
 import { InsurersEffects } from './insurers/data-access/state/insurers.effects';
 import { VehiclesEffects } from './vehicles/data-access/state/vehicles.effects';
 import { VehicleBrandsEffects } from './vehicle-brands/data-access/state/vehicle-brands.effects';
+import { provideServiceWorker } from '@angular/service-worker';
 
 registerLocaleData(localePL, 'pl');
 
@@ -29,16 +30,13 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     httpInterceptorProviders,
     provideStore(reducers),
-    provideEffects(
-      PoliciesEffects,
-      InsurersEffects,
-      CompaniesEffects,
-      InsuranceTypesEffects,
-      VehiclesEffects,
-      VehicleBrandsEffects,
-    ),
+    provideEffects(PoliciesEffects, InsurersEffects, CompaniesEffects, InsuranceTypesEffects, VehiclesEffects, VehicleBrandsEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     { provide: LOCALE_ID, useValue: 'pl' },
     { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'YYYY/MM/dd' } },
-  ],
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    })
+],
 };

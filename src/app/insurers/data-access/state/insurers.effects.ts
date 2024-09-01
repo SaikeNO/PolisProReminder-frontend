@@ -8,6 +8,7 @@ import { SnackBarService } from '../../../shared/data-access/snack-bar.service';
 import { ActionResultsTypes } from '../../../shared/interfaces/actionResults';
 import { MESSAGES } from '../../../shared/messages/insurer';
 import { InsurersFacade } from './insurers.facade';
+import { PortalService } from '../../../shared/data-access/portal.service';
 
 @Injectable()
 export class InsurersEffects {
@@ -15,6 +16,7 @@ export class InsurersEffects {
   private insurersService = inject(InsurersService);
   private snackBarService = inject(SnackBarService);
   private insurersFacade = inject(InsurersFacade);
+  private portalService = inject(PortalService);
 
   getAllInsurers$ = createEffect(() =>
     this.actions$.pipe(
@@ -131,6 +133,7 @@ export class InsurersEffects {
         map(({ result: { message, type } }) => {
           if (type === ActionResultsTypes.SUCCESS) {
             this.snackBarService.openSucces(message);
+            this.portalService.closePortal();
           } else if (type === ActionResultsTypes.FAILURE) {
             this.snackBarService.openFailure(message);
           }

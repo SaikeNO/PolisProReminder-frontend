@@ -133,7 +133,7 @@ export class VehiclesEffects {
         map(({ result: { message, type } }) => {
           if (type === ActionResultsTypes.SUCCESS) {
             this.snackBarService.openSucces(message);
-            this.portalService.setIsOpen(false);
+            this.portalService.closePortal();
           } else if (type === ActionResultsTypes.FAILURE) {
             this.snackBarService.openFailure(message);
           }

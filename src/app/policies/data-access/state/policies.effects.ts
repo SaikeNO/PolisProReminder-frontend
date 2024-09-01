@@ -8,6 +8,7 @@ import { ActionResultsTypes } from '../../../shared/interfaces/actionResults';
 import { MESSAGES } from '../../../shared/messages/policies';
 import { PoliciesFacade } from './policies.facade';
 import { SnackBarService } from '../../../shared/data-access/snack-bar.service';
+import { PortalService } from '../../../shared/data-access/portal.service';
 
 @Injectable()
 export class PoliciesEffects {
@@ -15,6 +16,7 @@ export class PoliciesEffects {
   private policiesService = inject(PoliciesService);
   private snackBarService = inject(SnackBarService);
   private policiesFacade = inject(PoliciesFacade);
+  private portalService = inject(PortalService);
 
   getPolicies$ = createEffect(() =>
     this.actions$.pipe(
@@ -131,6 +133,7 @@ export class PoliciesEffects {
         map(({ result: { message, type } }) => {
           if (type === ActionResultsTypes.SUCCESS) {
             this.snackBarService.openSucces(message);
+            this.portalService.closePortal();
           } else if (type === ActionResultsTypes.FAILURE) {
             this.snackBarService.openFailure(message);
           }

@@ -128,11 +128,8 @@ export class PoliciesFormComponent implements OnInit {
   private updateValidators() {
     const startDateControl = this.form.controls.startDate;
     const endDateControl = this.form.controls.endDate;
-    const paymentDateControl = this.form.controls.paymentDate;
     endDateControl.setValidators([Validators.required, greaterThan(startDateControl)]);
-    paymentDateControl.setValidators([Validators.required, greaterThan(startDateControl)]);
 
     endDateControl.updateValueAndValidity();
-    paymentDateControl.updateValueAndValidity();
   }
 }

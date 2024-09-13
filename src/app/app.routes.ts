@@ -4,6 +4,11 @@ import { isAuthenticatedGuard } from './shared/guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
     loadComponent: () =>
       import('./shared/ui/app-layout/app-layout.component').then((mod) => mod.AppLayoutComponent),
     canActivateChild: [isAuthenticatedGuard],
@@ -43,7 +48,6 @@ export const routes: Routes = [
       },
     ],
   },
-
   {
     path: 'login',
     loadComponent: () => import('./login/login.component').then((mod) => mod.LoginComponent),

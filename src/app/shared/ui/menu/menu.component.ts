@@ -21,6 +21,6 @@ export class MenuComponent {
   private dialog = inject(MatDialog);
 
   openDialog(): void {
-    this.dialog.open(ChangePasswordComponent, { maxWidth: 500 });
+    this.dialog.open(ChangePasswordComponent, { width: '500px' });
   }
 }

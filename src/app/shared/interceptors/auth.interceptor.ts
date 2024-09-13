@@ -68,7 +68,9 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<any> {
     // Business error
-    this.snackBar.open(error.error, undefined, { duration: 2000 });
+    if (error.status !== 401) {
+      this.snackBar.open(error.error, undefined, { duration: 2000 });
+    }
 
     if (error.error === 'Token expired') {
       this.logout();

@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PasswordInputComponent } from '../shared/ui/password-input/password-input.component';
 import { LoginModel } from './login.models';
 import { Credentials } from '../shared/interfaces/auth';
+import { SnackBarService } from '../shared/data-access/snack-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +33,7 @@ export class LoginComponent {
   private _formBuilder = inject(FormBuilder);
   private _authService = inject(AuthService);
   private _router = inject(Router);
+  private _snackBarService = inject(SnackBarService);
 
   loginForm: FormGroup<LoginModel> = this._formBuilder.group({
     email: ['', Validators.required],
@@ -47,6 +49,7 @@ export class LoginComponent {
         catchError((err: HttpErrorResponse) => {
           this.loginForm.controls.email.setErrors({ inncorrect: true });
           this.loginForm.controls.password.setErrors({ inncorrect: true });
+          this._snackBarService.openFailure('Błędny login lub hasło');
           return throwError(() => err);
         }),
       )

@@ -10,11 +10,13 @@
       }
     </mat-chip-listbox>
   </div>
-  <div>
-    <button mat-raised-button color="primary" matTooltip="Dodaj" (click)="openForm()">
-      <mat-icon>add</mat-icon>
-      Dodaj
-    </button>
+  <div class="add-button">
+    @if (!isArchived) {
+      <button mat-raised-button color="primary" matTooltip="Dodaj" (click)="openForm()">
+        <mat-icon>add</mat-icon>
+        Dodaj
+      </button>
+    }
   </div>
 </div>
 

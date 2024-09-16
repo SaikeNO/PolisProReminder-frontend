@@ -84,6 +84,7 @@ export class PoliciesComponent {
   public selection = new SelectionModel<Policy>(true, []);
   public selectedInsuranceTypeId: string | null = null;
   public visiblePolicies: Policy[] = [];
+  public isArchived: boolean = this.activatedRoute.snapshot.data['isArchived'];
   public displayedColumns: string[] = [
     'select',
     'details',
@@ -214,7 +215,7 @@ export class PoliciesComponent {
       pageSize: this.paginator.pageSize,
       sortBy: this.sort.active ? this.sort.active.toLowerCase() : '',
       sortDirection: this.sort.direction ? this.sort.direction : 'none',
-      isArchived: this.activatedRoute.snapshot.data['isArchived'],
+      isArchived: this.isArchived,
       typeId: this.selectedInsuranceTypeId ? this.selectedInsuranceTypeId : undefined,
     };
 

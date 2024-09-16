@@ -21,6 +21,17 @@ export const routes: Routes = [
         path: 'policies',
         loadComponent: () =>
           import('./policies/policies.component').then((mod) => mod.PoliciesComponent),
+        data: {
+          isArchived: false,
+        },
+      },
+      {
+        path: 'archived',
+        loadComponent: () =>
+          import('./policies/policies.component').then((mod) => mod.PoliciesComponent),
+        data: {
+          isArchived: true,
+        },
       },
       {
         path: 'insurers',

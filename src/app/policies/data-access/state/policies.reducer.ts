@@ -13,6 +13,7 @@ export const initialState: PoliciesState = {
     pageSize: 10,
     sortBy: '',
     sortDirection: 'none',
+    isArchived: false,
   },
   itemsFrom: 0,
   itemsTo: 0,

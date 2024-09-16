@@ -43,6 +43,7 @@ import {
 
 import { InsuranceTypesFacade } from '../insurance-types/data-access/state/insurance-types.facade';
 import { InsuranceTypePipe } from '../shared/pipes/insurance-type.pipe';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-policies',
@@ -70,6 +71,7 @@ export class PoliciesComponent {
   private policiesFacade = inject(PoliciesFacade);
   private insuranceTypesFacade = inject(InsuranceTypesFacade);
   private portalService = inject(PortalService);
+  private activatedRoute = inject(ActivatedRoute);
   private injector = inject(Injector);
   private dialog = inject(MatDialog);
   private onDestroy$ = new Subject<void>();
@@ -212,7 +214,7 @@ export class PoliciesComponent {
       pageSize: this.paginator.pageSize,
       sortBy: this.sort.active ? this.sort.active.toLowerCase() : '',
       sortDirection: this.sort.direction ? this.sort.direction : 'none',
-      isArchived: false,
+      isArchived: this.activatedRoute.snapshot.data['isArchived'],
       typeId: this.selectedInsuranceTypeId ? this.selectedInsuranceTypeId : undefined,
     };
 

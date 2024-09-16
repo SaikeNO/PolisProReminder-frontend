@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as PoliciesActions from './policies.actions';
 import * as PoliciesSelectors from './policies.selectors';
 import { AppState } from '../../../shared/reducers';
-import { GetQuery } from '../../../shared/interfaces/getQuery';
+import { GetPoliciesQuery } from '../../../shared/interfaces/getQuery';
 import { CreatePolicy } from '../../../shared/interfaces/policy';
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +20,7 @@ export class PoliciesFacade {
   itemsFrom$ = this.store.pipe(select(PoliciesSelectors.getItemsFrom));
   itemsTo$ = this.store.pipe(select(PoliciesSelectors.getItemsTo));
 
-  getPolicies(query: GetQuery): void {
+  getPolicies(query: GetPoliciesQuery): void {
     this.store.dispatch(PoliciesActions.getPolicies({ query }));
   }
 

@@ -6,5 +6,9 @@ export interface GetQuery {
   pageSize: number;
   sortBy: string;
   sortDirection: SortDirection;
+}
+
+export interface GetPoliciesQuery extends GetQuery {
   typeId?: string;
+  isArchived: boolean;
 }

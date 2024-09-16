@@ -29,7 +29,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Policy } from '../shared/interfaces/policy';
 import { PoliciesFacade } from './data-access/state/policies.facade';
 import { getPaginatorIntl } from '../shared/utils/paginator-intl';
-import { GetQuery } from '../shared/interfaces/getQuery';
+import { GetPoliciesQuery } from '../shared/interfaces/getQuery';
 import { PortalService } from '../shared/data-access/portal.service';
 import {
   POLICY_DETAILS,
@@ -206,17 +206,15 @@ export class PoliciesComponent {
   }
 
   private loadPolicies() {
-    const query: GetQuery = {
+    const query: GetPoliciesQuery = {
       searchPhrase: this.searchQuery$.getValue(),
       pageIndex: this.paginator.pageIndex,
       pageSize: this.paginator.pageSize,
       sortBy: this.sort.active ? this.sort.active.toLowerCase() : '',
       sortDirection: this.sort.direction ? this.sort.direction : 'none',
+      isArchived: false,
+      typeId: this.selectedInsuranceTypeId ? this.selectedInsuranceTypeId : undefined,
     };
-
-    if (this.selectedInsuranceTypeId) {
-      query.typeId = this.selectedInsuranceTypeId;
-    }
 
     this.policiesFacade.getPolicies(query);
   }

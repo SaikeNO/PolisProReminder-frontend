@@ -1,12 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { CreatePolicy, Policy } from '../../../shared/interfaces/policy';
-import { GetQuery } from '../../../shared/interfaces/getQuery';
+import { GetPoliciesQuery } from '../../../shared/interfaces/getQuery';
 import { PageResult } from '../../../shared/interfaces/pageResult';
 import { ActionResults } from '../../../shared/interfaces/actionResults';
 
 export const getPolicies = createAction(
   '[Policies Page] Get Policies',
-  props<{ query: GetQuery }>(),
+  props<{ query: GetPoliciesQuery }>(),
 );
 
 export const getPoliciesSuccess = createAction(

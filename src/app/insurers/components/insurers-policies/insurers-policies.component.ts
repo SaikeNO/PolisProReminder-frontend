@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, Injector, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { Policy } from '../../../shared/interfaces/policy';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -24,12 +23,13 @@ import { ConfirmDialogComponent } from '../../../shared/ui/confirm-dialog/confir
 import { filter, take } from 'rxjs';
 import { PoliciesFacade } from '../../../policies/data-access/state/policies.facade';
 import { MatDialog } from '@angular/material/dialog';
+import { CustomDatePipe } from '../../../shared/pipes/custom-date.pipe';
 
 @Component({
   selector: 'app-insurers-policies',
   standalone: true,
   imports: [
-    DatePipe,
+    CustomDatePipe,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

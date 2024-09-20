@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit, inject } from '@angular/core';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
@@ -19,6 +19,7 @@ import {
   POLICY_DETAILS,
   PoliciesDetailsComponent,
 } from '../../../policies/components/policies-details/policies-details.component';
+import { CustomDatePipe } from '../../../shared/pipes/custom-date.pipe';
 
 @Component({
   selector: 'app-policies-latest',
@@ -28,7 +29,7 @@ import {
     MatCheckboxModule,
     MatIconModule,
     ClipboardModule,
-    DatePipe,
+    CustomDatePipe,
     InsuranceTypePipe,
     AsyncPipe,
     MatButtonModule,

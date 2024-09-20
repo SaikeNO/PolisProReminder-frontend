@@ -36,6 +36,8 @@ import {
   VEHICLES_CONTAINER_FORM,
   VehiclesFormComponent,
 } from './components/vehicles-form/vehicles-form.component';
+import { CustomDatePipe } from '../shared/pipes/custom-date.pipe';
+
 @Component({
   selector: 'app-vehicles',
   standalone: true,
@@ -50,6 +52,7 @@ import {
     MatTooltipModule,
     MatCheckboxModule,
     AsyncPipe,
+    CustomDatePipe,
   ],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.scss',

@@ -2,13 +2,14 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { AttachmentListService, AttachmentParent } from './data-access/attachments-list.service';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { BehaviorSubject, Observable, catchError, finalize, take, throwError } from 'rxjs';
 import { Attachment } from '../../interfaces/attachment';
 import { saveAs } from 'file-saver';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ErrorInfoComponent } from '../error-info/error-info.component';
+import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 
 @Component({
   selector: 'app-attachments-list',
@@ -19,7 +20,7 @@ import { ErrorInfoComponent } from '../error-info/error-info.component';
     MatButtonModule,
     MatProgressSpinnerModule,
     AsyncPipe,
-    DatePipe,
+    CustomDatePipe,
     ErrorInfoComponent,
   ],
   templateUrl: './attachments-list.component.html',

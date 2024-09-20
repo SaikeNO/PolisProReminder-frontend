@@ -63,17 +63,17 @@
 
     <ng-container matColumnDef="startDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Początek ubezpieczenia</th>
-      <td mat-cell *matCellDef="let policy">{{ policy.startDate | date }}</td>
+      <td mat-cell *matCellDef="let policy">{{ policy.startDate | customDate }}</td>
     </ng-container>
 
     <ng-container matColumnDef="endDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Koniec ubezpieczenia</th>
-      <td mat-cell *matCellDef="let policy">{{ policy.endDate | date }}</td>
+      <td mat-cell *matCellDef="let policy">{{ policy.endDate | customDate }}</td>
     </ng-container>
 
     <ng-container matColumnDef="paymentDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Termin zapłaty</th>
-      <td mat-cell *matCellDef="let policy">{{ policy.paymentDate | date }}</td>
+      <td mat-cell *matCellDef="let policy">{{ policy.paymentDate | customDate }}</td>
     </ng-container>
 
     <ng-container matColumnDef="insuranceTypes">

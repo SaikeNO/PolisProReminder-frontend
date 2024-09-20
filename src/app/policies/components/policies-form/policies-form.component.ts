@@ -84,6 +84,7 @@ export class PoliciesFormComponent implements OnInit {
     isPaid: this.fb.nonNullable.control(false),
     insurerId: this.fb.control(null, Validators.required),
     insuranceTypeIds: this.fb.nonNullable.control([]),
+    note: this.fb.control(null),
   });
 
   constructor(@Inject(POLICY_FORM) public policy: Policy | undefined) {}
@@ -96,14 +97,9 @@ export class PoliciesFormComponent implements OnInit {
 
     if (!this.policy) return;
     this.form.patchValue({
-      title: this.policy.title,
-      policyNumber: this.policy.policyNumber,
-      endDate: this.policy.endDate,
-      startDate: this.policy.startDate,
+      ...this.policy,
       insuranceCompanyId: this.policy.insuranceCompany?.id,
       insurerId: this.policy.insurer?.id,
-      isPaid: this.policy.isPaid,
-      paymentDate: this.policy.paymentDate,
       insuranceTypeIds: this.policy.insuranceTypes?.map((t) => t.id),
     });
   }

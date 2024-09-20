@@ -10,4 +10,5 @@ export interface PolicyForm {
   isPaid: FormControl<boolean>;
   insurerId: FormControl<string | null>;
   insuranceTypeIds: FormControl<string[]>;
+  note: FormControl<string | null>;
 }

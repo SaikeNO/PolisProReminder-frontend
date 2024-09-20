@@ -12,6 +12,7 @@ export interface Policy {
   paymentDate: Date;
   isPaid: boolean;
   insurer?: Insurer;
+  note: string;
   insuranceTypes: InsuranceType[];
 }
 
@@ -25,5 +26,6 @@ export interface CreatePolicy {
   isPaid: boolean;
   insurerId: number;
   insuranceTypeIds: number[];
+  note: string;
   attachments: File[];
 }

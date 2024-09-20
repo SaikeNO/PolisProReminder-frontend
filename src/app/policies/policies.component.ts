@@ -44,7 +44,6 @@ import {
 import { InsuranceTypesFacade } from '../insurance-types/data-access/state/insurance-types.facade';
 import { InsuranceTypePipe } from '../shared/pipes/insurance-type.pipe';
 import { ActivatedRoute } from '@angular/router';
-import { CustomDatePipe } from '../shared/pipes/custom-date.pipe';
 
 @Component({
   selector: 'app-policies',
@@ -63,7 +62,6 @@ import { CustomDatePipe } from '../shared/pipes/custom-date.pipe';
     MatChipsModule,
     InsuranceTypePipe,
     ClipboardModule,
-    CustomDatePipe,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: getPaginatorIntl() }],
   templateUrl: './policies.component.html',

@@ -1,15 +1,14 @@
-import { NgFor } from '@angular/common';
+import { DatePipe, NgFor } from '@angular/common';
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { DndDirective } from '../../directives/dnd.directive';
-import { CustomDatePipe } from '../../pipes/custom-date.pipe';
 
 @Component({
   selector: 'app-attachment-input',
   standalone: true,
-  imports: [NgFor, MatIconModule, MatButtonModule, MatListModule, CustomDatePipe, DndDirective],
+  imports: [NgFor, MatIconModule, MatButtonModule, MatListModule, DatePipe, DndDirective],
   templateUrl: './attachment-input.component.html',
   styleUrl: './attachment-input.component.scss',
 })

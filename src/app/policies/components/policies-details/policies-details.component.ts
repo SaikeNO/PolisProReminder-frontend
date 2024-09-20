@@ -4,10 +4,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { DatePipe } from '@angular/common';
 import { ErrorInfoComponent } from '../../../shared/ui/error-info/error-info.component';
 import { AttachmentsListComponent } from '../../../shared/ui/attachments-list/attachments-list.component';
 import { AttachmentParent } from '../../../shared/ui/attachments-list/data-access/attachments-list.service';
-import { CustomDatePipe } from '../../../shared/pipes/custom-date.pipe';
 
 export const POLICY_DETAILS = new InjectionToken<{}>('POLICY_DETAILS');
 
@@ -18,7 +18,7 @@ export const POLICY_DETAILS = new InjectionToken<{}>('POLICY_DETAILS');
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    CustomDatePipe,
+    DatePipe,
     MatChipsModule,
     ErrorInfoComponent,
     AttachmentsListComponent,

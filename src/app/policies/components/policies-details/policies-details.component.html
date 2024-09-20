@@ -20,12 +20,12 @@
             <b>brak</b>
           }
         </h3>
-        <h3>Początek ubezpieczenia: {{ policy.startDate | customDate }}</h3>
-        <h3>Koniec ubezpieczenia: {{ policy.endDate | customDate }}</h3>
+        <h3>Początek ubezpieczenia: {{ policy.startDate | date }}</h3>
+        <h3>Koniec ubezpieczenia: {{ policy.endDate | date }}</h3>
         <h3>
           Termin zapłaty:
           @if (policy.paymentDate) {
-            {{ policy.paymentDate | customDate }}
+            {{ policy.paymentDate | date }}
           } @else {
             <b>brak</b>
           }

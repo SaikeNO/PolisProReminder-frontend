@@ -82,12 +82,12 @@
 
     <ng-container matColumnDef="firstRegistrationDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Data pierwszej rejestracji</th>
-      <td mat-cell *matCellDef="let vehicle">{{ vehicle.firstRegistrationDate | customDate }}</td>
+      <td mat-cell *matCellDef="let vehicle">{{ vehicle.firstRegistrationDate }}</td>
     </ng-container>
 
     <ng-container matColumnDef="productionYear">
       <th mat-header-cell *matHeaderCellDef>Rok produkcji</th>
-      <td mat-cell *matCellDef="let vehicle">{{ vehicle.productionYear | customDate }}</td>
+      <td mat-cell *matCellDef="let vehicle">{{ vehicle.productionYear }}</td>
     </ng-container>
 
     <ng-container matColumnDef="vin">

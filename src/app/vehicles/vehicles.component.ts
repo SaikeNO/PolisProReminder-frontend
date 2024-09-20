@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Injector, OnDestroy, ViewChild, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import {
   BehaviorSubject,
   Subject,
@@ -50,6 +50,7 @@ import {
     MatTooltipModule,
     MatCheckboxModule,
     AsyncPipe,
+    DatePipe,
   ],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.scss',

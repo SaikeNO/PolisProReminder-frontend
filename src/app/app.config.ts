@@ -19,7 +19,6 @@ import { VehiclesEffects } from './vehicles/data-access/state/vehicles.effects';
 import { VehicleBrandsEffects } from './vehicle-brands/data-access/state/vehicle-brands.effects';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { DATE_FORMAT } from './shared/constants/date-formats';
 
 registerLocaleData(localePL, 'pl');
 
@@ -47,6 +46,6 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    provideNativeDateAdapter(DATE_FORMAT),
+    provideNativeDateAdapter(),
   ],
 };

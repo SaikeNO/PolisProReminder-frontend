@@ -5,6 +5,7 @@ import { GetQuery } from '../../shared/interfaces/getQuery';
 import { PageResult } from '../../shared/interfaces/pageResult';
 import { CreateVehicle, Vehicle } from '../../shared/interfaces/vehicle';
 import { Attachment } from '../../shared/interfaces/attachment';
+import moment from 'moment';
 
 @Injectable({ providedIn: 'root' })
 export class VehiclesService {
@@ -23,7 +24,14 @@ export class VehiclesService {
       formData.append('attachments', attachment);
     });
 
-    formData.append('jsonString', JSON.stringify(vehicle));
+    formData.append(
+      'jsonString',
+      JSON.stringify({
+        ...vehicle,
+        productionYear: moment(vehicle.productionYear).format('YYYY-MM-DD'),
+        firstRegistrationDate: moment(vehicle.firstRegistrationDate).format('YYYY-MM-DD'),
+      }),
+    );
     return this.http.post<void>(`${this.url}/Vehicle`, formData);
   }
 
@@ -33,7 +41,14 @@ export class VehiclesService {
       formData.append('attachments', attachment);
     });
 
-    formData.append('jsonString', JSON.stringify(vehicle));
+    formData.append(
+      'jsonString',
+      JSON.stringify({
+        ...vehicle,
+        productionYear: moment(vehicle.productionYear).format('YYYY-MM-DD'),
+        firstRegistrationDate: moment(vehicle.firstRegistrationDate).format('YYYY-MM-DD'),
+      }),
+    );
     return this.http.put<void>(`${this.url}/Vehicle/${id}`, formData);
   }
 

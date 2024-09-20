@@ -17,10 +17,10 @@
           <h3>VIN: {{ vehicle.vin }}</h3>
         }
         @if (vehicle.productionYear) {
-          <h3>Data produkcji: {{ vehicle.productionYear }}</h3>
+          <h3>Data produkcji: {{ vehicle.productionYear | date }}</h3>
         }
         @if (vehicle.firstRegistrationDate) {
-          <h3>Data pierwszej rejestracji: {{ vehicle.firstRegistrationDate }}</h3>
+          <h3>Data pierwszej rejestracji: {{ vehicle.firstRegistrationDate | date }}</h3>
         }
         @if (vehicle.capacity) {
           <h3>Pojemność silnika: {{ vehicle.capacity }}</h3>

@@ -11,6 +11,7 @@
   .row {
     display: flex;
     flex-direction: row;
+    min-width: 600px;
   }
   .col {
     flex: 1;

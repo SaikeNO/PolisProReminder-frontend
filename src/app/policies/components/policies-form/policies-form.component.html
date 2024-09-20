@@ -57,18 +57,16 @@
             }
           </mat-form-field>
         </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <mat-label>Termin płatności</mat-label>
-            <input matInput formControlName="paymentDate" [matDatepicker]="paymentDate" />
-            <mat-datepicker-toggle matIconSuffix [for]="paymentDate"></mat-datepicker-toggle>
-            <mat-datepicker #paymentDate></mat-datepicker>
-            @if (form.controls.paymentDate.hasError("greaterThan")) {
-              <mat-error> Termin nie może być przed początkiem </mat-error>
-            }
-          </mat-form-field>
-        </div>
       </div>
+      <mat-form-field class="full-width">
+        <mat-label>Termin płatności</mat-label>
+        <input matInput formControlName="paymentDate" [matDatepicker]="paymentDate" />
+        <mat-datepicker-toggle matIconSuffix [for]="paymentDate"></mat-datepicker-toggle>
+        <mat-datepicker #paymentDate></mat-datepicker>
+        @if (form.controls.paymentDate.hasError("greaterThan")) {
+          <mat-error> Termin nie może być przed początkiem </mat-error>
+        }
+      </mat-form-field>
 
       <div class="row">
         <div class="col">

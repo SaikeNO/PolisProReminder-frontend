@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { VehiclesFacade } from '../../data-access/state/vehicles.facade';
 import { CreateVehicle, Vehicle } from '../../../shared/interfaces/vehicle';
 import { replaceEmptyStringWithNull } from '../../../shared/helpers/replaceEmptyStringWithNull';
-import { map } from 'rxjs';
+import { map, startWith } from 'rxjs';
 import { InsurersFacade } from '../../../insurers/data-access/state/insurers.facade';
 import { Option } from '../../../shared/ui/autocomplete/autocomplete.model';
 import { AutocompleteComponent } from '../../../shared/ui/autocomplete/autocomplete.component';
@@ -17,6 +17,7 @@ import { AttachmentsListComponent } from '../../../shared/ui/attachments-list/at
 import { AttachmentParent } from '../../../shared/ui/attachments-list/data-access/attachments-list.service';
 import { AttachmentInputComponent } from '../../../shared/ui/attachment-input/attachment-input.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { kwToKm } from '../../../shared/utils/utils';
 
 export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINER_FORM');
 
@@ -79,6 +80,9 @@ export class VehiclesFormComponent {
   ngOnInit(): void {
     this.insurersFacade.getAllInsurers();
     this.vehicleBrandsFacade.getVehicleBrands();
+    this.form.controls.kw.valueChanges.subscribe((kw) =>
+      this.form.controls.km.setValue(kw ? kwToKm(kw) : null),
+    );
 
     if (!this.vehicle) return;
 

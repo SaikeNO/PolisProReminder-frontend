@@ -3,12 +3,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
 import { map } from 'rxjs';
 
-import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
@@ -42,7 +40,6 @@ export const POLICY_FORM = new InjectionToken<{}>('POLICY_FORM');
     MatAutocompleteModule,
     AsyncPipe,
     AutocompleteComponent,
-    MatNativeDateModule,
     MatDatepickerModule,
     MatCheckboxModule,
     MatSelectModule,

@@ -6,7 +6,7 @@ export const replaceEmptyStringWithNull = (obj: any): any => {
   }
 
   if (obj instanceof Date) {
-    return moment(obj).format();
+    return moment(obj).format('YYYY-MM-DD');
   }
 
   if (Array.isArray(obj)) {

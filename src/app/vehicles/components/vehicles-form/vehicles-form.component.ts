@@ -13,7 +13,6 @@ import { Option } from '../../../shared/ui/autocomplete/autocomplete.model';
 import { AutocompleteComponent } from '../../../shared/ui/autocomplete/autocomplete.component';
 import { VehicleBrandsFacade } from '../../../vehicle-brands/data-access/state/vehicle-brands.facade';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { AttachmentsListComponent } from '../../../shared/ui/attachments-list/attachments-list.component';
 import { AttachmentParent } from '../../../shared/ui/attachments-list/data-access/attachments-list.service';
 import { AttachmentInputComponent } from '../../../shared/ui/attachment-input/attachment-input.component';
@@ -31,7 +30,6 @@ export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINE
     MatButtonModule,
     AsyncPipe,
     AutocompleteComponent,
-    MatNativeDateModule,
     MatDatepickerModule,
     AttachmentsListComponent,
     AttachmentInputComponent,

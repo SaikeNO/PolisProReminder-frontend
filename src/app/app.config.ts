@@ -41,7 +41,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     { provide: LOCALE_ID, useValue: 'pl' },
-    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'YYYY/MM/dd' } },
+    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'dd/MM/YYYY' } },
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

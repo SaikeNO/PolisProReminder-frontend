@@ -27,6 +27,7 @@
     "@ngrx/store": "^17.2.0",
     "@ngrx/store-devtools": "^17.2.0",
     "file-saver": "^2.0.5",
+    "libphonenumber-js": "^1.11.9",
     "moment": "^2.30.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

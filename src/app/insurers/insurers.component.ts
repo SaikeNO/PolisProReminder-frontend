@@ -36,6 +36,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 import { GetQuery } from '../shared/interfaces/getQuery';
 import { AsyncPipe } from '@angular/common';
+import { PhonePipe } from '../shared/pipes/phone.pipe';
 
 @Component({
   selector: 'app-insurers',
@@ -53,6 +54,7 @@ import { AsyncPipe } from '@angular/common';
     MatTooltipModule,
     MatCheckboxModule,
     AsyncPipe,
+    PhonePipe,
   ],
 })
 export class InsurersComponent implements AfterViewInit, OnDestroy {

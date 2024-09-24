@@ -12,6 +12,7 @@ import {
   PoliciesFormComponent,
 } from '../../../policies/components/policies-form/policies-form.component';
 import { PortalService } from '../../../shared/data-access/portal.service';
+import { PhonePipe } from '../../../shared/pipes/phone.pipe';
 
 export const INSURER_DETAILS = new InjectionToken<{}>('CONTAINER_DATA');
 
@@ -25,6 +26,7 @@ export const INSURER_DETAILS = new InjectionToken<{}>('CONTAINER_DATA');
     MatIconModule,
     MatButtonModule,
     ErrorInfoComponent,
+    PhonePipe,
   ],
   templateUrl: './insurers-details.component.html',
   styleUrl: './insurers-details.component.scss',

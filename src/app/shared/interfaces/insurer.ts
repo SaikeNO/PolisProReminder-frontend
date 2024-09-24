@@ -7,13 +7,19 @@ export interface Insurer {
   phoneNumber: string;
   email: string;
   pesel: string;
+  postalCode: string | null;
+  city: string | null;
+  street: string | null;
   policies?: Policy[];
 }
 
 export interface CreateInsurer {
   firstName: string;
-  lastName?: string;
+  lastName: string | null;
   pesel: string;
-  phoneNumber?: string;
-  email?: string;
+  phoneNumber: string | null;
+  email: string | null;
+  postalCode: string | null;
+  city: string | null;
+  street: string | null;
 }

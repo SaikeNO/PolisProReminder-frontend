@@ -82,6 +82,8 @@ export class InsurersComponent implements AfterViewInit, OnDestroy {
     'pesel',
     'phoneNumber',
     'email',
+    'address',
+    'street',
   ];
 
   ngAfterViewInit(): void {

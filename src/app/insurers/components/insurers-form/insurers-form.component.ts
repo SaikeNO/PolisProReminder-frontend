@@ -39,6 +39,9 @@ export class InsurersFormComponent implements OnInit {
     pesel: ['', [Validators.required, Validators.pattern(peselRegex)]],
     phoneNumber: ['', Validators.pattern(phoneRegex)],
     email: ['', Validators.email],
+    postalCode: ['', [Validators.maxLength(6)]],
+    city: ['', [Validators.maxLength(60)]],
+    street: ['', [Validators.maxLength(60)]],
   });
 
   constructor(
@@ -55,6 +58,9 @@ export class InsurersFormComponent implements OnInit {
       pesel: this.insurer.pesel,
       phoneNumber: this.insurer.phoneNumber,
       email: this.insurer.email,
+      postalCode: this.insurer.postalCode,
+      city: this.insurer.city,
+      street: this.insurer.street,
     });
   }
 

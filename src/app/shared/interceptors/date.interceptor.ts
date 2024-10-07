@@ -17,7 +17,7 @@ export class DateInterceptor implements HttpInterceptor {
   }
 
   private convertDates(body: any): any {
-    if (body === null || body === undefined) {
+    if (body === null || body === undefined || body instanceof Blob) {
       return body;
     }
 

@@ -1,6 +1,5 @@
 import { InsuranceCompany } from './insuranceCompany';
 import { InsuranceType } from './insuranceType';
-import { Insurer } from './insurer';
 
 export interface Policy {
   id: string;
@@ -11,7 +10,8 @@ export interface Policy {
   endDate: Date;
   paymentDate: Date;
   isPaid: boolean;
-  insurer?: Insurer;
+  insurerId: string;
+  insurerName?: string;
   note: string;
   insuranceTypes: InsuranceType[];
 }

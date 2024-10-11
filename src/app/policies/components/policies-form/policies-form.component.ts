@@ -96,7 +96,7 @@ export class PoliciesFormComponent implements OnInit {
     this.form.patchValue({
       ...this.policy,
       insuranceCompanyId: this.policy.insuranceCompany?.id,
-      insurerId: this.policy.insurer?.id,
+      insurerId: this.policy.insurerId,
       insuranceTypeIds: this.policy.insuranceTypes?.map((t) => t.id),
     });
   }

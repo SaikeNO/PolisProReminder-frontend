@@ -1,4 +1,3 @@
-import { Insurer } from './insurer';
 import { VehicleBrand } from './vehicleBrand';
 
 export interface Vehicle {
@@ -13,7 +12,8 @@ export interface Vehicle {
   capacity: number;
   mileage: number;
   vehicleBrand: VehicleBrand;
-  insurer: Insurer;
+  insurerId: string;
+  insurerName: string;
 }
 
 export interface CreateVehicle {
@@ -26,7 +26,7 @@ export interface CreateVehicle {
   km: number;
   capacity: number;
   mileage: number;
-  vehicleBrandId: number;
-  insurerId: number;
+  vehicleBrandId: string;
+  insurerId: string;
   attachments: File[];
 }

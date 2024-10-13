@@ -96,7 +96,7 @@ export class VehiclesFormComponent {
       km: this.vehicle.km,
       capacity: this.vehicle.capacity,
       mileage: this.vehicle.mileage,
-      insurerId: this.vehicle.insurer.id,
+      insurerId: this.vehicle.insurerId,
       vehicleBrandId: this.vehicle.vehicleBrand.id,
     });
   }

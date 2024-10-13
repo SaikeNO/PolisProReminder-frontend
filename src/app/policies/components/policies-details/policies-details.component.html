@@ -14,8 +14,8 @@
         <h3>Towarzystwo: {{ policy.insuranceCompany.name }}</h3>
         <h3>
           Ubezpieczający:
-          @if (policy.insurer) {
-            {{ policy.insurer.lastName }} {{ policy.insurer.firstName }}
+          @if (policy.insurerName) {
+            {{ policy.insurerName }}
           } @else {
             <b>brak</b>
           }

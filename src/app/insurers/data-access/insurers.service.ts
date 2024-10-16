@@ -11,21 +11,21 @@ export class InsurersService {
   private url = environment.API_URL;
 
   getAllInsurers() {
-    return this.http.get<Insurer[]>(`${this.url}/Insurer`);
+    return this.http.get<Insurer[]>(`${this.url}/Insurer/Individual`);
   }
 
   getPaginatedInsurers(query: GetQuery) {
-    return this.http.get<PageResult<Insurer>>(`${this.url}/Insurer/getPaginated`, {
+    return this.http.get<PageResult<Insurer>>(`${this.url}/Insurer/Individual/Paginated`, {
       params: { ...query },
     });
   }
 
   createInsurer(insurer: CreateInsurer) {
-    return this.http.post<void>(`${this.url}/Insurer`, insurer);
+    return this.http.post<void>(`${this.url}/Insurer/Individual`, insurer);
   }
 
   editInsurer(insurer: CreateInsurer, id: string) {
-    return this.http.put<void>(`${this.url}/Insurer/${id}`, insurer);
+    return this.http.put<void>(`${this.url}/Insurer/Individual/${id}`, insurer);
   }
 
   deleteInsurer(id: string) {

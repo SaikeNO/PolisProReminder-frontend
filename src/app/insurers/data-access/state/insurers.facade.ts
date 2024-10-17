@@ -14,6 +14,7 @@ export class InsurersFacade {
   error$ = this.store.pipe(select(InsurersSelectors.getError));
   query$ = this.store.pipe(select(InsurersSelectors.getQuery));
   insurers$ = this.store.pipe(select(InsurersSelectors.getInsurers));
+  insurersBasicInfo$ = this.store.pipe(select(InsurersSelectors.getInsurersBasicInfo));
   totalItemsCount$ = this.store.pipe(select(InsurersSelectors.getTotalItemsCount));
   totalPages$ = this.store.pipe(select(InsurersSelectors.getTotalPages));
   itemsFrom$ = this.store.pipe(select(InsurersSelectors.getItemsFrom));

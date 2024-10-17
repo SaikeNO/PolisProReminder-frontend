@@ -23,3 +23,8 @@ export interface CreateInsurer {
   city: string | null;
   street: string | null;
 }
+
+export interface InsurerBasicInfo {
+  id: string;
+  name: string;
+}

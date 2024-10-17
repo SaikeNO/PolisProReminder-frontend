@@ -11,6 +11,11 @@ export const getQuery = createSelector(selectFeature, (state) => state.query);
 
 export const getInsurers = createSelector(selectFeature, (state) => state.insurers);
 
+export const getInsurersBasicInfo = createSelector(
+  selectFeature,
+  (state) => state.insurersBasicInfo,
+);
+
 export const getTotalPages = createSelector(selectFeature, (state) => state.totalPages);
 
 export const getItemsFrom = createSelector(selectFeature, (state) => state.itemsFrom);

@@ -63,10 +63,8 @@ export class PoliciesFormComponent implements OnInit {
     map((companies) => companies.map((c) => ({ id: c.id, value: c.shortName }) as Option)),
   );
 
-  public insurers$ = this.insurersFacade.insurers$.pipe(
-    map((insurers) =>
-      insurers.map((i) => ({ id: i.id, value: `${i.lastName} ${i.firstName}` }) as Option),
-    ),
+  public insurers$ = this.insurersFacade.insurersBasicInfo$.pipe(
+    map((insurers) => insurers.map((i) => ({ id: i.id, value: i.name }) as Option)),
   );
 
   public insuranceTypes$ = this.insuranceTypesFacade.insuranceTypes$;

@@ -6,6 +6,7 @@ export const initialState: InsurersState = {
   isLoading: false,
   error: null,
   insurers: [],
+  insurersBasicInfo: [],
   query: {
     searchPhrase: '',
     pageIndex: 0,
@@ -25,7 +26,7 @@ export const insurersReducer = createReducer(
   on(InsurersActions.getAllInsurersSuccess, (state, action) => ({
     ...state,
     isLoading: false,
-    insurers: action.insurers,
+    insurersBasicInfo: action.insurers,
   })),
   on(InsurersActions.getAllInsurersFailure, (state, action) => ({
     ...state,

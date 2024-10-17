@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { CreateInsurer, Insurer } from '../../shared/interfaces/insurer';
+import { CreateInsurer, Insurer, InsurerBasicInfo } from '../../shared/interfaces/insurer';
 import { GetQuery } from '../../shared/interfaces/getQuery';
 import { PageResult } from '../../shared/interfaces/pageResult';
 
@@ -11,7 +11,7 @@ export class InsurersService {
   private url = environment.API_URL;
 
   getAllInsurers() {
-    return this.http.get<Insurer[]>(`${this.url}/Insurer/Individual`);
+    return this.http.get<InsurerBasicInfo[]>(`${this.url}/Insurer`);
   }
 
   getPaginatedInsurers(query: GetQuery) {

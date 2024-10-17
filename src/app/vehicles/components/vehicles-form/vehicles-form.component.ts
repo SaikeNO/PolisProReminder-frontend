@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { VehiclesFacade } from '../../data-access/state/vehicles.facade';
 import { CreateVehicle, Vehicle } from '../../../shared/interfaces/vehicle';
 import { replaceEmptyStringWithNull } from '../../../shared/helpers/replaceEmptyStringWithNull';
-import { map, startWith } from 'rxjs';
+import { map } from 'rxjs';
 import { InsurersFacade } from '../../../insurers/data-access/state/insurers.facade';
 import { Option } from '../../../shared/ui/autocomplete/autocomplete.model';
 import { AutocompleteComponent } from '../../../shared/ui/autocomplete/autocomplete.component';
@@ -62,10 +62,8 @@ export class VehiclesFormComponent {
     vehicleBrandId: ['', Validators.required],
   });
 
-  public insurers$ = this.insurersFacade.insurers$.pipe(
-    map((insurers) =>
-      insurers.map((i) => ({ id: i.id, value: `${i.lastName} ${i.firstName}` }) as Option),
-    ),
+  public insurers$ = this.insurersFacade.insurersBasicInfo$.pipe(
+    map((insurers) => insurers.map((i) => ({ id: i.id, value: i.name }) as Option)),
   );
 
   public vehicleBrands$ = this.vehicleBrandsFacade.vehicles$.pipe(

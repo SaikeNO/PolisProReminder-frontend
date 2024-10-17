@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateInsurer, Insurer } from '../../../shared/interfaces/insurer';
+import { CreateInsurer, Insurer, InsurerBasicInfo } from '../../../shared/interfaces/insurer';
 import { ActionResults } from '../../../shared/interfaces/actionResults';
 import { GetQuery } from '../../../shared/interfaces/getQuery';
 import { PageResult } from '../../../shared/interfaces/pageResult';
@@ -8,7 +8,7 @@ export const getAllInsurers = createAction('[Insurers Page] Get All Insurers');
 
 export const getAllInsurersSuccess = createAction(
   '[Insurers Page] Get All Insurers Success',
-  props<{ insurers: Insurer[] }>(),
+  props<{ insurers: InsurerBasicInfo[] }>(),
 );
 
 export const getAllInsurersFailure = createAction(

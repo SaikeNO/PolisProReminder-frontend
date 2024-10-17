@@ -12,7 +12,7 @@
       <div class="content-inner">
         <h3>Marka: {{ vehicle.vehicleBrand.name }}</h3>
         <h3>Numer rejestracyjny: {{ vehicle.registrationNumber }}</h3>
-        <h3>Właściciel: {{ vehicle.insurerName }}</h3>
+        <h3>Właściciel: {{ vehicle.insurers | insurers }}</h3>
         @if (vehicle.vin) {
           <h3>VIN: {{ vehicle.vin }}</h3>
         }

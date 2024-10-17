@@ -76,7 +76,9 @@
     <ng-container matColumnDef="insurer">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Właściciel</th>
       <td mat-cell *matCellDef="let vehicle">
-        {{ vehicle.insurerName }}
+        @for (insurer of vehicle.insurers; track $index) {
+          {{ insurer.name }}<br />
+        }
       </td>
     </ng-container>
 

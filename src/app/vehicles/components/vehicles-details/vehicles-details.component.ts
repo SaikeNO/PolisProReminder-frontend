@@ -8,6 +8,7 @@ import { ErrorInfoComponent } from '../../../shared/ui/error-info/error-info.com
 import { DatePipe } from '@angular/common';
 import { AttachmentsListComponent } from '../../../shared/ui/attachments-list/attachments-list.component';
 import { AttachmentParent } from '../../../shared/ui/attachments-list/data-access/attachments-list.service';
+import { InsurersPipe } from '../../../shared/pipes/insurers.pipe';
 
 export const VEHICLE_CONTAINER_DATA = new InjectionToken<{}>('VEHICLE_CONTAINER_DATA');
 
@@ -22,6 +23,7 @@ export const VEHICLE_CONTAINER_DATA = new InjectionToken<{}>('VEHICLE_CONTAINER_
     ErrorInfoComponent,
     DatePipe,
     AttachmentsListComponent,
+    InsurersPipe,
   ],
   templateUrl: './vehicles-details.component.html',
   styleUrl: './vehicles-details.component.scss',

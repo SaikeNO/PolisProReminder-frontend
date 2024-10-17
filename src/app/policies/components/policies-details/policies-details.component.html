@@ -14,11 +14,7 @@
         <h3>Towarzystwo: {{ policy.insuranceCompany.name }}</h3>
         <h3>
           Ubezpieczający:
-          @if (policy.insurerName) {
-            {{ policy.insurerName }}
-          } @else {
-            <b>brak</b>
-          }
+          {{ policy.insurers | insurers }}
         </h3>
         <h3>Początek ubezpieczenia: {{ policy.startDate | date }}</h3>
         <h3>Koniec ubezpieczenia: {{ policy.endDate | date }}</h3>

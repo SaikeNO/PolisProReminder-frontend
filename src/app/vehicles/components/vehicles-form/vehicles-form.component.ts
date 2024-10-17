@@ -18,6 +18,7 @@ import { AttachmentParent } from '../../../shared/ui/attachments-list/data-acces
 import { AttachmentInputComponent } from '../../../shared/ui/attachment-input/attachment-input.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { kwToKm } from '../../../shared/utils/utils';
+import { MatSelectModule } from '@angular/material/select';
 
 export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINER_FORM');
 
@@ -35,6 +36,7 @@ export const VEHICLES_CONTAINER_FORM = new InjectionToken<{}>('VEHICLES_CONTAINE
     AttachmentsListComponent,
     AttachmentInputComponent,
     MatExpansionModule,
+    MatSelectModule,
   ],
   templateUrl: './vehicles-form.component.html',
   styleUrl: './vehicles-form.component.scss',
@@ -58,7 +60,7 @@ export class VehiclesFormComponent {
     km: this.fb.control<number | null>(null),
     capacity: this.fb.control<number | null>(null),
     mileage: this.fb.control<number | null>(null),
-    insurerId: ['', Validators.required],
+    insurerIds: this.fb.nonNullable.control<string[]>([]),
     vehicleBrandId: ['', Validators.required],
   });
 
@@ -94,7 +96,7 @@ export class VehiclesFormComponent {
       km: this.vehicle.km,
       capacity: this.vehicle.capacity,
       mileage: this.vehicle.mileage,
-      insurerId: this.vehicle.insurerId,
+      insurerIds: this.vehicle.insurers.map((i) => i.id),
       vehicleBrandId: this.vehicle.vehicleBrand.id,
     });
   }

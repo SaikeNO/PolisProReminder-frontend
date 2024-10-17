@@ -40,16 +40,14 @@
           }
         </div>
         <div class="col">
-          @if (insurers$ | async; as insurers) {
-            @if (insurers.length) {
-              <app-autocomplete
-                [control]="form.controls.insurerId"
-                [options]="insurers"
-                label="Właściciel"
-                errorMessage="Właściciel jest wymagany"
-              />
-            }
-          }
+          <mat-form-field class="full-width">
+            <mat-label>Właściciel</mat-label>
+            <mat-select formControlName="insurerIds" multiple>
+              @for (insurer of insurers$ | async; track insurer.id) {
+                <mat-option [value]="insurer.id">{{ insurer.value }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
       <div class="row">

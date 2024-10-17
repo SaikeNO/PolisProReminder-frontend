@@ -8,7 +8,7 @@ export interface PolicyForm {
   endDate: FormControl<Date | null>;
   paymentDate: FormControl<Date | null>;
   isPaid: FormControl<boolean>;
-  insurerId: FormControl<string | null>;
+  insurerIds: FormControl<string[]>;
   insuranceTypeIds: FormControl<string[]>;
   note: FormControl<string | null>;
 }

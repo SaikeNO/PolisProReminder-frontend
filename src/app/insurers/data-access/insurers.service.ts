@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { CreateInsurer, Insurer, InsurerBasicInfo } from '../../shared/interfaces/insurer';
+import {
+  BusinessInsurer,
+  CreateBusinessInsurer,
+  CreateIndividualInsurer,
+  IndividualInsurer,
+  InsurerBasicInfo,
+} from '../../shared/interfaces/insurer';
 import { GetQuery } from '../../shared/interfaces/getQuery';
 import { PageResult } from '../../shared/interfaces/pageResult';
 
@@ -14,21 +20,40 @@ export class InsurersService {
     return this.http.get<InsurerBasicInfo[]>(`${this.url}/Insurer`);
   }
 
-  getPaginatedInsurers(query: GetQuery) {
-    return this.http.get<PageResult<Insurer>>(`${this.url}/Insurer/Individual/Paginated`, {
+  deleteInsurer(id: string) {
+    return this.http.delete<void>(`${this.url}/Insurer/${id}`);
+  }
+
+  //Individual
+  getPaginatedIndividualInsurers(query: GetQuery) {
+    return this.http.get<PageResult<IndividualInsurer>>(
+      `${this.url}/Insurer/Individual/Paginated`,
+      {
+        params: { ...query },
+      },
+    );
+  }
+
+  createIndividualInsurer(insurer: CreateIndividualInsurer) {
+    return this.http.post<void>(`${this.url}/Insurer/Individual`, insurer);
+  }
+
+  editIndividualInsurer(insurer: CreateIndividualInsurer, id: string) {
+    return this.http.put<void>(`${this.url}/Insurer/Individual/${id}`, insurer);
+  }
+
+  //Business
+  getPaginatedBusinessInsurers(query: GetQuery) {
+    return this.http.get<PageResult<BusinessInsurer>>(`${this.url}/Insurer/Business/Paginated`, {
       params: { ...query },
     });
   }
 
-  createInsurer(insurer: CreateInsurer) {
-    return this.http.post<void>(`${this.url}/Insurer/Individual`, insurer);
+  createBusinessInsurer(insurer: CreateBusinessInsurer) {
+    return this.http.post<void>(`${this.url}/Insurer/Business`, insurer);
   }
 
-  editInsurer(insurer: CreateInsurer, id: string) {
-    return this.http.put<void>(`${this.url}/Insurer/Individual/${id}`, insurer);
-  }
-
-  deleteInsurer(id: string) {
-    return this.http.delete<void>(`${this.url}/Insurer/${id}`);
+  editBusinessInsurer(insurer: CreateBusinessInsurer, id: string) {
+    return this.http.put<void>(`${this.url}/Insurer/Business/${id}`, insurer);
   }
 }

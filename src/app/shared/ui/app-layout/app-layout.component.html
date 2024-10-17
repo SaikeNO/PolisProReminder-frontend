@@ -25,9 +25,23 @@
         <mat-icon matListItemIcon>directions_car</mat-icon>
         <span>Pojazdy</span>
       </a>
-      <a mat-list-item routerLink="/insurers" routerLinkActive="active" (click)="closeDrawer()">
+      <a
+        mat-list-item
+        routerLink="/insurers/individual"
+        routerLinkActive="active"
+        (click)="closeDrawer()"
+      >
         <mat-icon matListItemIcon>group</mat-icon>
         <span>Klienci</span>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/insurers/business"
+        routerLinkActive="active"
+        (click)="closeDrawer()"
+      >
+        <mat-icon matListItemIcon>groups</mat-icon>
+        <span>Firmy</span>
       </a>
       <a mat-list-item routerLink="/company" routerLinkActive="active" (click)="closeDrawer()">
         <mat-icon matListItemIcon>apartment</mat-icon>

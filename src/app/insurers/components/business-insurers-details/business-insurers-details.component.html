@@ -1,8 +1,8 @@
 @if (insurer) {
   <mat-card>
     <mat-card-header>
-      <mat-card-title class="title"
-        >{{ insurer.firstName }} {{ insurer.lastName }}
+      <mat-card-title class="title">
+        {{ insurer.name }}
         <button mat-icon-button matTooltip="Edytuj">
           <mat-icon>edit</mat-icon>
         </button></mat-card-title
@@ -10,15 +10,16 @@
     </mat-card-header>
     <mat-card-content class="content">
       <div class="content-inner">
-        <h3>PESEL: {{ insurer.pesel }}</h3>
+        <h3>NIP: {{ insurer.nip }}</h3>
+        <h3>REGON: {{ insurer.regon }}</h3>
         <h3>Numer Telefonu: {{ insurer.phoneNumber | phone }}</h3>
         <h3>Email: {{ insurer.email }}</h3>
         <h3>Adres: {{ insurer.postalCode }} {{ insurer.city }}</h3>
         <h3>Ulica: {{ insurer.street }}</h3>
       </div>
 
-      @if (insurer.policies?.length) {
-        <app-insurers-policies [policies]="insurer.policies!"></app-insurers-policies>
+      @if (insurer.policies.length) {
+        <app-insurers-policies [policies]="insurer.policies"></app-insurers-policies>
       } @else {
         <div class="content-inner">
           <h4 class="">Klient nie posiada jeszcze żadnej polisy.</h4>

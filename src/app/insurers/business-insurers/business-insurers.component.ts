@@ -2,19 +2,19 @@ import { AfterViewInit, Component, Injector, OnDestroy, ViewChild, inject } from
 import { MatTableModule, MatTable } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
-import { Insurer } from '../shared/interfaces/insurer';
+import { BusinessInsurer } from '../../shared/interfaces/insurer';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { PortalService } from '../shared/data-access/portal.service';
+import { PortalService } from '../../shared/data-access/portal.service';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
   CONTAINER_DATA,
-  InsurersFormComponent,
-} from './components/insurers-form/insurers-form.component';
+  BusinessInsurersFormComponent,
+} from '../components/business-insurers-form/business-insurers-form.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../shared/ui/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../shared/ui/confirm-dialog/confirm-dialog.component';
 import {
   BehaviorSubject,
   Subject,
@@ -25,23 +25,23 @@ import {
   take,
   takeUntil,
 } from 'rxjs';
-import { InsurersFacade } from './data-access/state/insurers.facade';
-import { InfoDialogComponent } from '../shared/ui/info-dialog/info-dialog.component';
+import { InsurersFacade } from '../data-access/state/insurers.facade';
+import { InfoDialogComponent } from '../../shared/ui/info-dialog/info-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   INSURER_DETAILS,
-  InsurersDetailsComponent,
-} from './components/insurers-details/insurers-details.component';
+  BusinessInsurersDetailsComponent,
+} from '../components/business-insurers-details/business-insurers-details.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
-import { GetQuery } from '../shared/interfaces/getQuery';
+import { GetQuery } from '../../shared/interfaces/getQuery';
 import { AsyncPipe } from '@angular/common';
-import { PhonePipe } from '../shared/pipes/phone.pipe';
+import { PhonePipe } from '../../shared/pipes/phone.pipe';
 
 @Component({
-  selector: 'app-insurers',
-  templateUrl: './insurers.component.html',
-  styleUrl: './insurers.component.scss',
+  selector: 'app-business-insurers',
+  templateUrl: './business-insurers.component.html',
+  styleUrl: './business-insurers.component.scss',
   standalone: true,
   imports: [
     MatTableModule,
@@ -57,7 +57,7 @@ import { PhonePipe } from '../shared/pipes/phone.pipe';
     PhonePipe,
   ],
 })
-export class InsurersComponent implements AfterViewInit, OnDestroy {
+export class BusinessInsurersComponent implements AfterViewInit, OnDestroy {
   private portalService = inject(PortalService);
   private injector = inject(Injector);
   private dialog = inject(MatDialog);
@@ -65,23 +65,23 @@ export class InsurersComponent implements AfterViewInit, OnDestroy {
   private onDestroy$ = new Subject<void>();
 
   public searchQuery$ = new BehaviorSubject<string>('');
-  public selection = new SelectionModel<Insurer>(true, []);
-  public visibleInsurers: Insurer[] = [];
-  public insurers$ = this.insurersFacade.insurers$;
+  public selection = new SelectionModel<BusinessInsurer>(true, []);
+  public visibleInsurers: BusinessInsurer[] = [];
+  public businessInsurers$ = this.insurersFacade.businessInsurers$;
   public totalItemsCount$ = this.insurersFacade.totalItemsCount$;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<Insurer>;
+  @ViewChild(MatTable) table!: MatTable<BusinessInsurer>;
 
   public displayedColumns: string[] = [
     'select',
     'details',
     'edit',
     'delete',
-    'firstName',
-    'lastName',
-    'pesel',
+    'name',
+    'nip',
+    'regon',
     'phoneNumber',
     'email',
     'address',
@@ -89,7 +89,7 @@ export class InsurersComponent implements AfterViewInit, OnDestroy {
   ];
 
   ngAfterViewInit(): void {
-    this.insurers$
+    this.businessInsurers$
       .pipe(takeUntil(this.onDestroy$))
       .subscribe((insurers) => (this.visibleInsurers = insurers));
 
@@ -117,10 +117,10 @@ export class InsurersComponent implements AfterViewInit, OnDestroy {
     this.searchQuery$.next(filterValue);
   }
 
-  public openForm(insurer?: Insurer) {
+  public openForm(insurer?: BusinessInsurer) {
     this.portalService.setSelectedPortal(
       new ComponentPortal(
-        InsurersFormComponent,
+        BusinessInsurersFormComponent,
         null,
         Injector.create({
           parent: this.injector,
@@ -136,10 +136,10 @@ export class InsurersComponent implements AfterViewInit, OnDestroy {
     this.portalService.setIsOpen(true);
   }
 
-  public openDetails(insurer: Insurer): void {
+  public openDetails(insurer: BusinessInsurer): void {
     this.portalService.setSelectedPortal(
       new ComponentPortal(
-        InsurersDetailsComponent,
+        BusinessInsurersDetailsComponent,
         null,
         Injector.create({
           parent: this.injector,
@@ -155,17 +155,17 @@ export class InsurersComponent implements AfterViewInit, OnDestroy {
     this.portalService.setIsOpen(true);
   }
 
-  public onDeleteInsurer(insurer: Insurer): void {
-    if (insurer.policies?.length) {
+  public onDeleteInsurer(insurer: BusinessInsurer): void {
+    if (insurer.policies.length) {
       this.dialog.open(InfoDialogComponent, {
         data: {
-          message: `Nie można usunąć ${insurer.firstName} ${insurer.lastName}`,
+          message: `Nie można usunąć ${insurer.name}`,
           subMessage: 'Klient posiada polisy',
         },
       });
     } else {
       const dialog = this.dialog.open(ConfirmDialogComponent, {
-        data: { name: `${insurer.firstName} ${insurer.lastName}`, withMessage: false },
+        data: { name: `${insurer.name}`, withMessage: false },
         width: '500px',
       });
 
@@ -203,6 +203,6 @@ export class InsurersComponent implements AfterViewInit, OnDestroy {
       sortDirection: this.sort.direction ? this.sort.direction : 'none',
     };
 
-    this.insurersFacade.getPaginatedInsurers(query);
+    this.insurersFacade.getPaginatedBusinessInsurers(query);
   }
 }

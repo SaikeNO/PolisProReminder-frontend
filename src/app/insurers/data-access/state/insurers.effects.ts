@@ -32,64 +32,6 @@ export class InsurersEffects {
     ),
   );
 
-  getPaginatedInsurers$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(InsurersActions.getPaginatedInsurers),
-      mergeMap(({ query }) => {
-        return this.insurersService.getPaginatedInsurers(query).pipe(
-          map((pageResult) => InsurersActions.getPaginatedInsurersSuccess({ pageResult })),
-          catchError((error: HttpErrorResponse) =>
-            of(InsurersActions.getPaginatedInsurersFailure({ error: error.error })),
-          ),
-        );
-      }),
-    ),
-  );
-
-  reloadPaginatedPolicies$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(InsurersActions.reloadPaginatedInsurers),
-      withLatestFrom(this.insurersFacade.query$),
-      map(([_, query]) => InsurersActions.getPaginatedInsurers({ query })),
-    ),
-  );
-
-  createInsurer$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(InsurersActions.createInsurer),
-      mergeMap(({ createInsurer }) => {
-        return this.insurersService.createInsurer(createInsurer).pipe(
-          map(() =>
-            InsurersActions.createInsurerSuccess({
-              result: { message: MESSAGES.CREATE_SUCCESS, type: ActionResultsTypes.SUCCESS },
-            }),
-          ),
-          catchError((error: HttpErrorResponse) =>
-            of(InsurersActions.createInsurerFailure({ error: error.error })),
-          ),
-        );
-      }),
-    ),
-  );
-
-  editInsurer$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(InsurersActions.editInsurer),
-      mergeMap(({ createInsurer, id }) => {
-        return this.insurersService.editInsurer(createInsurer, id).pipe(
-          map(() =>
-            InsurersActions.editInsurerSuccess({
-              result: { message: MESSAGES.EDIT_SUCCESS, type: ActionResultsTypes.SUCCESS },
-            }),
-          ),
-          catchError((error: HttpErrorResponse) =>
-            of(InsurersActions.editInsurerFailure({ error: error.error })),
-          ),
-        );
-      }),
-    ),
-  );
-
   deleteInsurer$ = createEffect(() =>
     this.actions$.pipe(
       ofType(InsurersActions.deleteInsurer),
@@ -108,14 +50,145 @@ export class InsurersEffects {
     ),
   );
 
-  allActionsReloadPaginatedInsurers$ = createEffect(() =>
+  // Individual
+  getPaginatedIndividualInsurers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.getPaginatedIndividualInsurers),
+      mergeMap(({ query }) => {
+        return this.insurersService.getPaginatedIndividualInsurers(query).pipe(
+          map((pageResult) =>
+            InsurersActions.getPaginatedIndividualInsurersSuccess({ pageResult }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(InsurersActions.getPaginatedIndividualInsurersFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
+  reloadPaginatedIndividualInsurers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.reloadPaginatedIndividualInsurers),
+      withLatestFrom(this.insurersFacade.query$),
+      map(([_, query]) => InsurersActions.getPaginatedIndividualInsurers({ query })),
+    ),
+  );
+
+  createIndividualInsurer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.createIndividualInsurer),
+      mergeMap(({ createInsurer }) => {
+        return this.insurersService.createIndividualInsurer(createInsurer).pipe(
+          map(() =>
+            InsurersActions.createIndividualInsurerSuccess({
+              result: { message: MESSAGES.CREATE_SUCCESS, type: ActionResultsTypes.SUCCESS },
+            }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(InsurersActions.createIndividualInsurerFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
+  editIndividualInsurer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.editIndividualInsurer),
+      mergeMap(({ createInsurer, id }) => {
+        return this.insurersService.editIndividualInsurer(createInsurer, id).pipe(
+          map(() =>
+            InsurersActions.editIndividualInsurerSuccess({
+              result: { message: MESSAGES.EDIT_SUCCESS, type: ActionResultsTypes.SUCCESS },
+            }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(InsurersActions.editIndividualInsurerFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
+  allActionsReloadPaginatedIndividualInsurers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        InsurersActions.createInsurerSuccess,
-        InsurersActions.editInsurerSuccess,
+        InsurersActions.createIndividualInsurerSuccess,
+        InsurersActions.editIndividualInsurerSuccess,
         InsurersActions.deleteInsurerSuccess,
       ),
-      map(() => InsurersActions.reloadPaginatedInsurers()),
+      map(() => InsurersActions.reloadPaginatedIndividualInsurers()),
+    ),
+  );
+
+  // Business
+  getPaginatedBusinessInsurers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.getPaginatedBusinessInsurers),
+      mergeMap(({ query }) => {
+        return this.insurersService.getPaginatedBusinessInsurers(query).pipe(
+          map((pageResult) => InsurersActions.getPaginatedBusinessInsurersSuccess({ pageResult })),
+          catchError((error: HttpErrorResponse) =>
+            of(InsurersActions.getPaginatedBusinessInsurersFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
+  reloadPaginatedBusinessInsurers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.reloadPaginatedBusinessInsurers),
+      withLatestFrom(this.insurersFacade.query$),
+      map(([_, query]) => InsurersActions.getPaginatedBusinessInsurers({ query })),
+    ),
+  );
+
+  createBusinessInsurer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.createBusinessInsurer),
+      mergeMap(({ createInsurer }) => {
+        return this.insurersService.createBusinessInsurer(createInsurer).pipe(
+          map(() =>
+            InsurersActions.createBusinessInsurerSuccess({
+              result: { message: MESSAGES.CREATE_SUCCESS, type: ActionResultsTypes.SUCCESS },
+            }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(InsurersActions.createBusinessInsurerFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
+  editBusinessInsurer$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(InsurersActions.editBusinessInsurer),
+      mergeMap(({ createInsurer, id }) => {
+        return this.insurersService.editBusinessInsurer(createInsurer, id).pipe(
+          map(() =>
+            InsurersActions.editBusinessInsurerSuccess({
+              result: { message: MESSAGES.EDIT_SUCCESS, type: ActionResultsTypes.SUCCESS },
+            }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(InsurersActions.editBusinessInsurerFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
+  allActionsReloadPaginatedBusinessInsurers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        InsurersActions.createBusinessInsurerSuccess,
+        InsurersActions.editBusinessInsurerSuccess,
+        InsurersActions.deleteInsurerSuccess,
+      ),
+      map(() => InsurersActions.reloadPaginatedBusinessInsurers()),
     ),
   );
 
@@ -123,9 +196,11 @@ export class InsurersEffects {
     () =>
       this.actions$.pipe(
         ofType(
-          InsurersActions.createInsurerSuccess,
+          InsurersActions.createIndividualInsurerSuccess,
+          InsurersActions.createBusinessInsurerSuccess,
           // InsurersActions.createInsurerFailure,
-          InsurersActions.editInsurerSuccess,
+          InsurersActions.editIndividualInsurerSuccess,
+          InsurersActions.editBusinessInsurerSuccess,
           // InsurersActions.editInsurerFailure,
           InsurersActions.deleteInsurerSuccess,
           // InsurersActions.deleteInsurerFailure,

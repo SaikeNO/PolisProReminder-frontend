@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as InsurersActions from './insurers.actions';
 import * as InsurersSelectors from './insurers.selectors';
 import { AppState } from '../../../shared/reducers';
-import { CreateInsurer } from '../../../shared/interfaces/insurer';
+import { CreateBusinessInsurer, CreateIndividualInsurer } from '../../../shared/interfaces/insurer';
 import { GetQuery } from '../../../shared/interfaces/getQuery';
 
 @Injectable({ providedIn: 'root' })
@@ -13,30 +13,45 @@ export class InsurersFacade {
   isLoading$ = this.store.pipe(select(InsurersSelectors.isLoading));
   error$ = this.store.pipe(select(InsurersSelectors.getError));
   query$ = this.store.pipe(select(InsurersSelectors.getQuery));
-  insurers$ = this.store.pipe(select(InsurersSelectors.getInsurers));
+  individualInsurers$ = this.store.pipe(select(InsurersSelectors.getIndividualInsurers));
+  businessInsurers$ = this.store.pipe(select(InsurersSelectors.getBusinessInsurers));
   insurersBasicInfo$ = this.store.pipe(select(InsurersSelectors.getInsurersBasicInfo));
   totalItemsCount$ = this.store.pipe(select(InsurersSelectors.getTotalItemsCount));
   totalPages$ = this.store.pipe(select(InsurersSelectors.getTotalPages));
   itemsFrom$ = this.store.pipe(select(InsurersSelectors.getItemsFrom));
   itemsTo$ = this.store.pipe(select(InsurersSelectors.getItemsTo));
 
-  getPaginatedInsurers(query: GetQuery): void {
-    this.store.dispatch(InsurersActions.getPaginatedInsurers({ query }));
-  }
-
   getAllInsurers(): void {
     this.store.dispatch(InsurersActions.getAllInsurers());
   }
 
-  createInsurer(createInsurer: CreateInsurer): void {
-    this.store.dispatch(InsurersActions.createInsurer({ createInsurer }));
-  }
-
-  editInsurer(createInsurer: CreateInsurer, id: string): void {
-    this.store.dispatch(InsurersActions.editInsurer({ createInsurer, id }));
-  }
-
   deleteInsurer(id: string): void {
     this.store.dispatch(InsurersActions.deleteInsurer({ id }));
+  }
+
+  //Individual
+  getPaginatedIndividualInsurers(query: GetQuery): void {
+    this.store.dispatch(InsurersActions.getPaginatedIndividualInsurers({ query }));
+  }
+
+  createIndividualInsurer(createInsurer: CreateIndividualInsurer): void {
+    this.store.dispatch(InsurersActions.createIndividualInsurer({ createInsurer }));
+  }
+
+  editIndividualInsurer(createInsurer: CreateIndividualInsurer, id: string): void {
+    this.store.dispatch(InsurersActions.editIndividualInsurer({ createInsurer, id }));
+  }
+
+  //Business
+  getPaginatedBusinessInsurers(query: GetQuery): void {
+    this.store.dispatch(InsurersActions.getPaginatedBusinessInsurers({ query }));
+  }
+
+  createBusinessInsurer(createInsurer: CreateBusinessInsurer): void {
+    this.store.dispatch(InsurersActions.createBusinessInsurer({ createInsurer }));
+  }
+
+  editBusinessInsurer(createInsurer: CreateBusinessInsurer, id: string): void {
+    this.store.dispatch(InsurersActions.editBusinessInsurer({ createInsurer, id }));
   }
 }

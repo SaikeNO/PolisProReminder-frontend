@@ -5,7 +5,8 @@ import * as InsurersActions from './insurers.actions';
 export const initialState: InsurersState = {
   isLoading: false,
   error: null,
-  insurers: [],
+  individualInsurers: [],
+  businessInsurers: [],
   insurersBasicInfo: [],
   query: {
     searchPhrase: '',
@@ -34,13 +35,29 @@ export const insurersReducer = createReducer(
     error: action.error,
   })),
 
-  on(InsurersActions.getPaginatedInsurers, (state, { query }) => ({
+  on(InsurersActions.deleteInsurer, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(InsurersActions.deleteInsurerSuccess, (state) => ({
+    ...state,
+    isLoading: false,
+  })),
+  on(InsurersActions.deleteInsurerFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  //Individual
+  on(InsurersActions.getPaginatedIndividualInsurers, (state, { query }) => ({
     ...state,
     query,
     isLoading: true,
   })),
   on(
-    InsurersActions.getPaginatedInsurersSuccess,
+    InsurersActions.getPaginatedIndividualInsurersSuccess,
     (state, { pageResult: { items, itemsFrom, itemsTo, totalItemsCount, totalPages } }) => ({
       ...state,
       itemsFrom,
@@ -48,43 +65,94 @@ export const insurersReducer = createReducer(
       totalItemsCount,
       totalPages,
       isLoading: false,
-      insurers: items,
+      individualInsurers: items,
     }),
   ),
-  on(InsurersActions.getPaginatedInsurersFailure, (state, action) => ({
+  on(InsurersActions.getPaginatedIndividualInsurersFailure, (state, action) => ({
     ...state,
     isLoading: false,
     error: action.error,
   })),
 
-  on(InsurersActions.createInsurer, (state) => ({ ...state, isLoading: true, error: null })),
-  on(InsurersActions.createInsurerSuccess, (state) => ({
+  on(InsurersActions.createIndividualInsurer, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(InsurersActions.createIndividualInsurerSuccess, (state) => ({
     ...state,
     isLoading: false,
   })),
-  on(InsurersActions.createInsurerFailure, (state, action) => ({
-    ...state,
-    isLoading: false,
-    error: action.error,
-  })),
-
-  on(InsurersActions.editInsurer, (state) => ({ ...state, isLoading: true, error: null })),
-  on(InsurersActions.editInsurerSuccess, (state) => ({
-    ...state,
-    isLoading: false,
-  })),
-  on(InsurersActions.editInsurerFailure, (state, action) => ({
+  on(InsurersActions.createIndividualInsurerFailure, (state, action) => ({
     ...state,
     isLoading: false,
     error: action.error,
   })),
 
-  on(InsurersActions.deleteInsurer, (state) => ({ ...state, isLoading: true, error: null })),
-  on(InsurersActions.deleteInsurerSuccess, (state) => ({
+  on(InsurersActions.editIndividualInsurer, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(InsurersActions.editIndividualInsurerSuccess, (state) => ({
     ...state,
     isLoading: false,
   })),
-  on(InsurersActions.deleteInsurerFailure, (state, action) => ({
+  on(InsurersActions.editIndividualInsurerFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  //Business
+  on(InsurersActions.getPaginatedBusinessInsurers, (state, { query }) => ({
+    ...state,
+    query,
+    isLoading: true,
+  })),
+  on(
+    InsurersActions.getPaginatedBusinessInsurersSuccess,
+    (state, { pageResult: { items, itemsFrom, itemsTo, totalItemsCount, totalPages } }) => ({
+      ...state,
+      itemsFrom,
+      itemsTo,
+      totalItemsCount,
+      totalPages,
+      isLoading: false,
+      businessInsurers: items,
+    }),
+  ),
+  on(InsurersActions.getPaginatedBusinessInsurersFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  on(InsurersActions.createBusinessInsurer, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(InsurersActions.createBusinessInsurerSuccess, (state) => ({
+    ...state,
+    isLoading: false,
+  })),
+  on(InsurersActions.createBusinessInsurerFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  })),
+
+  on(InsurersActions.editBusinessInsurer, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(InsurersActions.editBusinessInsurerSuccess, (state) => ({
+    ...state,
+    isLoading: false,
+  })),
+  on(InsurersActions.editBusinessInsurerFailure, (state, action) => ({
     ...state,
     isLoading: false,
     error: action.error,

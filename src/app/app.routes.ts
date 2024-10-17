@@ -34,9 +34,18 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'insurers',
+        path: 'insurers/individual',
         loadComponent: () =>
-          import('./insurers/insurers.component').then((mod) => mod.InsurersComponent),
+          import('./insurers/individual-insurers/individual-insurers.component').then(
+            (mod) => mod.IndividualInsurersComponent,
+          ),
+      },
+      {
+        path: 'insurers/business',
+        loadComponent: () =>
+          import('./insurers/business-insurers/business-insurers.component').then(
+            (mod) => mod.BusinessInsurersComponent,
+          ),
       },
       {
         path: 'vehicles',

@@ -9,7 +9,12 @@ export const getError = createSelector(selectFeature, (state) => state.error);
 
 export const getQuery = createSelector(selectFeature, (state) => state.query);
 
-export const getInsurers = createSelector(selectFeature, (state) => state.insurers);
+export const getIndividualInsurers = createSelector(
+  selectFeature,
+  (state) => state.individualInsurers,
+);
+
+export const getBusinessInsurers = createSelector(selectFeature, (state) => state.businessInsurers);
 
 export const getInsurersBasicInfo = createSelector(
   selectFeature,

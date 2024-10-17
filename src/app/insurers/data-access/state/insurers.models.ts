@@ -1,5 +1,9 @@
 import { GetQuery } from '../../../shared/interfaces/getQuery';
-import { Insurer, InsurerBasicInfo } from '../../../shared/interfaces/insurer';
+import {
+  BusinessInsurer,
+  IndividualInsurer,
+  InsurerBasicInfo,
+} from '../../../shared/interfaces/insurer';
 
 export interface InsurersState {
   isLoading: boolean;
@@ -7,7 +11,9 @@ export interface InsurersState {
   query: GetQuery;
 
   insurersBasicInfo: InsurerBasicInfo[];
-  insurers: Insurer[];
+  individualInsurers: IndividualInsurer[];
+  businessInsurers: BusinessInsurer[];
+
   totalPages: number;
   totalItemsCount: number;
   itemsFrom: number;

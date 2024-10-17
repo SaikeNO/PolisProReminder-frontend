@@ -11,7 +11,7 @@
 </div>
 
 <div class="table-responsive mat-elevation-z8">
-  <table mat-table matSort [dataSource]="(insurers$ | async)!" aria-label="Klienci">
+  <table mat-table matSort [dataSource]="(individualInsurers$ | async)!" aria-label="Klienci">
     <ng-container matColumnDef="select">
       <th class="check" mat-header-cell *matHeaderCellDef>
         <mat-checkbox

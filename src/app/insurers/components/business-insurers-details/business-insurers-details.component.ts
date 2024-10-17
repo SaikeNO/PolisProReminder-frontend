@@ -1,5 +1,5 @@
 import { Component, Inject, InjectionToken, Injector, inject } from '@angular/core';
-import { Insurer } from '../../../shared/interfaces/insurer';
+import { BusinessInsurer } from '../../../shared/interfaces/insurer';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { InsurersPoliciesComponent } from '../insurers-policies/insurers-policies.component';
@@ -17,7 +17,7 @@ import { PhonePipe } from '../../../shared/pipes/phone.pipe';
 export const INSURER_DETAILS = new InjectionToken<{}>('CONTAINER_DATA');
 
 @Component({
-  selector: 'app-insurers-details',
+  selector: 'app-business-insurers-details',
   standalone: true,
   imports: [
     MatCardModule,
@@ -28,14 +28,14 @@ export const INSURER_DETAILS = new InjectionToken<{}>('CONTAINER_DATA');
     ErrorInfoComponent,
     PhonePipe,
   ],
-  templateUrl: './insurers-details.component.html',
-  styleUrl: './insurers-details.component.scss',
+  templateUrl: './business-insurers-details.component.html',
+  styleUrl: './business-insurers-details.component.scss',
 })
-export class InsurersDetailsComponent {
+export class BusinessInsurersDetailsComponent {
   private injector = inject(Injector);
   private portalService = inject(PortalService);
 
-  constructor(@Inject(INSURER_DETAILS) public insurer: Insurer | undefined) {}
+  constructor(@Inject(INSURER_DETAILS) public insurer: BusinessInsurer | undefined) {}
 
   public openForm() {
     this.portalService.setSelectedPortal(

@@ -1,0 +1,113 @@
+<div class="top-container">
+  <mat-form-field>
+    <mat-label>Wyszukaj</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="openForm()">
+    <mat-icon>add</mat-icon>
+    Dodaj
+  </button>
+</div>
+
+<div class="table-responsive mat-elevation-z8">
+  <table mat-table matSort [dataSource]="(businessInsurers$ | async)!" aria-label="Klienci">
+    <ng-container matColumnDef="select">
+      <th class="check" mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? toggleAllRows() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+        >
+        </mat-checkbox>
+      </th>
+      <td class="check" mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="details">
+      <th class="icon" mat-header-cell *matHeaderCellDef></th>
+      <td class="icon" mat-cell *matCellDef="let insurer">
+        <button mat-icon-button matTooltip="Szczegóły" (click)="openDetails(insurer)">
+          <mat-icon class="mat-18">open_in_new</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th class="icon" mat-header-cell *matHeaderCellDef></th>
+      <td class="icon" mat-cell *matCellDef="let insurer">
+        <button mat-icon-button matTooltip="Edytuj" (click)="openForm(insurer)">
+          <mat-icon class="mat-18">edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th class="icon" mat-header-cell *matHeaderCellDef></th>
+      <td class="icon" mat-cell *matCellDef="let insurer">
+        <button mat-icon-button color="warn" matTooltip="Usuń" (click)="onDeleteInsurer(insurer)">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwa firmy</th>
+      <td mat-cell *matCellDef="let insurer">{{ insurer.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nip">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>NIP</th>
+      <td mat-cell *matCellDef="let insurer">{{ insurer.nip }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="regon">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>REGON</th>
+      <td mat-cell *matCellDef="let insurer">{{ insurer.regon }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef>Telefon</th>
+      <td mat-cell *matCellDef="let insurer">{{ insurer.phoneNumber | phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+      <td mat-cell *matCellDef="let insurer">{{ insurer.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>Adres</th>
+      <td mat-cell *matCellDef="let insurer">{{ insurer.postalCode }} {{ insurer.city }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="street">
+      <th mat-header-cell *matHeaderCellDef>Ulica</th>
+      <td mat-cell *matCellDef="let insurer">{{ insurer.street }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">Brak wyników dla: "{{ input.value }}"</td>
+    </tr>
+  </table>
+</div>
+
+<mat-paginator
+  #paginator
+  [length]="totalItemsCount$ | async"
+  [pageIndex]="0"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 15, 30]"
+  aria-label="Wybierz stronę"
+>
+</mat-paginator>

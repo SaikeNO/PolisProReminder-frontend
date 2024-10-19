@@ -1,6 +1,6 @@
 <div class="table-responsive mat-elevation-z8">
   <table mat-table matSort aria-label="Polisy klienta">
-    <ng-container matColumnDef="select">
+    <ng-container matColumnDef="select" sticky>
       <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox
           (change)="$event ? toggleAllRows() : null"
@@ -19,7 +19,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="details">
+    <ng-container matColumnDef="details" sticky>
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let policy">
         <button mat-icon-button matTooltip="Szczegóły" (click)="openDetails(policy)">
@@ -28,7 +28,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="edit">
+    <ng-container matColumnDef="edit" sticky>
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let policy">
         <button mat-icon-button matTooltip="Edytuj" (click)="openForm(policy)">
@@ -37,7 +37,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="delete">
+    <ng-container matColumnDef="delete" sticky>
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let policy">
         <button mat-icon-button color="warn" matTooltip="Usuń" (click)="onDeletePolicy(policy)">

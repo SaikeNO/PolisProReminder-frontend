@@ -29,6 +29,10 @@ tr:nth-child(even) {
   }
 }
 
+.mat-mdc-header-cell.icon {
+  width: 48px;
+}
+
 .cell-content {
   display: flex;
   align-items: center;

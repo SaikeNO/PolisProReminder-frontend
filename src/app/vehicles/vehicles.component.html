@@ -12,7 +12,7 @@
 
 <div class="table-responsive mat-elevation-z8">
   <table mat-table matSort [dataSource]="(vehicles$ | async)!" aria-label="Klienci">
-    <ng-container matColumnDef="select">
+    <ng-container matColumnDef="select" sticky>
       <th class="check" mat-header-cell *matHeaderCellDef>
         <mat-checkbox
           (change)="$event ? toggleAllRows() : null"
@@ -31,7 +31,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="details">
+    <ng-container matColumnDef="details" sticky>
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let vehicle">
         <button mat-icon-button matTooltip="Szczegóły" (click)="openDetails(vehicle)">
@@ -40,7 +40,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="edit">
+    <ng-container matColumnDef="edit" sticky>
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let vehicle">
         <button mat-icon-button matTooltip="Edytuj" (click)="openForm(vehicle)">
@@ -49,7 +49,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="delete">
+    <ng-container matColumnDef="delete" sticky>
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let vehicle">
         <button mat-icon-button color="warn" matTooltip="Usuń" (click)="onDeleteVehicle(vehicle)">
@@ -121,7 +121,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">Brak wyników dla: "{{ input.value }}"</td>
+      <td class="mat-cell" colspan="20">Brak wyników dla: "{{ input.value }}"</td>
     </tr>
   </table>
 </div>

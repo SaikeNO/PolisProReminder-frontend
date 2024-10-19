@@ -22,7 +22,7 @@
 
 <div class="table-responsive mat-elevation-z8">
   <table mat-table matSort [dataSource]="(policies$ | async)!" aria-label="Polisy">
-    <ng-container matColumnDef="select">
+    <ng-container matColumnDef="select" sticky>
       <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox
           (change)="$event ? toggleAllRows() : null"
@@ -41,8 +41,8 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="details">
-      <th class="icon" mat-header-cell *matHeaderCellDef></th>
+    <ng-container matColumnDef="details" sticky>
+      <th class="icon" mat-header-cell *matHeaderCellDef width="48px"></th>
       <td class="icon" mat-cell *matCellDef="let policy">
         <button mat-icon-button matTooltip="Szczegóły" (click)="openDetails(policy)">
           <mat-icon class="mat-18">open_in_new</mat-icon>
@@ -50,7 +50,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="edit">
+    <ng-container matColumnDef="edit" sticky>
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let policy">
         <div matTooltip="Nie można edytować archiwum" [matTooltipDisabled]="!isArchived">
@@ -66,7 +66,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="delete">
+    <ng-container matColumnDef="delete" sticky>
       <th class="icon" mat-header-cell *matHeaderCellDef></th>
       <td class="icon" mat-cell *matCellDef="let policy">
         <div matTooltip="Nie można usuwać archiwum" [matTooltipDisabled]="!isArchived">
@@ -158,7 +158,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">Brak wyników dla: "{{ input.value }}"</td>
+      <td class="mat-cell" colspan="20">Brak wyników dla: "{{ input.value }}"</td>
     </tr>
   </table>
 </div>

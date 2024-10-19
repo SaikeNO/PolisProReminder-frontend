@@ -46,6 +46,10 @@ export class PoliciesService {
     return this.http.delete<void>(`${this.url}/Policy/${policyId}`);
   }
 
+  deletePolicyBatch(policyIds: string[]) {
+    return this.http.delete<void>(`${this.url}/Policy/Batch`, { body: { ids: policyIds } });
+  }
+
   paidPolicies(ids: string[]) {
     return this.http.patch<void>(`${this.url}/Policy/paid`, { ids });
   }

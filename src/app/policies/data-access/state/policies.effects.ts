@@ -108,6 +108,24 @@ export class PoliciesEffects {
     ),
   );
 
+  deletePolicyBatch$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PoliciesActions.deletePolicyBatch),
+      mergeMap(({ policyIds }) => {
+        return this.policiesService.deletePolicyBatch(policyIds).pipe(
+          map(() =>
+            PoliciesActions.deletePolicyBatchSuccess({
+              result: { message: MESSAGES.DELETE_BATCH_SUCCESS, type: ActionResultsTypes.SUCCESS },
+            }),
+          ),
+          catchError((error: HttpErrorResponse) =>
+            of(PoliciesActions.deletePolicyBatchFailure({ error: error.error })),
+          ),
+        );
+      }),
+    ),
+  );
+
   allActionsReloadPolicies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
@@ -128,6 +146,7 @@ export class PoliciesEffects {
           PoliciesActions.editPolicySuccess,
           // PoliciesActions.editInsurerFailure,
           PoliciesActions.deletePolicySuccess,
+          PoliciesActions.deletePolicyBatchSuccess,
           // PoliciesActions.deleteInsurerFailure,
         ),
         map(({ result: { message, type } }) => {

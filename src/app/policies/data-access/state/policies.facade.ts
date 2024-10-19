@@ -39,4 +39,8 @@ export class PoliciesFacade {
   deletePolicy(policyId: string): void {
     this.store.dispatch(PoliciesActions.deletePolicy({ policyId }));
   }
+
+  deletePolicyBatch(policyIds: string[]): void {
+    this.store.dispatch(PoliciesActions.deletePolicyBatch({ policyIds }));
+  }
 }

@@ -88,7 +88,6 @@ export class PoliciesComponent {
     'select',
     'details',
     'edit',
-    'delete',
     'title',
     'policyNumber',
     'insurer',
@@ -167,9 +166,12 @@ export class PoliciesComponent {
     this.portalService.setIsOpen(true);
   }
 
-  public onDeletePolicy(policy: Policy) {
+  public onDeletePolicy() {
+    const selectedPolicies = this.selection.selected;
+    const name = selectedPolicies.length > 1 ? `${selectedPolicies.length} elementy` : '1 element';
+
     const dialog = this.dialog.open(ConfirmDialogComponent, {
-      data: { name: `${policy.title}`, withMessage: false },
+      data: { name, withMessage: false },
       width: '500px',
     });
 
@@ -179,7 +181,10 @@ export class PoliciesComponent {
         filter((res: boolean) => res),
         take(1),
       )
-      .subscribe(() => this.policiesFacade.deletePolicy(policy.id));
+      .subscribe(() => {
+        this.policiesFacade.deletePolicyBatch(selectedPolicies.map((p) => p.id));
+        this.selection.clear();
+      });
   }
 
   public isAllSelected() {

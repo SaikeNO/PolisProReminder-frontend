@@ -76,6 +76,21 @@ export const editPolicyFailure = createAction(
   props<{ error: string }>(),
 );
 
+export const deletePolicyBatch = createAction(
+  '[Policies Page] Delete Policy ',
+  props<{ policyIds: string[] }>(),
+);
+
+export const deletePolicyBatchSuccess = createAction(
+  '[Policies Page] Delete Policy Success',
+  props<{ result: ActionResults }>(),
+);
+
+export const deletePolicyBatchFailure = createAction(
+  '[Policies Page] Delete Policy Failure',
+  props<{ error: string }>(),
+);
+
 export const deletePolicy = createAction(
   '[Policies Page] Delete Policy ',
   props<{ policyId: string }>(),

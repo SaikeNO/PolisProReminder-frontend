@@ -37,7 +37,7 @@ export class BusinessInsurersFormComponent implements OnInit, OnDestroy {
 
   public error$ = this.insurersFacade.error$;
   public form = this.fb.group({
-    name: ['', [Validators.required, Validators.maxLength(100)]],
+    name: ['', [Validators.required, Validators.maxLength(120)]],
     nip: ['', [Validators.pattern(nipRegex)]],
     regon: ['', [Validators.pattern(regonRegex)]],
     phoneNumber: ['', Validators.pattern(phoneRegex)],

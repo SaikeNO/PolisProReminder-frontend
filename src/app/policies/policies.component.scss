@@ -51,3 +51,10 @@ tr:nth-child(even) {
 .add-button {
   width: 100px;
 }
+
+.column-title {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

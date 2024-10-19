@@ -19,6 +19,8 @@ import { VehiclesEffects } from './vehicles/data-access/state/vehicles.effects';
 import { VehicleBrandsEffects } from './vehicle-brands/data-access/state/vehicle-brands.effects';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { getPaginatorIntl } from './shared/utils/paginator-intl';
 
 registerLocaleData(localePL, 'pl');
 
@@ -42,6 +44,7 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     { provide: LOCALE_ID, useValue: 'pl' },
     { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'dd/MM/YYYY' } },
+    { provide: MatPaginatorIntl, useValue: getPaginatorIntl() },
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

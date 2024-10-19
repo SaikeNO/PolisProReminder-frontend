@@ -63,7 +63,6 @@ import { ActivatedRoute } from '@angular/router';
     InsuranceTypePipe,
     ClipboardModule,
   ],
-  providers: [{ provide: MatPaginatorIntl, useValue: getPaginatorIntl() }],
   templateUrl: './policies.component.html',
   styleUrl: './policies.component.scss',
 })

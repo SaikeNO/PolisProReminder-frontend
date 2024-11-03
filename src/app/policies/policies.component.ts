@@ -187,6 +187,13 @@ export class PoliciesComponent {
       });
   }
 
+  public onPaidPolicy() {
+    const selectedPolicies = this.selection.selected;
+
+    this.policiesFacade.paidPolicyBatch(selectedPolicies.map((p) => p.id));
+    this.selection.clear();
+  }
+
   public isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.visiblePolicies.length;

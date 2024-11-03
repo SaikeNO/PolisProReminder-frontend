@@ -105,3 +105,18 @@ export const deletePolicyFailure = createAction(
   '[Policies Page] Delete Policy Failure',
   props<{ error: string }>(),
 );
+
+export const paidPolicyBatch = createAction(
+  '[Policies Page] Paid Policy ',
+  props<{ policyIds: string[] }>(),
+);
+
+export const paidPolicyBatchSuccess = createAction(
+  '[Policies Page] Paid Policy Success',
+  props<{ result: ActionResults }>(),
+);
+
+export const paidPolicyBatchFailure = createAction(
+  '[Policies Page] Paid Policy Failure',
+  props<{ error: string }>(),
+);

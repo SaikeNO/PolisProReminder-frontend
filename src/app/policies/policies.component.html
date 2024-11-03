@@ -65,7 +65,21 @@
     </ng-container>
 
     <ng-container matColumnDef="edit" sticky>
-      <th class="icon" mat-header-cell *matHeaderCellDef></th>
+      <th class="icon" mat-header-cell *matHeaderCellDef>
+        @if (this.selection.selected.length) {
+          <div matTooltip="Nie można edytować archiwum" [matTooltipDisabled]="!isArchived">
+            <button
+              [disabled]="isArchived"
+              mat-icon-button
+              color="accent"
+              matTooltip="Opłacone"
+              (click)="onPaidPolicy()"
+            >
+              <mat-icon class="mat-18">paid</mat-icon>
+            </button>
+          </div>
+        }
+      </th>
       <td class="icon" mat-cell *matCellDef="let policy">
         <div matTooltip="Nie można edytować archiwum" [matTooltipDisabled]="!isArchived">
           <button

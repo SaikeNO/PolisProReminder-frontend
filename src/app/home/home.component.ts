@@ -8,6 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconButton } from '@angular/material/button';
 import { PoliciesLatestComponent } from './components/policies-latest/policies-latest.component';
+import { TodoComponent } from './components/todo/todo.component';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ import { PoliciesLatestComponent } from './components/policies-latest/policies-l
     AsyncPipe,
     MatIconButton,
     PoliciesLatestComponent,
+    TodoComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

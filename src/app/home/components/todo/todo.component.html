@@ -1,0 +1,45 @@
+<!-- <form [formGroup]="form" (ngSubmit)="addTask()" class="add-task">
+  <input formControlName="title" placeholder="Nowe zadanie" />
+  <button type="submit" [disabled]="form.invalid">Dodaj</button>
+</form> -->
+
+<div class="container">
+  <div class="list-container">
+    <h2>Do zrobienia</h2>
+
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="tasksToDo"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="list"
+      (cdkDropListDropped)="drop($event, tasksDone, tasksToDo, false)"
+    >
+      @for (task of tasksToDo; track task) {
+        <div class="box" cdkDrag>
+          {{ task.title }}
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="list-container">
+    <h2>Wykonane</h2>
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="tasksDone"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="list"
+      (cdkDropListDropped)="drop($event, tasksDone, tasksToDo, true)"
+    >
+      @for (task of tasksDone; track task) {
+        <div class="box" cdkDrag>
+          {{ task.title }}
+          <button (click)="deleteTask(task.id)">Usuń</button>
+        </div>
+      }
+    </div>
+  </div>
+</div>

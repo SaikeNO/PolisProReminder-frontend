@@ -1,7 +1,7 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="430px">
-    <mat-grid-tile [colspan]="2" [rowspan]="1">
+  <mat-grid-list cols="3" rowHeight="430px">
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
       <mat-card class="dashboard-card">
         <app-policies-latest></app-policies-latest>
       </mat-card>
@@ -29,11 +29,10 @@
       </mat-card>
     </mat-grid-tile>
 
-    <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <mat-grid-tile [colspan]="2" [rowspan]="2">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            <span>Card 2</span>
             <button
               mat-icon-button
               class="more-button"
@@ -48,7 +47,9 @@
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content></mat-card-content>
+        <mat-card-content>
+          <app-todo />
+        </mat-card-content>
       </mat-card>
     </mat-grid-tile>
 

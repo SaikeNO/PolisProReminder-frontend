@@ -22,9 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const accessToken = this.storageService.getAccessToken();
     if (accessToken) {
       return request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+        setHeaders: { Authorization: `Bearer ${accessToken}` },
         withCredentials: true,
       });
     }
@@ -35,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.refreshTokenInProgress) {
       return new Observable((observer) => {
         this.tokenRefreshed$.subscribe(() => {
-          observer.next();
+          observer.next(undefined);
           observer.complete();
         });
       });

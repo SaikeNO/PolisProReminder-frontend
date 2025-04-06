@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { filter, take } from 'rxjs';
 import { InsuranceTypesFacade } from './data-access/state/insurance-types.facade';
 import { InsuranceType } from '../shared/interfaces/insuranceType';
-import { InsuranceTypesDialogComponent } from './data-access/components/insurance-types-dialog/insurance-types-dialog.component';
+import { InsuranceTypesDialogComponent } from './components/insurance-types-dialog/insurance-types-dialog.component';
 import { ConfirmDialogComponent } from '../shared/ui/confirm-dialog/confirm-dialog.component';
 
 @Component({

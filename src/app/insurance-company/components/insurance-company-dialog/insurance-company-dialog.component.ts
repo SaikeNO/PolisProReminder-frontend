@@ -20,7 +20,6 @@ import { CompaniesFacade } from '../../data-access/state/companies.facade';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    JsonPipe,
     ReactiveFormsModule,
   ],
   templateUrl: './insurance-company-dialog.component.html',
@@ -77,9 +76,6 @@ export class InsuranceCompanyDialogComponent implements OnInit {
   }
 
   private mapToCreateInsuranceCompany(obj: FormGroup): CreateInsuranceCompany {
-    return {
-      name: obj.controls['name'].value,
-      shortName: obj.controls['shortName'].value,
-    };
+    return { name: obj.controls['name'].value, shortName: obj.controls['shortName'].value };
   }
 }

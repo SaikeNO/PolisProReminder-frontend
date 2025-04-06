@@ -8,28 +8,42 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { TodoDialogComponent } from './components/todo-dialog/todo-dialog.component';
+import { filter, map, take } from 'rxjs';
 
 @Component({
   selector: 'app-todo',
   standalone: true,
-  imports: [ReactiveFormsModule, CdkDropList, CdkDrag],
+  imports: [
+    ReactiveFormsModule,
+    CdkDropList,
+    CdkDrag,
+    MatCardModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   templateUrl: './todo.component.html',
-  styleUrl: './todo.component.scss',
+  styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent {
   private taskService = inject(TaskService);
-  private fb = inject(FormBuilder);
+  private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
-  tasksToDo: Task[] = [
-    { completed: false, id: '123', order: 1, title: 'Siema' },
-    { completed: false, id: '1223', order: 2, title: 'asdasd' },
-  ];
-  tasksDone: Task[] = [{ completed: true, id: '123', order: 2, title: 'asdasd' }];
-
-  public form = this.fb.nonNullable.group({
-    title: ['', [Validators.minLength(3), Validators.maxLength(100), Validators.required]],
-  });
+  tasksToDo: Task[] = [];
+  tasksDone: Task[] = [];
 
   ngOnInit(): void {
     this.loadTasks();
@@ -37,36 +51,53 @@ export class TodoComponent {
 
   loadTasks(): void {
     this.taskService.getTasks().subscribe((tasks) => {
-      this.tasksToDo = tasks.filter((task) => !task.completed).sort((a, b) => a.order - b.order);
-      this.tasksDone = tasks.filter((task) => task.completed).sort((a, b) => a.order - b.order);
+      this.tasksToDo = tasks.filter((task) => !task.isCompleted).sort((a, b) => a.order - b.order);
+      this.tasksDone = tasks.filter((task) => task.isCompleted).sort((a, b) => a.order - b.order);
     });
   }
 
-  addTask(): void {
-    if (this.form.valid) {
-      const task = this.form.value as CreateTask;
+  openDialog(initialTask?: Task): void {
+    const isEditing = !!initialTask;
 
-      this.taskService.addTask(task).subscribe((task) => {
-        task.order = this.tasksToDo.length;
-        this.tasksToDo.push(task);
-        this.form.reset();
+    this.dialog
+      .open(TodoDialogComponent, { data: { task: initialTask } })
+      .afterClosed()
+      .pipe(
+        filter((response: FormGroup) => response && response.valid),
+        map((response) => this.mapToCreateInsuranceInsuranceType(response)),
+        take(1),
+      )
+      .subscribe((task) => {
+        if (isEditing) {
+          this.taskService.updateTask({ ...initialTask, title: task.title }).subscribe(() => {
+            this.loadTasks();
+            this.snackBar.open('Edytowano zadanie!', 'Zamknij', { duration: 2000 });
+          });
+        } else {
+          this.taskService.addTask(task).subscribe(() => {
+            this.loadTasks();
+            this.snackBar.open('Zadanie dodane!', 'Zamknij', { duration: 2000 });
+          });
+        }
       });
-    }
+  }
+
+  private mapToCreateInsuranceInsuranceType(obj: FormGroup): CreateTask {
+    return {
+      title: obj.controls['title'].value,
+      order: this.tasksToDo.length,
+    };
   }
 
   deleteTask(taskId: string): void {
     this.taskService.deleteTask(taskId).subscribe(() => {
       this.tasksToDo = this.tasksToDo.filter((task) => task.id !== taskId);
       this.tasksDone = this.tasksDone.filter((task) => task.id !== taskId);
+      this.snackBar.open('Zadanie usunięte!', 'Zamknij', { duration: 2000 });
     });
   }
 
-  drop(
-    event: CdkDragDrop<Task[]>,
-    targetList: Task[],
-    sourceList: Task[],
-    completed: boolean,
-  ): void {
+  drop(event: CdkDragDrop<Task[]>, targetList: Task[], completed: boolean): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(targetList, event.previousIndex, event.currentIndex);
     } else {
@@ -80,9 +111,9 @@ export class TodoComponent {
 
     targetList.forEach((task, index) => {
       task.order = index;
-      task.completed = completed;
+      task.isCompleted = completed;
     });
 
-    this.taskService.updateTaskOrder([...this.tasksToDo, ...this.tasksDone]).subscribe();
+    this.taskService.updateTaskOrder([...this.tasksDone, ...this.tasksToDo]).subscribe();
   }
 }

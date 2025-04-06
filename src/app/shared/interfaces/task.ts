@@ -1,10 +1,11 @@
 export interface Task {
   id: string;
   title: string;
-  completed: boolean;
+  isCompleted: boolean;
   order: number;
 }
 
 export interface CreateTask {
   title: string;
+  order: number;
 }

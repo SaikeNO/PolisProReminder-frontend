@@ -1,3 +1,19 @@
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    width: 30px;
+    height: 30px;
+    .material-icons {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
 .container {
   display: flex;
   gap: 25px;
@@ -16,8 +32,24 @@
   display: block;
 }
 
+.done-list {
+  .box {
+    text-decoration: line-through;
+  }
+}
+
+.empty-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.54);
+  margin-top: 20px;
+}
+
 .box {
-  padding: 20px 10px;
+  padding: 5px 10px;
   border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   display: flex;

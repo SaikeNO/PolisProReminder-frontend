@@ -11,7 +11,7 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            <span>Card 1</span>
+            <span>Twoi pracownicy</span>
             <button
               mat-icon-button
               class="more-button"
@@ -25,28 +25,12 @@
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content></mat-card-content>
+        <mat-card-content>tu będzie lista pracowników wraz z ich uprawnieniami</mat-card-content>
       </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="2" [rowspan]="2">
       <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            <button
-              mat-icon-button
-              class="more-button"
-              [matMenuTriggerFor]="menu"
-              aria-label="Przełącz menu"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Ilość wyświetlanych</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
         <mat-card-content>
           <app-todo />
         </mat-card-content>

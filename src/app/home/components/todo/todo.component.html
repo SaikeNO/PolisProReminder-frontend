@@ -1,11 +1,11 @@
-<!-- <form [formGroup]="form" (ngSubmit)="addTask()" class="add-task">
-  <input formControlName="title" placeholder="Nowe zadanie" />
-  <button type="submit" [disabled]="form.invalid">Dodaj</button>
-</form> -->
-
 <div class="container">
   <div class="list-container">
-    <h2>Do zrobienia</h2>
+    <h2 class="title">
+      Do zrobienia
+      <button mat-mini-fab color="primary" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </h2>
 
     <div
       cdkDropList
@@ -13,12 +13,17 @@
       [cdkDropListData]="tasksToDo"
       [cdkDropListConnectedTo]="[doneList]"
       class="list"
-      (cdkDropListDropped)="drop($event, tasksDone, tasksToDo, false)"
+      (cdkDropListDropped)="drop($event, tasksToDo, false)"
     >
-      @for (task of tasksToDo; track task) {
+      @for (task of tasksToDo; track task.id) {
         <div class="box" cdkDrag>
           {{ task.title }}
+          <button mat-icon-button (click)="openDialog(task)">
+            <mat-icon>edit</mat-icon>
+          </button>
         </div>
+      } @empty {
+        <div class="empty-list">Brak zadań do wykonania</div>
       }
     </div>
   </div>
@@ -31,14 +36,18 @@
       #doneList="cdkDropList"
       [cdkDropListData]="tasksDone"
       [cdkDropListConnectedTo]="[todoList]"
-      class="list"
-      (cdkDropListDropped)="drop($event, tasksDone, tasksToDo, true)"
+      class="list done-list"
+      (cdkDropListDropped)="drop($event, tasksDone, true)"
     >
-      @for (task of tasksDone; track task) {
+      @for (task of tasksDone; track task.id) {
         <div class="box" cdkDrag>
           {{ task.title }}
-          <button (click)="deleteTask(task.id)">Usuń</button>
+          <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
+      } @empty {
+        <div class="empty-list">Przesuń tutaj wykonane zadania</div>
       }
     </div>
   </div>

@@ -7,14 +7,14 @@ import { environment } from '../../../../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class TaskService {
   private http = inject(HttpClient);
-  private url = environment.API_URL;
+  private url = `${environment.API_URL}/todotask`;
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(this.url);
   }
 
   addTask(task: CreateTask): Observable<Task> {
-    return this.http.post<Task>(this.url, { task });
+    return this.http.post<Task>(this.url, task);
   }
 
   deleteTask(id: string): Observable<void> {
@@ -22,10 +22,10 @@ export class TaskService {
   }
 
   updateTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.url}/${task.id}`, task);
+    return this.http.put<Task>(this.url, task);
   }
 
-  updateTaskOrder(tasks: Task[]): Observable<void> {
-    return this.http.put<void>(`${this.url}/order`, tasks);
+  updateTaskOrder(tasks: Task[]): Observable<Task> {
+    return this.http.post<Task>(`${this.url}/Order`, { todoTasks: tasks });
   }
 }

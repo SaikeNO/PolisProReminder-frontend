@@ -1,14 +1,12 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
 import { filter, map, take } from 'rxjs';
-import { InsuranceTypesFacade } from '../../state/insurance-types.facade';
-import { CreateInsuranceType, InsuranceType } from '../../../../shared/interfaces/insuranceType';
+import { InsuranceTypesFacade } from '../../data-access/state/insurance-types.facade';
+import { CreateInsuranceType, InsuranceType } from '../../../shared/interfaces/insuranceType';
 
 @Component({
   selector: 'app-insurance-insurance-types-dialog',

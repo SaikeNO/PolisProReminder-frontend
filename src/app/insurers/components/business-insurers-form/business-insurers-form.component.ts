@@ -25,8 +25,6 @@ export const CONTAINER_DATA = new InjectionToken<{}>('CONTAINER_DATA');
     MatSelectModule,
     ReactiveFormsModule,
     MatButtonModule,
-    AsyncPipe,
-    NgFor,
   ],
   templateUrl: './business-insurers-form.component.html',
   styleUrl: './business-insurers-form.component.scss',

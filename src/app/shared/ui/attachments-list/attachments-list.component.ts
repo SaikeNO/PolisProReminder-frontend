@@ -13,15 +13,7 @@ import { ErrorInfoComponent } from '../error-info/error-info.component';
 @Component({
   selector: 'app-attachments-list',
   standalone: true,
-  imports: [
-    MatListModule,
-    MatIcon,
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    AsyncPipe,
-    DatePipe,
-    ErrorInfoComponent,
-  ],
+  imports: [MatListModule, MatIcon, MatButtonModule, MatProgressSpinnerModule, AsyncPipe, DatePipe],
   templateUrl: './attachments-list.component.html',
   styleUrl: './attachments-list.component.scss',
 })

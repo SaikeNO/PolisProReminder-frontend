@@ -15,7 +15,6 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    AsyncPipe,
     MatIconModule,
     MatButtonModule,
   ],

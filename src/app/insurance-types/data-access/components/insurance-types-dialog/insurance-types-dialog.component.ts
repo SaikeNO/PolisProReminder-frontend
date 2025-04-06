@@ -18,7 +18,6 @@ import { CreateInsuranceType, InsuranceType } from '../../../../shared/interface
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    JsonPipe,
     ReactiveFormsModule,
   ],
   templateUrl: './insurance-types-dialog.component.html',
@@ -67,8 +66,6 @@ export class InsuranceTypesDialogComponent implements OnInit {
   }
 
   private mapToCreateInsuranceInsuranceType(obj: FormGroup): CreateInsuranceType {
-    return {
-      name: obj.controls['name'].value,
-    };
+    return { name: obj.controls['name'].value };
   }
 }

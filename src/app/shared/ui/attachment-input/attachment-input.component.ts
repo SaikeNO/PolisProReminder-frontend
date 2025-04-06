@@ -8,7 +8,7 @@ import { DndDirective } from '../../directives/dnd.directive';
 @Component({
   selector: 'app-attachment-input',
   standalone: true,
-  imports: [NgFor, MatIconModule, MatButtonModule, MatListModule, DatePipe, DndDirective],
+  imports: [MatIconModule, MatButtonModule, MatListModule, DatePipe, DndDirective],
   templateUrl: './attachment-input.component.html',
   styleUrl: './attachment-input.component.scss',
 })

@@ -14,13 +14,11 @@ import { TodoComponent } from './components/todo/todo.component';
   selector: 'app-home',
   standalone: true,
   imports: [
-    NgFor,
     LayoutModule,
     MatCardModule,
     MatMenuModule,
     MatIcon,
     MatGridListModule,
-    AsyncPipe,
     MatIconButton,
     PoliciesLatestComponent,
     TodoComponent,

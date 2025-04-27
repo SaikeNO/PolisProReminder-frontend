@@ -1,0 +1,24 @@
+<div class="assistants-container">
+  @if (loading) {
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="30"
+      class="loading-spinner"
+    ></mat-progress-spinner>
+  }
+
+  @if (!loading) {
+    <mat-list>
+      @if (assistants.length > 0) {
+        @for (assistant of assistants; track assistant.id) {
+          <mat-list-item>
+            <span matListItemTitle>{{ assistant.firstName }} {{ assistant.lastName }}</span>
+            <span matListItemLine>{{ assistant.email }}</span>
+          </mat-list-item>
+        }
+      } @else {
+        <mat-list-item> Brak asystentów do wyświetlenia. </mat-list-item>
+      }
+    </mat-list>
+  }
+</div>

@@ -9,6 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconButton } from '@angular/material/button';
 import { PoliciesLatestComponent } from './components/policies-latest/policies-latest.component';
 import { TodoComponent } from './components/todo/todo.component';
+import { AssistantsComponent } from './components/assistants/assistants.component';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ import { TodoComponent } from './components/todo/todo.component';
     MatIconButton,
     PoliciesLatestComponent,
     TodoComponent,
+    AssistantsComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

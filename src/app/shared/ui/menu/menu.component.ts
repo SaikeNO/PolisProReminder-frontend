@@ -7,12 +7,12 @@ import { AsyncPipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { AuthService } from '../../data-access/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [MatButtonModule, MatMenuModule, MatIconModule, AsyncPipe],
+  imports: [MatButtonModule, MatMenuModule, MatIconModule, AsyncPipe, RouterLink],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })

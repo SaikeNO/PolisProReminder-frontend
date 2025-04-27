@@ -4,6 +4,10 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/user-info">
+      <mat-icon>settings</mat-icon>
+      <span>Ustawienia</span>
+    </button>
     <button mat-menu-item (click)="openDialog()">
       <mat-icon>lock_open</mat-icon>
       <span>Zmień hasło</span>

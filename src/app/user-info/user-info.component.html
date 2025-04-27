@@ -1,0 +1,40 @@
+@if (user$ | async; as user) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Twoje dane</mat-card-title>
+    </mat-card-header>
+    <mat-list>
+      <mat-list-item>
+        <span matListItemTitle>Imię</span>
+        <span matListItemLine>{{ user.firstName }} {{ user.lastName }}</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span matListItemTitle>Email</span>
+        <span matListItemLine>{{ user.email }} </span>
+      </mat-list-item>
+      <mat-list-item>
+        <span matListItemTitle>Role</span>
+        <span matListItemLine>{{ user.roles.join(", ") }}</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <span matListItemTitle>Hasło</span>
+        <span matListItemLine>*******</span>
+        <div matListItemMeta>
+          <button mat-icon-button (click)="openDialog()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+}
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <span>Twoi pracownicy</span>
+    </mat-card-title>
+  </mat-card-header>
+  <app-assistants />
+</mat-card>

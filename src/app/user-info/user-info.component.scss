@@ -1,9 +1,22 @@
 mat-card {
   max-width: 400px;
   margin: 20px auto;
-  padding: 20px;
 }
 
 [mat-icon-button] {
   margin-top: 2px;
+}
+
+.user-info-card {
+  position: relative;
+}
+
+.edit-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+mat-icon {
+  color: #000;
 }

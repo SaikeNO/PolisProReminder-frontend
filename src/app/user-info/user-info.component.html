@@ -1,21 +1,24 @@
 @if (user$ | async; as user) {
-  <mat-card>
+  <mat-card class="user-info-card">
     <mat-card-header>
-      <mat-card-title>Twoje dane</mat-card-title>
+      <mat-card-title>
+        <span>Twoje dane </span>
+        <button class="edit-button" mat-icon-button (click)="openEditUserInfoDialog()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-title>
     </mat-card-header>
+
     <mat-list>
       <mat-list-item>
-        <span matListItemTitle>Imię</span>
+        <span matListItemTitle>Imię i Nazwisko</span>
         <span matListItemLine>{{ user.firstName }} {{ user.lastName }}</span>
       </mat-list-item>
       <mat-list-item>
         <span matListItemTitle>Email</span>
         <span matListItemLine>{{ user.email }} </span>
       </mat-list-item>
-      <mat-list-item>
-        <span matListItemTitle>Role</span>
-        <span matListItemLine>{{ user.roles.join(", ") }}</span>
-      </mat-list-item>
+
       <mat-divider></mat-divider>
       <mat-list-item>
         <span matListItemTitle>Hasło</span>
@@ -25,6 +28,10 @@
             <mat-icon>edit</mat-icon>
           </button>
         </div>
+      </mat-list-item>
+      <mat-list-item>
+        <span matListItemTitle>Role</span>
+        <span matListItemLine>{{ user.roles.join(", ") }}</span>
       </mat-list-item>
     </mat-list>
   </mat-card>

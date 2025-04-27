@@ -13,6 +13,7 @@ import { PasswordInputComponent } from '../shared/ui/password-input/password-inp
 import { LoginModel } from './login.models';
 import { Credentials } from '../shared/interfaces/auth';
 import { SnackBarService } from '../shared/data-access/snack-bar.service';
+import { UserService } from '../shared/data-access/user.service';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +33,7 @@ import { SnackBarService } from '../shared/data-access/snack-bar.service';
 export class LoginComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
   private _authService = inject(AuthService);
+  private _userService = inject(UserService);
   private _router = inject(Router);
   private _snackBarService = inject(SnackBarService);
 
@@ -60,7 +62,7 @@ export class LoginComponent implements OnInit {
         }),
       )
       .subscribe(() => {
-        this._authService.getUserInfo().subscribe(() => {
+        this._userService.getUserInfo().subscribe(() => {
           this._router.navigate(['/']);
         });
       });

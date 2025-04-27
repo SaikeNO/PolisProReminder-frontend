@@ -8,6 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangePasswordComponent } from '../shared/ui/change-password/change-password.component';
+import { EditUserInfoComponent } from '../shared/ui/edit-user-info/edit-user-info.component';
 
 @Component({
   selector: 'app-user-info',
@@ -31,5 +32,9 @@ export class UserInfoComponent {
 
   openDialog(): void {
     this.dialog.open(ChangePasswordComponent, { width: '500px' });
+  }
+
+  openEditUserInfoDialog(): void {
+    this.dialog.open(EditUserInfoComponent, { width: '500px' });
   }
 }

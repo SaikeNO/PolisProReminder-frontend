@@ -1,9 +1,13 @@
 type UserRole = 'ADMIN' | 'AGENT' | 'USER';
 
-export interface User {
+export interface UserBase {
   firstName: string;
   lastName: string;
   email: string;
+}
+
+export interface User extends UserBase {
+  id: string;
   roles: UserRole[];
 }
 

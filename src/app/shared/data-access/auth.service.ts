@@ -21,15 +21,6 @@ export class AuthService {
     );
   }
 
-  getUserInfo() {
-    return this.http.get<User>(`${environment.API_URL}/user/info`).pipe(
-      tap((response) => {
-        this.storageService.saveUser(response);
-        this.userService.setUser(response);
-      }),
-    );
-  }
-
   changePassword(changePassword: ChangePassword) {
     return this.http.post<void>(`${environment.API_URL}/user/changePassword`, changePassword);
   }

@@ -1,63 +1,29 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="3" rowHeight="430px">
-    <mat-grid-tile [colspan]="3" [rowspan]="1">
+<mat-grid-list cols="3" rowHeight="430px">
+  @for (card of cards$ | async; track card.id) {
+    <mat-grid-tile [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
-        <app-policies-latest></app-policies-latest>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            <span>Twoi pracownicy</span>
-            <button
-              mat-icon-button
-              class="more-button"
-              [matMenuTriggerFor]="menu"
-              aria-label="Przełącz menu"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Ilość wyświetlanych</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <app-assistants />
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="2" [rowspan]="2">
-      <mat-card class="dashboard-card">
+        @if (card.title) {
+          <mat-card-header>
+            <mat-card-title>{{ card.title }}</mat-card-title>
+          </mat-card-header>
+        }
         <mat-card-content>
-          <app-todo />
+          @switch (card.id) {
+            @case (1) {
+              <app-policies-latest></app-policies-latest>
+            }
+            @case (2) {
+              <app-assistants></app-assistants>
+            }
+            @case (3) {
+              <app-todo></app-todo>
+            }
+            @default {
+              <div>Inna zawartość</div>
+            }
+          }
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            <span>Card 3</span>
-            <button
-              mat-icon-button
-              class="more-button"
-              [matMenuTriggerFor]="menu"
-              aria-label="Przełącz menu"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Ilość wyświetlanych</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content></mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
+  }
+</mat-grid-list>

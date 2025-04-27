@@ -1,19 +1,10 @@
-<mat-card-header>
-  <mat-card-title>
-    <span>Najbliższe polisy</span>
-    <button
-      mat-icon-button
-      class="more-button"
-      [matMenuTriggerFor]="menu"
-      aria-label="Przełącz menu"
-    >
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu" xPosition="before">
-      <button mat-menu-item>Ilość wyświetlanych</button>
-    </mat-menu>
-  </mat-card-title>
-</mat-card-header>
+<button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Przełącz menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu" xPosition="before">
+  <button mat-menu-item>Ilość wyświetlanych</button>
+</mat-menu>
+
 <mat-card-content>
   <div class="table-responsive">
     <table mat-table matSort [dataSource]="(policies$ | async)!" aria-label="Polisy">

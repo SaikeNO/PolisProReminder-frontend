@@ -1,9 +1,10 @@
+type UserRole = 'ADMIN' | 'AGENT' | 'USER';
+
 export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  role: 'ADMIN' | 'AGENT' | 'USER';
-  superior?: User;
+  roles: UserRole[];
 }
 
 export interface Credentials {

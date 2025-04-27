@@ -4,7 +4,7 @@ import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { UserService } from './user.service';
-import { Credentials, LoginResponse, ChangePassword } from '../interfaces/auth';
+import { Credentials, LoginResponse, ChangePassword, User } from '../interfaces/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,8 +17,15 @@ export class AuthService {
       tap((response) => {
         this.storageService.saveAccessToken(response.accessToken);
         this.storageService.saveRefreshToken(response.refreshToken);
-        //this.storageService.saveUser(response.user);
-        //this.userService.setUser(response.user);
+      }),
+    );
+  }
+
+  getUserInfo() {
+    return this.http.get<User>(`${environment.API_URL}/user/info`).pipe(
+      tap((response) => {
+        this.storageService.saveUser(response);
+        this.userService.setUser(response);
       }),
     );
   }

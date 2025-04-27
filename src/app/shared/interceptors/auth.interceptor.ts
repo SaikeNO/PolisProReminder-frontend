@@ -6,6 +6,7 @@ import { catchError, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../data-access/auth.service';
 import { StorageService } from '../data-access/storage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../../environments/environment';
 
 export class AuthInterceptor implements HttpInterceptor {
   private authService = inject(AuthService);
@@ -79,7 +80,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     // Invalid token error
-    else if (error.status === 401) {
+    else if (error.status === 401 && request.url !== `${environment.API_URL}/identity/refresh`) {
       return this.refreshToken().pipe(
         switchMap(() => {
           request = this.addAuthHeader(request);

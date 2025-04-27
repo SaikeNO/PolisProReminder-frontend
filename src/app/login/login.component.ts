@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -29,7 +29,7 @@ import { SnackBarService } from '../shared/data-access/snack-bar.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
   private _authService = inject(AuthService);
   private _router = inject(Router);
@@ -39,6 +39,12 @@ export class LoginComponent {
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
+
+  ngOnInit(): void {
+    this.loginForm.valueChanges.subscribe(() => {
+      this.clearErrors();
+    });
+  }
 
   onSubmit() {
     if (this.loginForm.invalid) return;
@@ -53,6 +59,15 @@ export class LoginComponent {
           return throwError(() => err);
         }),
       )
-      .subscribe(() => this._router.navigate(['/']));
+      .subscribe(() => {
+        this._authService.getUserInfo().subscribe(() => {
+          this._router.navigate(['/']);
+        });
+      });
+  }
+
+  private clearErrors() {
+    this.loginForm.controls.email.setErrors(null);
+    this.loginForm.controls.password.setErrors(null);
   }
 }

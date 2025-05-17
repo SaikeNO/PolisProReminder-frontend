@@ -14,6 +14,7 @@ import { LoginModel } from './login.models';
 import { Credentials } from '../shared/interfaces/auth';
 import { SnackBarService } from '../shared/data-access/snack-bar.service';
 import { UserService } from '../shared/data-access/user.service';
+import { AppLogoComponent } from '../shared/logo/logo.component';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ import { UserService } from '../shared/data-access/user.service';
     ReactiveFormsModule,
     MatIconModule,
     PasswordInputComponent,
+    AppLogoComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',

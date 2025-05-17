@@ -39,6 +39,21 @@ export class AuthService {
       );
   }
 
+  confirmEmail(userId: string, code: string) {
+    return this.http.get<string>(`${environment.API_URL}/identity/confirmEmail`, {
+      params: { userId, code },
+      responseType: 'text' as 'json',
+    });
+  }
+
+  resetPassword(email: string, resetCode: string, newPassword: string) {
+    return this.http.post<void>(`${environment.API_URL}/identity/resetPassword`, {
+      email,
+      resetCode,
+      newPassword,
+    });
+  }
+
   logout() {
     this.storageService.clean();
   }

@@ -74,6 +74,11 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'auth/setPassword',
+    loadComponent: () =>
+      import('./set-password/set-password.component').then((m) => m.SetPasswordComponent),
+  },
+  {
     path: 'login',
     loadComponent: () => import('./login/login.component').then((mod) => mod.LoginComponent),
   },

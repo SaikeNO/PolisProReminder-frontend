@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Dodaj asystenta</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" novalidate>
+    <mat-form-field class="full-width">
+      <mat-label>Imię</mat-label>
+      <input matInput formControlName="firstName" />
+      @if (form.controls.firstName.hasError("required")) {
+        <mat-error>Imię jest wymagane</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Nazwisko</mat-label>
+      <input matInput formControlName="lastName" />
+      @if (form.controls.lastName.hasError("required")) {
+        <mat-error>Nazwisko jest wymagane</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Adres email</mat-label>
+      <input matInput formControlName="email" />
+      @if (form.controls.email.hasError("required")) {
+        <mat-error> Email jest wymagany</mat-error>
+      }
+      @if (form.controls.email.hasError("email")) {
+        <mat-error> Wprowadź poprawny adres email </mat-error>
+      }
+    </mat-form-field>
+    <p>
+      Na wskazany adres e-mail asystenta zostanie wysłany link potwierdzający oraz instrukcja
+      ustawienia hasła.
+    </p>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Anuluj</button>
+  <button mat-button (click)="onSubmit()">Dodaj asystena</button>
+</mat-dialog-actions>

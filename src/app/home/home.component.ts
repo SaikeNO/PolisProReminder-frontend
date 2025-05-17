@@ -7,7 +7,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { PoliciesLatestComponent } from './components/policies-latest/policies-latest.component';
 import { TodoComponent } from './components/todo/todo.component';
-import { AssistantsComponent } from './components/assistants/assistants.component';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +18,6 @@ import { AssistantsComponent } from './components/assistants/assistants.componen
     MatGridListModule,
     PoliciesLatestComponent,
     TodoComponent,
-    AssistantsComponent,
     AsyncPipe,
   ],
   templateUrl: './home.component.html',
@@ -33,13 +31,13 @@ export class HomeComponent {
         return [
           { id: 1, title: 'Najbliższe polisy', cols: 3, rows: 1 },
           { id: 3, title: null, cols: 3, rows: 1 },
-          { id: 2, title: 'Twoi pracownicy', cols: 3, rows: 1 },
+          { id: 2, title: 'Card 2', cols: 3, rows: 1 },
           { id: 4, title: 'Card 3', cols: 3, rows: 1 },
         ];
       }
       return [
         { id: 1, title: 'Najbliższe polisy', cols: 3, rows: 1 },
-        { id: 2, title: 'Twoi pracownicy', cols: 1, rows: 1 },
+        { id: 2, title: 'Card 2', cols: 1, rows: 1 },
         { id: 3, title: null, cols: 2, rows: 2 },
         { id: 4, title: 'Card 3', cols: 1, rows: 1 },
       ];

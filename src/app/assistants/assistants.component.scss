@@ -1,0 +1,33 @@
+.loading-spinner {
+  display: block;
+  margin: 20px auto;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+[mat-icon-button] {
+  margin-top: 2px;
+}
+
+.user-info-card {
+  position: relative;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    width: 30px;
+    height: 30px;
+    .material-icons {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

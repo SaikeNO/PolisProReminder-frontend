@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { UserService } from '../shared/data-access/user.service';
 import { AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { AssistantsComponent } from '../home/components/assistants/assistants.component';
+import { AssistantsComponent } from '../assistants/assistants.component';
 import { MatDivider, MatListModule } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';

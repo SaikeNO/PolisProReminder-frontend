@@ -3,14 +3,12 @@ import { Injectable, inject } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
-import { UserService } from './user.service';
-import { Credentials, LoginResponse, ChangePassword, User } from '../interfaces/auth';
+import { Credentials, LoginResponse, ChangePassword, ChangeEmail } from '../interfaces/auth';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
   private storageService = inject(StorageService);
-  private userService = inject(UserService);
 
   login(credentials: Credentials) {
     return this.http.post<LoginResponse>(`${environment.API_URL}/identity/login`, credentials).pipe(
@@ -22,7 +20,11 @@ export class AuthService {
   }
 
   changePassword(changePassword: ChangePassword) {
-    return this.http.post<void>(`${environment.API_URL}/user/changePassword`, changePassword);
+    return this.http.post<void>(`${environment.API_URL}/identity/manage/info`, changePassword);
+  }
+
+  changeEmail(changeEmail: ChangeEmail) {
+    return this.http.post<void>(`${environment.API_URL}/identity/manage/info`, changeEmail);
   }
 
   isAuthenticated(): boolean {

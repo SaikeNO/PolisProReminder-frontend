@@ -1,7 +1,6 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PasswordInputComponent } from '../password-input/password-input.component';
 import {
   AbstractControl,
   FormBuilder,
@@ -10,12 +9,13 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../data-access/auth.service';
 import { PasswordsInterface } from './change-password.models';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, takeUntil } from 'rxjs';
-import { SnackBarService } from '../../data-access/snack-bar.service';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../../shared/data-access/auth.service';
+import { SnackBarService } from '../../../shared/data-access/snack-bar.service';
+import { PasswordInputComponent } from '../../../shared/ui/password-input/password-input.component';
 
 @Component({
   selector: 'app-change-password',
@@ -40,7 +40,7 @@ export class ChangePasswordComponent implements OnDestroy {
 
   constructor(public dialogRef: MatDialogRef<ChangePasswordComponent>) {
     this.form = this._formBuilder.group({
-      currentPassword: ['', Validators.required],
+      oldPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, this.passwordsMatchValidator()]],
     });
@@ -54,7 +54,7 @@ export class ChangePasswordComponent implements OnDestroy {
     if (this.form.invalid) return;
     this._authService
       .changePassword({
-        currentPassword: this.form.value.currentPassword!,
+        oldPassword: this.form.value.oldPassword!,
         newPassword: this.form.value.newPassword!,
       })
       .pipe(takeUntil(this._onDestroy$))

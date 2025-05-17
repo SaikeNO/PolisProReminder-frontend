@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { UserService } from '../../data-access/user.service';
-import { SnackBarService } from '../../data-access/snack-bar.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { filter } from 'rxjs';
+import { UserService } from '../../../shared/data-access/user.service';
+import { SnackBarService } from '../../../shared/data-access/snack-bar.service';
+import { AuthService } from '../../../shared/data-access/auth.service';
 
 @Component({
-  selector: 'app-edit-user-info',
-  standalone: true,
+  selector: 'app-change-email',
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -19,27 +19,25 @@ import { filter } from 'rxjs';
     MatButtonModule,
     MatDialogModule,
   ],
-  templateUrl: './edit-user-info.component.html',
-  styleUrls: ['./edit-user-info.component.scss'],
+  templateUrl: './change-email.component.html',
+  styleUrl: './change-email.component.scss',
 })
-export class EditUserInfoComponent {
+export class ChangeEmailComponent {
   private _formBuilder = inject(FormBuilder);
   private _userService = inject(UserService);
+  private _authService = inject(AuthService);
   private _snackBarService = inject(SnackBarService);
-  public dialogRef = inject(MatDialogRef<EditUserInfoComponent>);
+  public dialogRef = inject(MatDialogRef<ChangeEmailComponent>);
 
   form = this._formBuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+    newEmail: ['', [Validators.required, Validators.email]],
   });
 
   constructor() {
     this._userService.user$.pipe(filter((user) => !!user)).subscribe((user) => {
+      console.log(user);
       this.form.patchValue({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
+        newEmail: user.email,
       });
     });
   }
@@ -47,15 +45,16 @@ export class EditUserInfoComponent {
   onSubmit(): void {
     if (this.form.invalid) return;
 
-    this._userService
-      .updateUserInfo({
-        email: this.form.value.email!,
-        firstName: this.form.value.firstName!,
-        lastName: this.form.value.lastName!,
+    this._authService
+      .changeEmail({
+        newEmail: this.form.value.newEmail!,
       })
       .subscribe(() => {
         this.dialogRef.close();
-        this._snackBarService.openSucces('Informacje zostały zaktualizowane.');
+        this._snackBarService.openSucces(
+          'Na podany adres e-mail został wysłany link do potwierdzenia zmiany adresu e-mail.',
+          10000,
+        );
       });
   }
 }

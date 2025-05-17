@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Edytuj adres email</h2>
+<mat-dialog-content>
+  <p>
+    Aby zmienić adres email, konieczne będzie potwierdzenie nowego adresu poprzez link wysłany na
+    podany email.
+  </p>
+  <form [formGroup]="form" novalidate>
+    <mat-form-field class="full-width">
+      <mat-label>Nowy adres email</mat-label>
+      <input matInput formControlName="newEmail" />
+      @if (form.controls.newEmail.hasError("required")) {
+        <mat-error> Email jest wymagany</mat-error>
+      }
+      @if (form.controls.newEmail.hasError("email")) {
+        <mat-error> Wprowadź poprawny adres email </mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Anuluj</button>
+  <button mat-button (click)="onSubmit()">Zapisz</button>
+</mat-dialog-actions>

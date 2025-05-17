@@ -3,9 +3,6 @@
     <mat-card-header>
       <mat-card-title>
         <span>Twoje dane </span>
-        <button class="edit-button" mat-icon-button (click)="openEditUserInfoDialog()">
-          <mat-icon>edit</mat-icon>
-        </button>
       </mat-card-title>
     </mat-card-header>
 
@@ -13,10 +10,20 @@
       <mat-list-item>
         <span matListItemTitle>Imię i Nazwisko</span>
         <span matListItemLine>{{ user.firstName }} {{ user.lastName }}</span>
+        <div matListItemMeta>
+          <button mat-icon-button (click)="openChangeUserInfoDialog()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
       </mat-list-item>
       <mat-list-item>
         <span matListItemTitle>Email</span>
         <span matListItemLine>{{ user.email }} </span>
+        <div matListItemMeta>
+          <button mat-icon-button (click)="openChangeEmailDialog()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
       </mat-list-item>
 
       <mat-divider></mat-divider>

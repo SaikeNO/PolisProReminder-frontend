@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UserService } from '../shared/data-access/user.service';
 import { AsyncPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -7,8 +7,9 @@ import { MatDivider, MatListModule } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangePasswordComponent } from '../shared/ui/change-password/change-password.component';
-import { EditUserInfoComponent } from '../shared/ui/edit-user-info/edit-user-info.component';
+import { ChangeUserInfoComponent } from './components/change-user-info/change-user-info.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ChangeEmailComponent } from './components/change-email/change-email.component';
 
 @Component({
   selector: 'app-user-info',
@@ -34,7 +35,11 @@ export class UserInfoComponent {
     this.dialog.open(ChangePasswordComponent, { width: '500px' });
   }
 
-  openEditUserInfoDialog(): void {
-    this.dialog.open(EditUserInfoComponent, { width: '500px' });
+  openChangeUserInfoDialog(): void {
+    this.dialog.open(ChangeUserInfoComponent, { width: '500px' });
+  }
+
+  openChangeEmailDialog(): void {
+    this.dialog.open(ChangeEmailComponent, { width: '500px' });
   }
 }

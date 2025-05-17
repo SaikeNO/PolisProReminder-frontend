@@ -16,17 +16,6 @@
         <mat-error>Nazwisko jest wymagane</mat-error>
       }
     </mat-form-field>
-
-    <mat-form-field class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" />
-      @if (form.controls.email.hasError("required")) {
-        <mat-error> Email jest wymagany</mat-error>
-      }
-      @if (form.controls.email.hasError("email")) {
-        <mat-error> Wprowadź poprawny adres email </mat-error>
-      }
-    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

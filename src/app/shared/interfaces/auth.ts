@@ -3,11 +3,11 @@ type UserRole = 'ADMIN' | 'AGENT' | 'USER';
 export interface UserBase {
   firstName: string;
   lastName: string;
-  email: string;
 }
 
 export interface User extends UserBase {
   id: string;
+  email: string;
   roles: UserRole[];
 }
 
@@ -16,8 +16,12 @@ export interface Credentials {
   password: string;
 }
 
+export interface ChangeEmail {
+  newEmail: string;
+}
+
 export interface ChangePassword {
-  currentPassword: string;
+  oldPassword: string;
   newPassword: string;
 }
 

@@ -5,9 +5,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { UserService } from '../../data-access/user.service';
 import { AsyncPipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { AuthService } from '../../data-access/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { ChangePasswordComponent } from '../../../user-info/components/change-password/change-password.component';
 
 @Component({
   selector: 'app-menu',

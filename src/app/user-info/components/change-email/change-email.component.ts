@@ -35,7 +35,6 @@ export class ChangeEmailComponent {
 
   constructor() {
     this._userService.user$.pipe(filter((user) => !!user)).subscribe((user) => {
-      console.log(user);
       this.form.patchValue({
         newEmail: user.email,
       });

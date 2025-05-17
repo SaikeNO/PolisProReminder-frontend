@@ -84,7 +84,8 @@ export class AuthInterceptor implements HttpInterceptor {
       error.status === 401 &&
       request.url !== `${environment.API_URL}/identity/refresh` &&
       request.url !== `${environment.API_URL}/identity/confirmEmail` &&
-      request.url !== `${environment.API_URL}/identity/login`
+      request.url !== `${environment.API_URL}/identity/login` &&
+      request.url !== `${environment.API_URL}/user/info`
     ) {
       return this.refreshToken().pipe(
         switchMap(() => {

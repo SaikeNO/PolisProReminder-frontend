@@ -41,9 +41,9 @@ export class AuthService {
       );
   }
 
-  confirmEmail(userId: string, code: string) {
+  confirmEmail(userId: string, code: string, changedEmail?: string) {
     return this.http.get<string>(`${environment.API_URL}/identity/confirmEmail`, {
-      params: { userId, code },
+      params: changedEmail ? { userId, code, changedEmail } : { userId, code },
       responseType: 'text' as 'json',
     });
   }

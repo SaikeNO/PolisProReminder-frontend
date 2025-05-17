@@ -28,5 +28,12 @@ import { Component } from '@angular/core';
       </g>
     </svg>
   `,
+  styles: [
+    `
+      svg {
+        margin: 30px 0;
+      }
+    `,
+  ],
 })
 export class AppLogoComponent {}

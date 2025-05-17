@@ -1,10 +1,14 @@
-.login-page {
+.page {
   display: grid;
   place-items: center;
 }
 
-.login-form {
+.wrapper {
   width: 100%;
   max-width: 300px;
   display: grid;
+}
+
+a {
+  margin-top: 20px;
 }

@@ -1,0 +1,15 @@
+<div class="page">
+  <div class="wrapper">
+    <app-logo />
+    @if (loading) {
+      <div>Trwa potwierdzanie adresu email...</div>
+    }
+    @if (error) {
+      <div>{{ error }}</div>
+    }
+    @if (success) {
+      <div>Poprawnie zmieniono adres email!</div>
+      <a mat-raised-button routerLink="/login" color="primary">Zaloguj się</a>
+    }
+  </div>
+</div>

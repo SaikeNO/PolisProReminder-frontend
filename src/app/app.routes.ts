@@ -74,6 +74,11 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'auth/confirmEmail',
+    loadComponent: () =>
+      import('./confirm-email/confirm-email.component').then((m) => m.ConfirmEmailComponent),
+  },
+  {
     path: 'auth/setPassword',
     loadComponent: () =>
       import('./set-password/set-password.component').then((m) => m.SetPasswordComponent),

@@ -4,10 +4,10 @@
     <h1>Zaloguj się</h1>
     <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <mat-form-field class="full-width">
-        <mat-label>Login</mat-label>
+        <mat-label>Email</mat-label>
         <input matInput formControlName="email" />
         @if (loginForm.controls.email.hasError("required")) {
-          <mat-error>Login jest wymagany</mat-error>
+          <mat-error>Email jest wymagany</mat-error>
         }
       </mat-form-field>
 

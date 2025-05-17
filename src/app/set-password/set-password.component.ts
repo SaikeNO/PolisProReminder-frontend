@@ -18,6 +18,8 @@ import { AuthService } from '../shared/data-access/auth.service';
 import { MatCardModule } from '@angular/material/card';
 import { AppLogoComponent } from '../shared/logo/logo.component';
 import { SnackBarService } from '../shared/data-access/snack-bar.service';
+import { UserService } from '../shared/data-access/user.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-set-password',
@@ -42,6 +44,7 @@ export class SetPasswordComponent implements OnInit {
   private _router = inject(Router);
   private _route = inject(ActivatedRoute);
   private _snackBarService = inject(SnackBarService);
+  private _userService = inject(UserService);
 
   form = this._formBuilder.group({
     newPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -82,20 +85,28 @@ export class SetPasswordComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.invalid) return;
 
-    this._authService
-      .resetPassword(this.email, this.resetCode, this.form.value.newPassword!)
-      .subscribe({
-        next: () => {
-          this._snackBarService.openSucces('Hasło zostało ustawione. Możesz się zalogować.');
-          this._router.navigate(['/login']);
-        },
-        error: () => {
-          this._snackBarService.openFailure('Nie udało się ustawić hasła.');
-        },
-      });
+    try {
+      await firstValueFrom(
+        this._authService.resetPassword(this.email, this.resetCode, this.form.value.newPassword!),
+      );
+
+      await firstValueFrom(
+        this._authService.login({
+          email: this.email,
+          password: this.form.value.newPassword!,
+        }),
+      );
+
+      await firstValueFrom(this._userService.getUserInfo());
+
+      this._snackBarService.openSucces('Poprawnie ustawiono hasło.');
+      this._router.navigate(['/']);
+    } catch {
+      this._snackBarService.openFailure('Nie udało się ustawić hasła.');
+    }
   }
 
   passwordsMatchValidator(): ValidatorFn {

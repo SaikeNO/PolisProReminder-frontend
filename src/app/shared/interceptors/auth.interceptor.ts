@@ -80,7 +80,12 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     // Invalid token error
-    else if (error.status === 401 && request.url !== `${environment.API_URL}/identity/refresh`) {
+    else if (
+      error.status === 401 &&
+      request.url !== `${environment.API_URL}/identity/refresh` &&
+      request.url !== `${environment.API_URL}/identity/confirmEmail` &&
+      request.url !== `${environment.API_URL}/identity/login`
+    ) {
       return this.refreshToken().pipe(
         switchMap(() => {
           request = this.addAuthHeader(request);

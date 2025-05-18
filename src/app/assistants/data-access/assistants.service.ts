@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of } from 'rxjs';
+import { tap, switchMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { User } from '../../shared/interfaces/auth';
 import { CreateAssistant } from '../../shared/interfaces/assistant';
@@ -17,7 +17,7 @@ export class AssistantsService {
   createAssistant(assistant: CreateAssistant): Observable<string> {
     return this.http
       .post<string>(this.url, assistant)
-      .pipe(tap(() => this.getAssistants().subscribe()));
+      .pipe(switchMap((result) => this.getAssistants().pipe(switchMap(() => of(result)))));
   }
 
   getAssistants(): Observable<User[]> {
@@ -26,15 +26,21 @@ export class AssistantsService {
       .pipe(tap((assistants) => this.assistantsSubject.next(assistants)));
   }
 
+  unlockAssistant(assistantId: string): Observable<void> {
+    return this.http
+      .patch<void>(`${this.url}/${assistantId}/unlock`, {})
+      .pipe(switchMap((result) => this.getAssistants().pipe(switchMap(() => of(result)))));
+  }
+
   lockoutAssistant(assistantId: string): Observable<void> {
     return this.http
       .patch<void>(`${this.url}/${assistantId}/lockout`, {})
-      .pipe(tap(() => this.getAssistants().subscribe()));
+      .pipe(switchMap((result) => this.getAssistants().pipe(switchMap(() => of(result)))));
   }
 
   deleteAssistant(assistantId: string): Observable<void> {
     return this.http
       .delete<void>(`${this.url}/${assistantId}`)
-      .pipe(tap(() => this.getAssistants().subscribe()));
+      .pipe(switchMap((result) => this.getAssistants().pipe(switchMap(() => of(result)))));
   }
 }

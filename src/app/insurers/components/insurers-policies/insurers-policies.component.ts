@@ -120,7 +120,7 @@ export class InsurersPoliciesComponent implements OnInit {
 
   public onDeletePolicy(policy: Policy) {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
-      data: { name: `${policy.title}`, withMessage: false },
+      data: { title: `Czy jesteś pewień usunięcia ${policy.title}?` },
       width: '500px',
     });
 

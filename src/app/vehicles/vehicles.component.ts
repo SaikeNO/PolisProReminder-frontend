@@ -157,7 +157,7 @@ export class VehiclesComponent implements AfterViewInit, OnDestroy {
 
   public onDeleteVehicle(vehicle: Vehicle): void {
     const dialog = this.dialog.open(ConfirmDialogComponent, {
-      data: { name: vehicle.name, withMessage: false },
+      data: { title: `Czy jesteś pewnień usunięcia ${vehicle.name}?` },
       width: '500px',
     });
 

@@ -165,7 +165,7 @@ export class BusinessInsurersComponent implements AfterViewInit, OnDestroy {
       });
     } else {
       const dialog = this.dialog.open(ConfirmDialogComponent, {
-        data: { name: `${insurer.name}`, withMessage: false },
+        data: { title: `Czy jesteś pewień usunięcia ${insurer.name}?` },
         width: '500px',
       });
 

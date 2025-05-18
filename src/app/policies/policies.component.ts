@@ -171,7 +171,7 @@ export class PoliciesComponent {
     const name = selectedPolicies.length > 1 ? `${selectedPolicies.length} elementy` : '1 element';
 
     const dialog = this.dialog.open(ConfirmDialogComponent, {
-      data: { name, withMessage: false },
+      data: { title: `Czy na pewno chcesz usunąć ${name}?` },
       width: '500px',
     });
 

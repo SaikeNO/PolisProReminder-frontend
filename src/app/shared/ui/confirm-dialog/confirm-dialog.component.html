@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>
-  Czy jesteś pewien, że chcesz usunąć <b> {{ data.name }} </b>
+  {{ data.title || "Czy jesteś pewien?" }}
 </h2>
-@if (data.withMessage) {
-  <mat-dialog-content> Spowoduje to usunięcie powiązania pomiędzy polisami </mat-dialog-content>
+@if (data.message) {
+  <mat-dialog-content> {{ data.message }} </mat-dialog-content>
 }
 <mat-dialog-actions>
   <button mat-button [mat-dialog-close]="false">Nie</button>

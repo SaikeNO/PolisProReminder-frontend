@@ -165,7 +165,7 @@ export class IndividualInsurersComponent implements AfterViewInit, OnDestroy {
       });
     } else {
       const dialog = this.dialog.open(ConfirmDialogComponent, {
-        data: { name: `${insurer.firstName} ${insurer.lastName}`, withMessage: false },
+        data: { title: `Czy jesteś pewień usunięcia ${insurer.firstName} ${insurer.lastName}?` },
         width: '500px',
       });
 

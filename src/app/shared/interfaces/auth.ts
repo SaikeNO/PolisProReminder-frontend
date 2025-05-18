@@ -8,6 +8,7 @@ export interface UserBase {
 export interface User extends UserBase {
   id: string;
   email: string;
+  isEmailConfirmed: boolean;
   roles: UserRole[];
 }
 

@@ -8,6 +8,7 @@ import { AssistantsService } from './data-access/assistants.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddAssistantComponent } from './components/add-assistant/add-assistant.component';
 import { AsyncPipe } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-assistants',
@@ -18,6 +19,7 @@ import { AsyncPipe } from '@angular/common';
     MatIconModule,
     MatButtonModule,
     AsyncPipe,
+    MatTooltipModule,
   ],
   templateUrl: './assistants.component.html',
   styleUrl: './assistants.component.scss',

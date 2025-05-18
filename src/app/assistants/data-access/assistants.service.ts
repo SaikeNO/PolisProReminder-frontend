@@ -3,14 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { Assistant, CreateAssistant } from '../../shared/interfaces/assistant';
+import { User } from '../../shared/interfaces/auth';
+import { CreateAssistant } from '../../shared/interfaces/assistant';
 
 @Injectable({ providedIn: 'root' })
 export class AssistantsService {
   private http = inject(HttpClient);
   private url = `${environment.API_URL}/user/assistant`;
 
-  private assistantsSubject = new BehaviorSubject<Assistant[]>([]);
+  private assistantsSubject = new BehaviorSubject<User[]>([]);
   assistants$ = this.assistantsSubject.asObservable();
 
   private loadingSubject = new BehaviorSubject<boolean>(false);
@@ -24,9 +25,9 @@ export class AssistantsService {
     );
   }
 
-  getAssistants(): Observable<Assistant[]> {
+  getAssistants(): Observable<User[]> {
     this.loadingSubject.next(true);
-    return this.http.get<Assistant[]>(this.url).pipe(
+    return this.http.get<User[]>(this.url).pipe(
       tap((assistants) => this.assistantsSubject.next(assistants)),
       tap({ finalize: () => this.loadingSubject.next(false) }),
     );

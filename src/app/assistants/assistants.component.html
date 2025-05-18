@@ -24,6 +24,11 @@
               <mat-list-item>
                 <span matListItemTitle>{{ assistant.firstName }} {{ assistant.lastName }}</span>
                 <span matListItemLine>{{ assistant.email }}</span>
+                @if (!assistant.isEmailConfirmed) {
+                  <div matListItemMeta>
+                    <mat-icon matTooltip="Asystent nie potwierdził adresu email">warning</mat-icon>
+                  </div>
+                }
               </mat-list-item>
             }
           } @else {

@@ -29,14 +29,17 @@
                   @if (!assistant.isEmailConfirmed) {
                     <mat-icon matTooltip="Asystent nie potwierdził adresu email">warning</mat-icon>
                   }
-                  <button
-                    mat-icon-button
-                    color="warn"
-                    matTooltip="Zablokuj"
-                    (click)="blockAssistant(assistant.id)"
-                  >
-                    <mat-icon>block</mat-icon>
-                  </button>
+                  <span [matTooltip]="assistant.isLockedOut ? 'Asystent zablokowany' : 'Zablokuj'">
+                    <button
+                      mat-icon-button
+                      color="warn"
+                      (click)="blockAssistant(assistant.id)"
+                      [disabled]="assistant.isLockedOut"
+                    >
+                      <mat-icon>block</mat-icon>
+                    </button>
+                  </span>
+
                   <button
                     mat-icon-button
                     color="warn"

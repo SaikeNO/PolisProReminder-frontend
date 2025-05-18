@@ -9,6 +9,7 @@ export interface User extends UserBase {
   id: string;
   email: string;
   isEmailConfirmed: boolean;
+  isLockedOut: boolean;
   roles: UserRole[];
 }
 

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap, finalize } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { User } from '../../shared/interfaces/auth';
 import { CreateAssistant } from '../../shared/interfaces/assistant';

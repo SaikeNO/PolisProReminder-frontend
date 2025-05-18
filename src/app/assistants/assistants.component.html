@@ -8,7 +8,7 @@
     </mat-card-title>
   </mat-card-header>
   <div>
-    @if (loading$ | async) {
+    @if (loading) {
       <mat-progress-spinner
         mode="indeterminate"
         diameter="30"
@@ -16,7 +16,7 @@
       ></mat-progress-spinner>
     }
 
-    @if (!(loading$ | async)) {
+    @if (!loading) {
       @if (assistants$ | async; as assistants) {
         <mat-list>
           @if (assistants.length > 0) {
@@ -24,11 +24,28 @@
               <mat-list-item>
                 <span matListItemTitle>{{ assistant.firstName }} {{ assistant.lastName }}</span>
                 <span matListItemLine>{{ assistant.email }}</span>
-                @if (!assistant.isEmailConfirmed) {
-                  <div matListItemMeta>
+
+                <div matListItemMeta>
+                  @if (!assistant.isEmailConfirmed) {
                     <mat-icon matTooltip="Asystent nie potwierdził adresu email">warning</mat-icon>
-                  </div>
-                }
+                  }
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    matTooltip="Zablokuj"
+                    (click)="blockAssistant(assistant.id)"
+                  >
+                    <mat-icon>block</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    matTooltip="Usuń"
+                    (click)="deleteAssistant(assistant.id)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
               </mat-list-item>
             }
           } @else {

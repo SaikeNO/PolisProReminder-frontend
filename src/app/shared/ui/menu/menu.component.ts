@@ -8,11 +8,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../data-access/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { ChangePasswordComponent } from '../../../user-info/components/change-password/change-password.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [MatButtonModule, MatMenuModule, MatIconModule, AsyncPipe, RouterLink],
+  imports: [MatButtonModule, MatMenuModule, MatIconModule, AsyncPipe, RouterLink, MatTooltipModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
 })

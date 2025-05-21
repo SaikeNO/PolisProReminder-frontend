@@ -42,6 +42,10 @@
       </mat-list-item>
     </mat-list>
   </mat-card>
-}
 
-<app-assistants />
+  @if (user.roles.includes("Agent")) {
+    <app-assistants />
+  } @else if (user.roles.includes("Assistant")) {
+    <app-agent-info />
+  }
+}

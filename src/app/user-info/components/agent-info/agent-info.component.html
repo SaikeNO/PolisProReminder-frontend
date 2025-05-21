@@ -1,0 +1,20 @@
+@if (agent$ | async; as agent) {
+  <mat-card class="user-info-card">
+    <mat-card-header>
+      <mat-card-title>
+        <span>Twój agent</span>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-list>
+      <mat-list-item>
+        <span matListItemTitle>Imię i Nazwisko</span>
+        <span matListItemLine>{{ agent.firstName }} {{ agent.lastName }}</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span matListItemTitle>Email</span>
+        <span matListItemLine>{{ agent.email }} </span>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+}

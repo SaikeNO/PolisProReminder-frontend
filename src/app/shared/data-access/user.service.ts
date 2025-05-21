@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, switchMap, switchMapTo, tap } from 'rxjs';
-import { User, UserBase } from '../interfaces/auth';
+import { BaseUser, User, UserInfo } from '../interfaces/auth';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { HttpClient } from '@angular/common/http';
@@ -16,7 +16,7 @@ export class UserService {
     this.user$.next(user);
   }
 
-  updateUserInfo(userInfo: UserBase) {
+  updateUserInfo(userInfo: UserInfo) {
     return this.http
       .patch(`${environment.API_URL}/user/info`, userInfo)
       .pipe(switchMap(() => this.getUserInfo()));
@@ -29,5 +29,9 @@ export class UserService {
         this.setUser(response);
       }),
     );
+  }
+
+  getAgentInfo() {
+    return this.http.get<BaseUser>(`${environment.API_URL}/user/agent/info`);
   }
 }

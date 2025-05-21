@@ -1,13 +1,16 @@
-type UserRole = 'ADMIN' | 'AGENT' | 'USER';
+export type UserRole = 'Admin' | 'Agent' | 'Assistant';
 
-export interface UserBase {
+export interface UserInfo {
   firstName: string;
   lastName: string;
 }
 
-export interface User extends UserBase {
+export interface BaseUser extends UserInfo {
   id: string;
   email: string;
+}
+
+export interface User extends BaseUser {
   isEmailConfirmed: boolean;
   isLockedOut: boolean;
   roles: UserRole[];

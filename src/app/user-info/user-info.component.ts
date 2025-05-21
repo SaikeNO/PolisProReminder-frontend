@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ChangeUserInfoComponent } from './components/change-user-info/change-user-info.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ChangeEmailComponent } from './components/change-email/change-email.component';
+import { AgentInfoComponent } from './components/agent-info/agent-info.component';
 
 @Component({
   selector: 'app-user-info',
@@ -22,6 +23,7 @@ import { ChangeEmailComponent } from './components/change-email/change-email.com
     MatDivider,
     MatIcon,
     MatIconButton,
+    AgentInfoComponent,
   ],
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss'],

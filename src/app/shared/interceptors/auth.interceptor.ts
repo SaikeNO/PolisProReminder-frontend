@@ -67,7 +67,7 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<any> {
     // Business error
-    if (error.status !== 401) {
+    if (error.status == 400) {
       this.snackBar.open(error.error, undefined, { duration: 2000 });
     }
 
@@ -105,13 +105,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // Access denied error
     else if (error.status === 403) {
-      // Show message
-      // Logout
+      this.snackBar.open('Brak uprawnień do wykonania akcji', undefined, { duration: 2000 });
     }
 
     // Server error
     else if (error.status === 500) {
-      // Show message
+      this.snackBar.open(error.error, undefined, { duration: 2000 });
     }
 
     // Maintenance error

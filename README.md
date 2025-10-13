@@ -1,27 +1,48 @@
 # PolisProReminder
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
+PolisProReminder to aplikacja webowa stworzona w celu ułatwienia zarządzania polisami ubezpieczeniowymi. Umożliwia agentom ubezpieczeniowym oraz ich asystentom śledzenie terminów, płatności i szczegółów polis, a także zarządzanie informacjami o klientach, pojazdach i towarzystwach ubezpieczeniowych.
 
-## Development server
+![Ekran główny](assets/home.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Główne Funkcjonalności
 
-## Code scaffolding
+- **Zarządzanie Polisami:** Dodawanie, edytowanie, usuwanie i archiwizowanie polis ubezpieczeniowych.
+- **Zarządzanie Klientami:** Prowadzenie bazy klientów indywidualnych oraz biznesowych.
+- **Zarządzanie Pojazdami:** Ewidencja pojazdów z możliwością przypisania do klienta.
+- **Zarządzanie Towarzystwami Ubezpieczeniowymi:** Baza towarzystw ubezpieczeniowych.
+- **Zarządzanie Typami Ubezpieczeń:** Definiowanie różnych typów ubezpieczeń.
+- **Panel Agenta:** Dostęp do wszystkich funkcji z możliwością zarządzania asystentami.
+- **Panel Asystenta:** Ograniczony dostęp do funkcji, z możliwością pracy w imieniu agenta.
+- **Powiadomienia:** System powiadomień o zbliżających się terminach płatności i wygasaniu polis.
+- **Listy Zadań (To-Do):** Proste narzędzie do zarządzania zadaniami do wykonania.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Główna lista](assets/list.png)
 
-## Build
+## Technologie
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Angular 17:** Framework do budowy aplikacji webowych.
+- **Angular Material:** Komponenty UI zgodne z Material Design.
+- **NgRx:** Zarządzanie stanem aplikacji w oparciu o wzorzec Redux.
+- **RxJS:** Programowanie reaktywne z wykorzystaniem Observables.
+- **TypeScript:** Język programowania rozszerzający JavaScript o statyczne typowanie.
+- **SCSS:** Preprocesor CSS.
 
-## Running unit tests
+## Serwer deweloperski
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Uruchom `ng serve` aby włączyć serwer deweloperski. Przejdź do `http://localhost:4200/`. Aplikacja automatycznie przeładuje się po zmianie plików źródłowych.
 
-## Running end-to-end tests
+## Scaffolding kodu
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Uruchom `ng generate component component-name` aby wygenerować nowy komponent. Możesz również użyć `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Further help
+## Budowanie
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Uruchom `ng build` aby zbudować projekt. Artefakty budowania zostaną zapisane w katalogu `dist/`.
+
+## Uruchamianie testów jednostkowych
+
+Uruchom `ng test` aby uruchomić testy jednostkowe za pomocą [Karma](https://karma-runner.github.io).
+
+## Dalsza pomoc
+
+Aby uzyskać więcej pomocy na temat Angular CLI użyj `ng help` lub sprawdź stronę [Angular CLI Overview and Command Reference](https://angular.io/cli).
